@@ -8,7 +8,8 @@
     "server": "node server.js $*",
     "samples": "npm run server samples",
     "doc": "npm run server doc",
-    "optimize": "node scripts/optimize-for-prod.js"
+    "optimize": "node scripts/optimize-for-prod.js",
+    "test": "nightwatch"
   },
   "devDependencies": {
     "archiver": "^3.0.0",

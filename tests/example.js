@@ -1,5 +1,5 @@
 module.exports = {
-  'Demo test Google' : function (client) {
+  'can run' : function (client) {
     // client
     //   .url('http://www.google.com')
     //   .waitForElementVisible('body', 1000)

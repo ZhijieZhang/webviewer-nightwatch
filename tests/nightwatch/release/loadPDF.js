@@ -4,6 +4,7 @@ describe('Load PDF', function() {
       .url('http://localhost:3000/samples/viewing/viewing')
       .waitForElementVisible('iframe', 1000)
       .waitForWVEvent('pageComplete')
+      .readerControl('setCurrentPageNumber', 3)
       .pause(30000)
       .end();
   })

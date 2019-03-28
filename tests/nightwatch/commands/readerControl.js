@@ -3,7 +3,7 @@ exports.command = function(apiName, ...args) {
   const callback = args[args.length - 1];
 
   this.getAttribute('iframe', 'id', function(result) {
-    me
+    this
     .frame(result.value)
     .execute(
       function(apiName, args) {

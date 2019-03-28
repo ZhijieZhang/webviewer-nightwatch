@@ -6,10 +6,6 @@ class WaitForWVEvent extends EventEmitter {
     super();
     this.nameSpace = 'docViewer';
     this.WVEvent = null;
-    this.isWVEventTriggered = null;
-    this.timeoutRetryInMilliseconds = 100;
-    this.defaultTimeoutInMilliseconds = 6000;
-    this.startTimeInMilliseconds = null;
   }
 
   command(...args) {
@@ -17,13 +13,17 @@ class WaitForWVEvent extends EventEmitter {
       this.nameSpace = args[0];
     }
     this.WVEvent = args[args.length - 1];
-    this.isWVEventTriggered = false;
-    this.startTimeInMilliseconds = new Date().getTime();
+
+    const timeoutInMilliseconds = 6000;
+    this.failTimeout = setTimeout(() => {
+      assert.ok(false);
+    }, timeoutInMilliseconds);
 
     const me = this;
     this.api.getAttribute('iframe', 'id', function(result) {
       me.api
       .frame(result.value)
+      .timeoutsAsyncScript(timeoutInMilliseconds)
       .executeAsync(
         function(nameSpace, wvEvent, done) {
           window = window[0] || window;
@@ -40,28 +40,11 @@ class WaitForWVEvent extends EventEmitter {
         [me.nameSpace, me.WVEvent], 
 
         function() {
-          me.isWVEventTriggered = true;
+          clearTimeout(me.failTimeout);
+          return me.emit('complete');
         }
       );
     })
-
-    this.check(function(eventTriggered) {
-      assert.ok(eventTriggered);
-      return this.emit('complete');
-    }, this.defaultTimeoutInMilliseconds)
-  }
-
-  check(callback, maxTimeInMilliseconds) {
-    const now = new Date().getTime();
-    if(this.isWVEventTriggered) {
-      callback(true);
-    } else if (now - this.startTimeInMilliseconds < maxTimeInMilliseconds) {
-      setTimeout(() => {
-        this.check(callback, maxTimeInMilliseconds);
-      }, this.timeoutRetryInMilliseconds);
-    } else {
-      callback(false);
-    }
   }
 }
 

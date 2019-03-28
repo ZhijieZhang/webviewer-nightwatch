@@ -37,19 +37,7 @@ describe('Load PDF', function() {
       });
     });
 
-    describe('Linearized PDF', function(client) {
-      it('load linearized.pdf using constructor options', function(client) {
-        client
-          .setUrlWithOptions({ initialDoc: '/samples/files/linearized.pdf' })
-          .waitForWVEvent('pageComplete');
-      });
-
-      it('load linearized.pdf using loadDocument API', function(client) {
-        client
-          .readerControl('loadDocument', '/samples/files/linearized.pdf')
-          .waitForWVEvent('pageComplete');
-      });
-
+    describe('Linearized PDF', function() {
       it('load linearized.pdf and frantically scroll and zoom', function(client) {
         client
           .readerControl('loadDocument', '/samples/files/linearized.pdf')
@@ -58,7 +46,7 @@ describe('Load PDF', function() {
           })
       });
 
-      it.only('load linearized.pdf with useDownloaderOption to false, and frantically scroll and zoom', function(client) {
+      it('load linearized.pdf with useDownloaderOption to false, and frantically scroll and zoom', function(client) {
         client
         .setUrlWithOptions({ useDownloader: false })
         .readerControl('loadDocument', '/samples/files/linearized.pdf')
@@ -67,9 +55,17 @@ describe('Load PDF', function() {
         })
       })
     });
+
+    describe('Non-linearized PDF', function() {
+      it('load non-linearized.pdf', function(client) {
+        client
+          .readerControl('loadDocument', '/samples/files/non-linearized.pdf')
+          .waitForWVEvent('pageComplete');
+      });
+    })
   });
 
-  describe('with server', function() {
+  describe('With Server', function() {
     beforeEach(function(client, done) {
       client
         .url('http://localhost:3000/samples/viewing/viewing/')

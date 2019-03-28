@@ -11,7 +11,7 @@ exports.command = function(apiName, ...args) {
     
     result => { 
       if(typeof callback === 'function') {
-        callback.call(this, result)
+        callback.call(this, result && result.value)
       }
     }
   );

@@ -6,15 +6,28 @@ class WaitForWVEvent extends EventEmitter {
     super();
     this.nameSpace = 'docViewer';
     this.WVEvent = null;
+    this.callback = () => {};
   }
 
   command(...args) {
-    if (args.length === 2) {
-      this.nameSpace = args[0];
+    if (args.length > 1) {
+      if (args[0] === 'annotManager') {
+        this.nameSpace = args[0];
+        this.WVEvent = args[1];
+        if (args[2] && typeof args[2] === 'function') {
+          this.callback = args[2];
+        }
+      } else {
+        this.WVEvent = args[0];
+        if (args[1] && typeof args[1] === 'function') {
+          this.callback = args[1];
+        }
+      }
+    } else if (args.length === 1) {
+      this.WVEvent = args[0];
     }
-    this.WVEvent = args[args.length - 1];
 
-    const timeoutInMilliseconds = 6000;
+    const timeoutInMilliseconds = 10000;
     this.failTimeout = setTimeout(() => {
       assert.ok(false, `${this.WVEvent} from ${this.nameSpace} didn't get triggered in ${timeoutInMilliseconds}`);
     }, timeoutInMilliseconds);
@@ -25,11 +38,11 @@ class WaitForWVEvent extends EventEmitter {
         function(nameSpace, wvEvent, done) {
           window = window[0] || window;
           const docViewer = window.readerControl.docViewer;
-          const obj = nameSpace === 'docViewer'
-            ? docViewer
-            : docViewer.getAnnotationManager();
+          const obj = nameSpace !== 'docViewer'
+            ? docViewer.getAnnotationManager()
+            : docViewer;
 
-          obj.on(wvEvent, () => {
+          obj.one(wvEvent, () => {
             done();
           });
         }, 
@@ -40,6 +53,7 @@ class WaitForWVEvent extends EventEmitter {
           // using arrow function here to force the context of "this" to be the instance of this class
           // instead of the client window in this callback
           clearTimeout(this.failTimeout);
+          this.callback.call(this.api);
           return this.emit('complete');
         }
       );

@@ -3,9 +3,10 @@ describe('Load PDF', function() {
     client
       .url('http://localhost:3000/samples/viewing/viewing')
       .waitForElementVisible('iframe', 1000)
+      .switchToUIFrame()
       .waitForWVEvent('pageComplete')
       .readerControl('setCurrentPageNumber', 3)
-      .pause(30000)
+      .waitForWVEvent('pageComplete')
       .end();
-  })
+  });
 })

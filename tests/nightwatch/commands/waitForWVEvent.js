@@ -16,13 +16,10 @@ class WaitForWVEvent extends EventEmitter {
 
     const timeoutInMilliseconds = 6000;
     this.failTimeout = setTimeout(() => {
-      assert.ok(false);
+      assert.ok(false, `${this.WVEvent} from ${this.nameSpace} didn't get triggered in ${timeoutInMilliseconds}`);
     }, timeoutInMilliseconds);
 
-    const me = this;
-    this.api.getAttribute('iframe', 'id', function(result) {
-      me.api
-      .frame(result.value)
+    this.api      
       .timeoutsAsyncScript(timeoutInMilliseconds)
       .executeAsync(
         function(nameSpace, wvEvent, done) {
@@ -37,14 +34,15 @@ class WaitForWVEvent extends EventEmitter {
           });
         }, 
       
-        [me.nameSpace, me.WVEvent], 
+        [this.nameSpace, this.WVEvent], 
 
-        function() {
-          clearTimeout(me.failTimeout);
-          return me.emit('complete');
+        () => {
+          // using arrow function here to force the context of "this" to be the instance of this class
+          // instead of the client window in this callback
+          clearTimeout(this.failTimeout);
+          return this.emit('complete');
         }
       );
-    })
   }
 }
 

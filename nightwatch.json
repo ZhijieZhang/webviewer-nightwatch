@@ -1,5 +1,7 @@
 {
-  "src_folders": ["tests"],
+  "src_folders": ["tests/nightwatch/release"],
+
+  "custom_commands_path": ["tests/nightwatch/commands"],
 
   "webdriver": {
     "start_process": true,

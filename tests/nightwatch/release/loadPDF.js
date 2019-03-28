@@ -63,6 +63,46 @@ describe('Load PDF', function() {
           .waitForWVEvent('pageComplete');
       });
     })
+
+    describe('Encrypted PDF', function() {
+      beforeEach(function(client, done) {
+        client
+          .readerControl('loadDocument', '/samples/files/encrypted-foobar12.pdf')
+          .waitForElementVisible('[data-element="passwordModal"]', 5000, () => done());
+      })
+
+      it('show password modal', function() {})
+
+      it('load successfully after the correct password is submitted', function(client) {
+        client
+          .setValue('input[type=password]', 'foobar12')
+          .click('[data-element="passwordSubmitButton"]')
+          .waitForWVEvent('pageComplete')
+      })
+
+      it('show wrong password information after a wrong password is submitted', function(client) {
+        client
+          .setValue('input[type=password]', 'this must not be the correct password')
+          .click('[data-element="passwordSubmitButton"]')
+          .assert.cssClassPresent('input[type=password]', 'wrong')
+          .waitForElementVisible('.incorrect-password', 5000);
+      })
+
+      it('remain visible after cancel button is clicked', function(client) {
+        client
+          .click('[data-element="passwordCancelButton"]')
+          .expect.element('[data-element="passwordModal"]').to.be.present;
+      })
+    })
+
+    describe('PDF with JavaScript', function() {
+      it.only('load javascript.pdf', function(client) {
+        client
+          .readerControl('loadDocument', '/samples/files/javascript.pdf')
+          .waitForWVEvent('annotationsLoaded')
+          .pause(5000)
+      })
+    })
   });
 
   describe('With Server', function() {

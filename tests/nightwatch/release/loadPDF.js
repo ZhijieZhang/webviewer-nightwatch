@@ -68,9 +68,9 @@ describe('Load PDF', function() {
       let passwordModal;
 
       beforeEach(function(client, done) {
-        passwordModal = client.page.passwordModal();
-
         client.readerControl('loadDocument', '/samples/files/encrypted-foobar12.pdf');
+        
+        passwordModal = client.page.passwordModal();
         passwordModal.waitForElementVisible('@modal', 5000, () => done());
       })
 
@@ -89,7 +89,7 @@ describe('Load PDF', function() {
           .setValue('@input', 'this cannot be the correct password ^_^')
           .click('@submitBtn')
           .assert.cssClassPresent('@input', 'wrong')
-          .waitForElementVisible('@wrongPasswordDiv', 5000)
+          .waitForElementVisible('@wrongPasswordDiv', 5000);
       })
 
       it('remain visible after cancel button is clicked', function() {
@@ -99,14 +99,25 @@ describe('Load PDF', function() {
       })
     })
 
-    // describe('PDF with JavaScript', function() {
-    //   it.only('load javascript.pdf', function(client) {
-    //     client
-    //       .readerControl('loadDocument', '/samples/files/javascript.pdf')
-    //       .waitForWVEvent('annotationsLoaded')
-    //       .pause(5000)
-    //   })
-    // })
+    describe('PDF with JavaScript', function() {
+      let jsPDF;
+
+      beforeEach(function(client, done) {
+        jsPDF = client.page.jsPDF();
+       
+        client
+          .readerControl('loadDocument', '/samples/files/javascript.pdf')
+          .waitForWVEvent('annotationsLoaded', done)
+      })
+
+      it.only('update divs???', function(client) {
+        jsPDF
+          .moveToElement('@textInput', 5, 5)
+          .expect.element('@enterExitInput').to.have.value.that.equals('Mouse Enter - Text')
+        
+        client.pause(500000);
+      })
+    })
   });
 
   describe('With Server', function() {

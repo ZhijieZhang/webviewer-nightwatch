@@ -1,14 +1,12 @@
 {
   "src_folders": ["tests/nightwatch/release"],
-
   "custom_commands_path": ["tests/nightwatch/commands"],
-
+  "page_objects_path": ["tests/nightwatch/pageObjects"],
   "webdriver": {
     "start_process": true,
     "server_path": "node_modules/.bin/chromedriver",
     "port": 9515
   },
-
   "test_settings": {
     "default": {
       "desiredCapabilities": {
@@ -16,6 +14,5 @@
       }
     }
   },
-
   "test_runner": "mocha"
 }

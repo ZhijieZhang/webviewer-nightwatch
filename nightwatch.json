@@ -1,5 +1,5 @@
 {
-  "src_folders": ["tests/nightwatch/release"],
+  "src_folders": ["tests/nightwatch/release/release.test.js"],
   "custom_commands_path": ["tests/nightwatch/commands"],
   "page_objects_path": ["tests/nightwatch/pageObjects"],
   "webdriver": {

@@ -59,4 +59,9 @@ describe('PDF with JavaScript', function() {
         .assert.valueContains('@focusBlurInput', 'Blur', `${element} failed to trigger mouseup event`);
     })
   })
+
+  it('prompts alert after the alert check button is clicked', function(client) {
+    jsPDF.click('@checkBtnWidgetWithAlert');
+    client.acceptAlert();
+  })
 })

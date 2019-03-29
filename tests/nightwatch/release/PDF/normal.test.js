@@ -23,7 +23,7 @@ describe('Normal PDF', function() {
       .waitForWVEvent('pageComplete');
   });
 
-  it.only('fail to load with invalid license key', function(client) {
+  it('fail to load with invalid license key', function(client) {
     client
       .frameParent()
       .execute(
@@ -34,5 +34,6 @@ describe('Normal PDF', function() {
       .switchToUIFrame()
       .setUrlWithOptions({ initialDoc: '/samples/files/sample.pdf' })
       .waitForElementVisible('[data-element="errorModal"]')
+      .expect.element('[data-element="errorModal"] .container').text.to.contain('Bad License Key')
   })
 });

@@ -9,20 +9,40 @@ module.exports = {
     downUpInput: {
       selector: '#Down\\/Up input[type="text"]'
     },
-    textInput: {
+    textWidget: {
       selector: '#TextField input[type="text"]'
     },
-    checkBox: {
+    checkBtnWidget: {
       selector: '#Button'
     },
-    choice: {
+    choiceWidget: {
       selector: '#Combo\\ Box select'
     },
-    list: {
+    listWidget: {
       selector: '#List\\ Box select'
     },
-    alertCheckBox: {
+    checkBtnWidgetWithAlert: {
       selector: '#Alert\\ Button' 
+    },
+    documentContainer: {
+      selector: '[data-element="documentContainer"]'
     }
-  }
+  },
+  commands: [
+    {
+      mouseDown: function(button, element) {
+        this.moveToElement(element, 5, 5);
+        this.api.mouseButtonDown(button);
+
+        return this;
+      }
+    },
+    {
+      mouseUp: function(button) {
+        this.api.mouseButtonUp(button);
+
+        return this;
+      }
+    }
+  ]
 }

@@ -18,7 +18,8 @@ describe('WebViewer Release Test', function() {
       './PDF/non-linearized.test.js',
       './PDF/encrypted.test.js',
       './PDF/javascript.test.js',
-      './PDF/substituted-font.test.js'
+      './PDF/substituted-font.test.js',
+      './PDF/annotation.test.js'
     ]);
   });
 

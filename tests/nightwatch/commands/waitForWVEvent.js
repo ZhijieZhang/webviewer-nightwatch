@@ -54,7 +54,7 @@ class WaitForWVEvent extends EventEmitter {
           // instead of the client window in this callback
           clearTimeout(this.failTimeout);
           this.callback.call(this.api);
-          return this.emit('complete');
+          this.emit('complete');
         }
       );
   }

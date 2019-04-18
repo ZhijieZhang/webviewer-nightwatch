@@ -2,40 +2,64 @@ exports.command = function(options, callback) {
   this.execute(
     function(options) {
       window = window[0] || window;
-      let url = window.location.href;
-  
-      if (options.initialDoc !== undefined) {
-        url = url.replace(/(#d=).+?&/, `$1${options.initialDoc}&`);
-      }
-      if (options.pdftronServer !== undefined) {
-        const encodedPath = window.encodeURIComponent(options.pdftronServer);
-  
-        if (url.match(/pdftronServer=/)) {
-          if (url.match(/pdftronServer=.+?&/)) {
-            url = url.replace(/(pdftronServer=).+?&/, encodedPath ? `$1${encodedPath}&` : '&');
+      // search the query key in the url and replace its value with the new value
+      // if the key is not found and the new value is truthy, append the key value to the end of the url  
+      window.replaceQueryValue = function(url, key, newValue) {
+        let result = url;
+      
+        if (url.match(new RegExp(`${key}=`))) {
+          if (url.match(new RegExp(`${key}=\.\+\?&`))) {
+            result = url.replace(new RegExp(`\(${key}=\)\.\+\?&`), newValue ? `$1${newValue}&` : '&');
           } else {
-            url = url.replace(/(pdftronServer=).+?$/, encodedPath ? `$1${encodedPath}` : '');
+            result = url.replace(new RegExp(`\(${key}=\)\.\+\?\$`), newValue ? `$1${newValue}` : '');
           }
-        } else if (encodedPath) {
-          url += `&pdftronServer=${encodedPath}`;
+        } else if (newValue) {
+          result += `&${key}=${newValue}`;
         }
+      
+        return result;
       }
+      // each key of the map is a constructor option
+      // the value of the key is an object in the shape of:
+      // key: map the constructor option key to the query key that will be added to the iframe url
+      // getValue: a function that takes the value of a constructor option and returns the value of the query key that will be added to the iframe url
+      // for example:
+      // { initialDoc: '/test.pdf', fullAPI: true } => '#d=/test.pdf&pdfnet=true'
+      window.constructorOptionQueryKeyValueMap = {
+        initialDoc: {
+          key: '#d',
+          getValue: value => value
+        },
+        pdftronServer: {
+          key: 'pdftronServer',
+          getValue: value => window.encodeURIComponent(value)
+        },
+        useDownloader: {
+          key: 'useDownloader',
+          getValue: value => value
+        },
+        fullAPI: {
+          key: 'pdfnet',
+          getValue: value => value
+        },
+        enableRedaction: {
+          key: 'enableRedaction',
+          getValue: value => value
+        }
+      };
 
-      if (options.useDownloader !== undefined) {
-        const useDownloader = options.useDownloader ? 'true' : 'false';
-
-        if (url.match(/useDownloader=/)) {
-          if (url.match(/useDownloader=.+?&/)) {
-            url = url.replace(/(useDownloader=).+?&/, `$1${useDownloader}&`);
-          } else {
-            url = url.replace(/(useDownloader=).+?$/, `$1${useDownloader}`);
+      window.location.href = Object
+        .keys(constructorOptionQueryKeyValueMap)
+        .reduce(function(url, optionKey) {
+          const optionValue = options[optionKey];
+          
+          if (optionValue !== undefined) {
+            const { key, getValue } = constructorOptionQueryKeyValueMap[optionKey]
+            return replaceQueryValue(url, key, getValue(optionValue));
           }
-        } else if (useDownloader) {
-          url += `&useDownloader=${useDownloader}`;
-        }
-      }
-  
-      window.location.href = url;
+
+          return url;
+        }, window.location.href);
     },
 
     [options],

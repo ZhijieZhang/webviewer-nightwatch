@@ -113,44 +113,52 @@ describe('Annotation', function () {
     const textTools = [
       {
         toolNames: [
-          'AnnotationCreateTextStrikeout',
-          'AnnotationCreateTextSquiggly',
-          'AnnotationCreateTextHighlight',
-          'AnnotationCreateTextUnderline'
+          'AnnotationCreateRectangle'
+          // 'AnnotationCreateTextStrikeout',
+          // 'AnnotationCreateTextSquiggly',
+          // 'AnnotationCreateTextHighlight',
+          // 'AnnotationCreateTextUnderline'
         ],
-        draw: function(x, y) {
+        draw: function({ start, end }) {
+          console.log(start, end);      
           client
+            .frameParent()
+            .moveToElement('body', start.x, start.y)
             .mouseButtonDown('left')
-            .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
-            .mouseButtonUp('left')
+            .moveToElement('body', end.x, end.y)
+            .mouseButtonUp('up')    
+          // client
+          //   .mouseButtonDown('left')
+          //   .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
+          //   .mouseButtonUp('left')
         }
       },
-      {
-        toolNames: [
-          'AnnotationCreateRedaction'
-        ],
-        draw: function(x, y) {
-          client
-            .mouseButtonDown('left')
-            .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
-            .mouseButtonUp('left')
-            .moveToElement('.pageContainer', x + tAnnotWidth / 2, y + tAnnotHeight / 2)
-            // apply the redaction
-            .mouseButtonClick()
-            .waitForElementVisible('[data-element="annotationPopup"]', 5000)
-            .click('[data-element="annotationRedactButton"]')
-            .waitForElementVisible('.WarningModal', 5000)
-            .click('[data-element="WarningModalSignButton"]')
-            .pause(1000)
-        } 
-      }
+      // {
+      //   toolNames: [
+      //     'AnnotationCreateRedaction'
+      //   ],
+      //   draw: function(x, y) {
+      //     client
+      //       .mouseButtonDown('left')
+      //       .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
+      //       .mouseButtonUp('left')
+      //       .moveToElement('.pageContainer', x + tAnnotWidth / 2, y + tAnnotHeight / 2)
+      //       // apply the redaction
+      //       .mouseButtonClick()
+      //       .waitForElementVisible('[data-element="annotationPopup"]', 5000)
+      //       .click('[data-element="annotationRedactButton"]')
+      //       .waitForElementVisible('.WarningModal', 5000)
+      //       .click('[data-element="WarningModalSignButton"]')
+      //       .pause(1000)
+      //   } 
+      // }
     ];
 
     client
       .setUrlWithOptions({
         initialDoc: '/samples/files/sample.pdf',
-        fullAPI: true,
-        enableRedaction: true
+        // fullAPI: true,
+        // enableRedaction: true
       })
       .waitForWVEvent('pageComplete')
       // if we don't wait 500ms then mouse actions will be performed on the progressModal(in the UI we close it asynchronously)
@@ -177,25 +185,47 @@ describe('Annotation', function () {
         //       })
         //   })
         // });
+        textTools.forEach(function({ toolNames, draw }, index) {
+          const initOffsetX = 60,
+                initOffsetY = 75,
+                gap = 10,
+                x = initOffsetX;
 
-        genericTools.forEach(function ({ toolNames, draw }, rowIndex) {
-          const initOffsetX = 5,
-                initOffsetY = 220,
-                gap = 20,
-                y = initOffsetY + rowIndex * (gAnnotHeight + gap);
-
-          toolNames.forEach(function (toolName, colIndex) {
-            const x = initOffsetX + colIndex * (gAnnotWidth + gap);
+          toolNames.forEach(function (toolName, rowIndex) {
+            const previousNumberOfRows = Array.from({ length: index }, function(_, index) {
+                return index;
+              }).reduce(function(rows, index) {
+                return rows + textTools[index].toolNames.length
+              }, 0);
+            const y = initOffsetY + (rowIndex + previousNumberOfRows) * (tAnnotHeight + gap)
 
             client
               .readerControl('setToolMode', toolName)
-              .moveToElement('.pageContainer', x, y, function () {
-                draw(x, y);
-              });
+              .getTextPosition('This is', draw)
+              // .moveToElement('.pageContainer', x, y, function() {
+              //   draw(x, y);
+              // })
           })
         });
+
+        // genericTools.forEach(function ({ toolNames, draw }, rowIndex) {
+        //   const initOffsetX = 5,
+        //         initOffsetY = 220,
+        //         gap = 20,
+        //         y = initOffsetY + rowIndex * (gAnnotHeight + gap);
+
+        //   toolNames.forEach(function (toolName, colIndex) {
+        //     const x = initOffsetX + colIndex * (gAnnotWidth + gap);
+
+        //     client
+        //       .readerControl('setToolMode', toolName)
+        //       .moveToElement('.pageContainer', x, y, function () {
+        //         draw(x, y);
+        //       });
+        //   })
+        // });
       })
-      .saveAndReloadPDF()
+      // .saveAndReloadPDF()
       .waitForWVEvent('pageComplete')
       .pause(500000)
   });

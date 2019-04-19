@@ -22,4 +22,6 @@ exports.command = function(callback) {
       })
     }
   )
+
+  return this;
 }

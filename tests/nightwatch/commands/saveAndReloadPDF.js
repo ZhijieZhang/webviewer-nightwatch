@@ -1,4 +1,4 @@
-exports.command = function(callback) {
+exports.command = function() {
   this.executeAsync(
     function(done) {
       window = window || window[0];

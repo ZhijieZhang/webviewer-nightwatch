@@ -1,4 +1,4 @@
-exports.command = function(options, callback) {
+exports.command = function(options, callback = () => {}) {
   this.execute(
     function(options) {
       window = window[0] || window;
@@ -65,9 +65,7 @@ exports.command = function(options, callback) {
     [options],
 
     () => {
-      if (typeof callback === 'function') {
-        callback.call(this);
-      }
+      callback.call(this);
     }
   );
 

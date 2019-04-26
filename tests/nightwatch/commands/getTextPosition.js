@@ -1,4 +1,4 @@
-exports.command = function(text, callback) {
+exports.command = function(text, callback = () => {}) {
   this.executeAsync(
     function(text, done) {
       window = window || window[0];
@@ -34,9 +34,7 @@ exports.command = function(text, callback) {
     [text],
 
     result => { 
-      if(typeof callback === 'function') {
-        callback.call(this, result && result.value)
-      }
+      callback.call(this, result && result.value)
     }
   )
 

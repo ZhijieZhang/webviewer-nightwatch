@@ -1,8 +1,3 @@
-// 'AnnotationCreateRedaction'
-// 'AnnotationCreateTextHighlight'
-// 'AnnotationCreateTextSquiggly'
-// 'AnnotationCreateTextStrikeout'
-// 'AnnotationCreateTextUnderline'
 const path = require('path');
 // image to upload when using the stamp tool
 const stampImage = path.resolve(__dirname, '../../../../samples/files/stamptest.png');
@@ -29,7 +24,6 @@ describe('Annotation', function () {
         toolNames: [
           'AnnotationCreateArrow',
           'AnnotationCreateEllipse',
-          'AnnotationCreateFreeHand',
           'AnnotationCreateLine',
           'AnnotationCreateRectangle',
           'AnnotationCreateDistanceMeasurement',
@@ -41,117 +35,123 @@ describe('Annotation', function () {
             .mouseButtonUp('left')
         }
       },
-      // {
-      //   toolNames: [
-      //     'AnnotationCreatePolygon',
-      //     'AnnotationCreatePolygonCloud',
-      //     'AnnotationCreatePolyline',
-      //     'AnnotationCreatePerimeterMeasurement',
-      //     'AnnotationCreateAreaMeasurement'
-      //   ],
-      //   draw: function (x, y) {
-      //     client
-      //       .mouseButtonClick()
-      //       .moveToElement('.pageContainer', x + gAnnotWidth, y)
-      //       .mouseButtonClick()
-      //       .moveToElement('.pageContainer', x + gAnnotWidth / 2, y + gAnnotHeight)
-      //       .doubleClick();
-      //   }
-      // },
-      // {
-      //   toolNames: ['AnnotationCreateCallout'],
-      //   draw: function (x, y) {
-      //     client
-      //       .mouseButtonClick()
-      //       .moveToElement('.pageContainer', x + gAnnotWidth, y)
-      //       .mouseButtonClick()
-      //       .moveToElement('.pageContainer', x + gAnnotWidth / 2, y + gAnnotHeight / 2)
-      //       .mouseButtonClick()
-      //       // click off the text area to blur it out
-      //       .moveToElement('.pageContainer', 5, 5)
-      //       .doubleClick();
-      //   }
-      // },
-      // {
-      //   toolNames: ['AnnotationCreateFreeText'],
-      //   draw: function (x, y) {
-      //     client
-      //       .mouseButtonDown('left')
-      //       .moveToElement('.pageContainer', x + gAnnotWidth, y + gAnnotHeight)
-      //       .mouseButtonUp('left')
-      //       .readerControl('setToolMode', 'AnnotationEdit')
-      //       // click off the text area to blur it out
-      //       .moveToElement('.pageContainer', 5, 5)
-      //       .mouseButtonClick()
-      //   }
-      // },
-      // {
-      //   toolNames: ['AnnotationCreateSticky'],
-      //   draw: function (x, y) {
-      //     client
-      //       .mouseButtonClick()
-      //       // in the current UI version, a sticky annotation will be selected
-      //       // and the left panel will open after it is added to the canvas 
-      //       // wait for 1 sec so that the panel will be fully open then close it and deselect the annotation
-      //       .pause(500)
-      //       .readerControl('closeElements', ['leftPanel'])
-      //       .moveToElement('.pageContainer', 5, 5)
-      //       .mouseButtonClick()
-      //   }
-      // },
-      // {
-      //   toolNames: ['AnnotationCreateStamp'],
-      //   draw: function (x, y) {
-      //     client
-      //       // if we don't pause then there's a change that the file input can't be found
-      //       .pause(500)
-      //       .mouseButtonClick()
-      //       .setValue('input[type="file"]', stampImage)
-      //   }
-      // }
+      {
+        toolNames: [
+          'AnnotationCreatePolygon',
+          'AnnotationCreatePolygonCloud',
+          'AnnotationCreatePolyline',
+          'AnnotationCreatePerimeterMeasurement',
+          'AnnotationCreateAreaMeasurement'
+        ],
+        draw: function (x, y) {
+          client
+            .mouseButtonClick()
+            .moveToElement('.pageContainer', x + gAnnotWidth, y)
+            .mouseButtonClick()
+            .moveToElement('.pageContainer', x + gAnnotWidth / 2, y + gAnnotHeight)
+            .doubleClick();
+        }
+      },
+      {
+        // free hand tool has some trouble drawing a straight line between two points(not sure why)
+        // so we move it out of the first element and make the path tweaked
+        toolNames: ['AnnotationCreateFreeHand'],
+        draw: function (x, y) {
+          client
+            .mouseButtonDown('left')
+            .moveToElement('.pageContainer', x + gAnnotWidth, y + 10)
+            .moveToElement('.pageContainer', x + gAnnotWidth - 10, y + 20)
+            .moveToElement('.pageContainer', x + gAnnotWidth / 2, y + gAnnotHeight)
+            .moveToElement('.pageContainer', x, y)
+            .mouseButtonUp('left')
+        }
+      },
+      {
+        toolNames: ['AnnotationCreateCallout'],
+        draw: function (x, y) {
+          client
+            .mouseButtonClick()
+            .moveToElement('.pageContainer', x + gAnnotWidth, y)
+            .mouseButtonClick()
+            .moveToElement('.pageContainer', x + gAnnotWidth / 2, y + gAnnotHeight / 2)
+            .mouseButtonClick()
+            // click off the text area to blur it out
+            .moveToElement('.pageContainer', 5, 5)
+            .doubleClick();
+        }
+      },
+      {
+        toolNames: ['AnnotationCreateFreeText'],
+        draw: function (x, y) {
+          client
+            .mouseButtonDown('left')
+            .moveToElement('.pageContainer', x + gAnnotWidth, y + gAnnotHeight)
+            .mouseButtonUp('left')
+            .readerControl('setToolMode', 'AnnotationEdit')
+            // click off the text area to blur it out
+            .moveToElement('.pageContainer', 5, 5)
+            .mouseButtonClick()
+        }
+      },
+      {
+        toolNames: ['AnnotationCreateSticky'],
+        draw: function (x, y) {
+          client
+            .mouseButtonClick()
+            // in the current UI version, a sticky annotation will be selected
+            // and the left panel will open after it is added to the canvas 
+            // wait for 1 sec so that the panel will be fully open then close it and deselect the annotation
+            .pause(500)
+            .readerControl('closeElements', ['leftPanel'])
+            .moveToElement('.pageContainer', 5, 5)
+            .mouseButtonClick()
+        }
+      },
+      {
+        toolNames: ['AnnotationCreateStamp'],
+        draw: function (x, y) {
+          client
+            // if we don't pause then there's a change that the file input can't be found
+            .pause(500)
+            .mouseButtonClick()
+            .setValue('input[type="file"]', stampImage)
+        }
+      }
     ];
     const textTools = [
       {
         toolNames: [
-          'AnnotationCreateRectangle'
-          // 'AnnotationCreateTextStrikeout',
-          // 'AnnotationCreateTextSquiggly',
-          // 'AnnotationCreateTextHighlight',
-          // 'AnnotationCreateTextUnderline'
+          'AnnotationCreateTextStrikeout',
+          'AnnotationCreateTextSquiggly',
+          'AnnotationCreateTextHighlight',
+          'AnnotationCreateTextUnderline'
         ],
-        draw: function({ start, end }) {
-          console.log(start, end);      
+        draw: function(x, y) {
           client
-            .frameParent()
-            .moveToElement('body', start.x, start.y)
             .mouseButtonDown('left')
-            .moveToElement('body', end.x, end.y)
-            .mouseButtonUp('up')    
-          // client
-          //   .mouseButtonDown('left')
-          //   .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
-          //   .mouseButtonUp('left')
+            .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
+            .mouseButtonUp('left')
         }
       },
-      // {
-      //   toolNames: [
-      //     'AnnotationCreateRedaction'
-      //   ],
-      //   draw: function(x, y) {
-      //     client
-      //       .mouseButtonDown('left')
-      //       .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
-      //       .mouseButtonUp('left')
-      //       .moveToElement('.pageContainer', x + tAnnotWidth / 2, y + tAnnotHeight / 2)
-      //       // apply the redaction
-      //       .mouseButtonClick()
-      //       .waitForElementVisible('[data-element="annotationPopup"]', 5000)
-      //       .click('[data-element="annotationRedactButton"]')
-      //       .waitForElementVisible('.WarningModal', 5000)
-      //       .click('[data-element="WarningModalSignButton"]')
-      //       .pause(1000)
-      //   } 
-      // }
+      {
+        toolNames: [
+          'AnnotationCreateRedaction'
+        ],
+        draw: function(x, y) {
+          client
+            .mouseButtonDown('left')
+            .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
+            .mouseButtonUp('left')
+            .moveToElement('.pageContainer', x + tAnnotWidth / 2, y + tAnnotHeight / 2)
+            // apply the redaction
+            .mouseButtonClick()
+            .waitForElementVisible('[data-element="annotationPopup"]', 5000)
+            .click('[data-element="annotationRedactButton"]')
+            .waitForElementVisible('.WarningModal', 5000)
+            .click('[data-element="WarningModalSignButton"]')
+            .pause(1000)
+        } 
+      }
     ];
 
     client
@@ -185,28 +185,6 @@ describe('Annotation', function () {
         //       })
         //   })
         // });
-        textTools.forEach(function({ toolNames, draw }, index) {
-          const initOffsetX = 60,
-                initOffsetY = 75,
-                gap = 10,
-                x = initOffsetX;
-
-          toolNames.forEach(function (toolName, rowIndex) {
-            const previousNumberOfRows = Array.from({ length: index }, function(_, index) {
-                return index;
-              }).reduce(function(rows, index) {
-                return rows + textTools[index].toolNames.length
-              }, 0);
-            const y = initOffsetY + (rowIndex + previousNumberOfRows) * (tAnnotHeight + gap)
-
-            client
-              .readerControl('setToolMode', toolName)
-              .getTextPosition('This is', draw)
-              // .moveToElement('.pageContainer', x, y, function() {
-              //   draw(x, y);
-              // })
-          })
-        });
 
         // genericTools.forEach(function ({ toolNames, draw }, rowIndex) {
         //   const initOffsetX = 5,
@@ -225,8 +203,9 @@ describe('Annotation', function () {
         //   })
         // });
       })
+      .saveElementScreenshot('.pageContainer', 'pageContainer.png')
       // .saveAndReloadPDF()
-      .waitForWVEvent('pageComplete')
+      // .waitForWVEvent('pageComplete')
       .pause(500000)
   });
 });

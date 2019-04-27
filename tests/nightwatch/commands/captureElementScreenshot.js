@@ -1,8 +1,5 @@
 const Jimp = require('jimp');
 const Buffer = require('buffer').Buffer;
-// const path = require('path');
-
-// const folderPath = path.resolve(__dirname, '../release/screenshot');
 
 // take a screenshot of the visible region of the element
 // this command makes a few assumptions:
@@ -42,9 +39,6 @@ exports.command = function(element, callback = () => {}) {
         );
 
         callback.call(this, screenshot);
-
-        // filename = /\.(png|jpeg|bmp)/.test(filename) ? filename : filename + '.png';
-        // screenshot.write(path.resolve(folderPath, filename));
       })
     })
 

@@ -3,7 +3,7 @@ const path = require('path');
 const stampImage = path.resolve(__dirname, '../../../../samples/files/stamptest.png');
 
 describe('Annotation', function () {
-  it.only('draw each type of annotation successfully', function (client) {
+  it('can add each type of annotation to the document and annotations looks the same after reloading the PDF', function (client) {
     // width for the annotation drawn by the generic tools, in pixels
     const gAnnotWidth = 40;
     // height for the annotation drawn by the generic tools, in pixels

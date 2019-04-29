@@ -9,25 +9,26 @@ module.exports = {
     downUpInput: {
       selector: '#Down\\/Up input[type="text"]'
     },
-    textWidget: {
+    textField: {
       selector: '#TextField input[type="text"]'
     },
-    checkBtnWidget: {
+    checkbox: {
       selector: '#Button'
     },
-    choiceWidget: {
+    choiceField: {
       selector: '#Combo\\ Box select'
     },
-    listWidget: {
+    listField: {
       selector: '#List\\ Box select'
     },
-    checkBtnWidgetWithAlert: {
+    checkboxWithAlert: {
       selector: '#Alert\\ Button' 
     },
     documentContainer: {
       selector: '[data-element="documentContainer"]'
     }
   },
+  // TODO: remove duplicate code, it also appears in form.js.
   commands: [
     {
       mouseDown: function(button, element) {

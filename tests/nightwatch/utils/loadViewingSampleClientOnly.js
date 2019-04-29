@@ -1,6 +1,6 @@
 const loadViewingSampleClientOnly = (client, done) => {
   client
-    .resizeWindow(1280, 800)
+    .resizeWindow(1280, 1280)
     .url('http://localhost:3000/samples/viewing/viewing/')
     .waitForElementVisible('iframe', 1000)
     .switchToUIFrame()

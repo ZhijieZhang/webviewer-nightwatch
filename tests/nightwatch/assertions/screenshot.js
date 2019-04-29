@@ -6,17 +6,15 @@ const { promisify } = require('util');
 const stat = promisify(fs.stat);
 const copyFile = promisify(fs.copyFile);
 const unlink = promisify(fs.unlink);
-const mkdir = promisify(fs.mkdir);
-const rmdir = promisify(fs.rmdir);
 
 const RESET = '\x1b[0m';
 const RED = '\x1b[31m';
 const GREEN = '\x1b[32m';
 const YELLOW = '\x1b[33m';
 const CYAN = '\x1b[36m';
-const baseFolderPath = path.resolve(__dirname, '../release/screenshot/baseline');
-const diffFolderPath = path.resolve(__dirname, '../release/screenshot/diff');
-const currentFolderPath = path.resolve(__dirname, '../release/screenshot/current');
+const baseFolderPath = path.resolve(__dirname, '../screenshot/baseline');
+const diffFolderPath = path.resolve(__dirname, '../screenshot/diff');
+const currentFolderPath = path.resolve(__dirname, '../screenshot/current');
 
 exports.assertion = function (element, filename, message) {
   this.message = message || `Screenshot test for ${element} failed.`;
@@ -58,7 +56,6 @@ exports.assertion = function (element, filename, message) {
             callback(hasOverwritten);
           }
         } catch (error) {
-          console.log(error);
           await currentScreenshot.writeAsync(baseFilePath);
           console.log(`${filename} doesn't exist, saved the current screenshot as a baseline screenshot`);
           callback(true);

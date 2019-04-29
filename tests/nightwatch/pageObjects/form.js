@@ -3,8 +3,8 @@ module.exports = {
     textField: {
       selector: '#Feld\\.2 input[type="text"]'
     },
-    multilineTextField: {
-      selector: '#Feld\\.1 textarea'
+    passwordField: {
+      selector: '#Feld\\.9 input[type="text"]'
     },
     // a text field of which the value will be used to calculate
     // the total price
@@ -26,20 +26,35 @@ module.exports = {
     percentTextField: {
       selector: '#Format\\.pro input[type="text"]'
     },
+    multilineTextField: {
+      selector: '#Feld\\.1 textarea'
+    },
     radioBox: {
       selector: '#Feld\\.3 input[type="radio"]'
     },
     checkbox: {
       selector: '#Feld\\.7 input[type="checkbox"]'
     },
-    choiceField: {
-      selector: '#Feld\\.4 select'
+    choiceFieldFirstOption: {
+      selector: '#Feld\\.4 select option[value="1"]'
     },
-    listField: {
-      selector: '#Feld\\.5 select'
-    },
-    passwordField: {
-      selector: '#Feld\\.9 input[type="text"]'
+    listFieldFirstOption: {
+      selector: '#Feld\\.5 select option[value="1"]'
     }
-  }
+  },
+  commands: [
+    {
+      // this command is a workaround for the native clearValue API
+      // https://github.com/nightwatchjs/nightwatch/issues/1132
+      clear: function(element) {
+        this.getValue(element, function({ value }) {
+          for (c in value) {
+            this.setValue(element, this.api.Keys.BACK_SPACE);
+          }
+        }.bind(this))
+
+        return this;
+      }
+    }
+  ]
 }

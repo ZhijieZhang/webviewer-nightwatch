@@ -21,7 +21,8 @@ describe('WebViewer Release Test', function() {
       './PDF/substituted-font.test.js',
       './PDF/annotation.test.js',
       './PDF/form.test.js',
-      './PDF/text-selection.test.js'
+      './PDF/text-selection.test.js',
+      './PDF/outline.test.js'
     ]);
   });
 

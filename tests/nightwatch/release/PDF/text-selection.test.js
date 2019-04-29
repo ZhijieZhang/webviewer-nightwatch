@@ -23,10 +23,10 @@ describe('Text Selection', function() {
       .click('[data-element="copyTextButton"]')
       .readerControl('docViewer', 'getSelectedText', function(text) {
         assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, an');
-      })
+      });
   })
 
-  it.only('select and copy the text in multiple pages', function(client) {
+  it('select and copy the text in multiple pages', function(client) {
     client
       // .readerControl('setZoomLevel', 0.75)
       // .waitForWVEvent('pageComplete')
@@ -38,7 +38,6 @@ describe('Text Selection', function() {
       .click('[data-element="copyTextButton"]')
       .readerControl('docViewer', 'getSelectedText', function(text) {
         assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, and customer satisfaction.\nWebViewer');
-      })
-      .pause(5000000)
+      });
   })
 })

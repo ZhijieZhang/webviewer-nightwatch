@@ -12,6 +12,9 @@
     "default": {
       "desiredCapabilities": {
         "browserName": "chrome"
+      },
+      "globals": {
+        "asyncHookTimeout": 1000000
       }
     }
   },

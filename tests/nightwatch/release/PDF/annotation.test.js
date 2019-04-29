@@ -126,7 +126,7 @@ describe('Annotation', function () {
           'AnnotationCreateTextHighlight',
           'AnnotationCreateTextUnderline'
         ],
-        draw: function(x, y) {
+        draw: function (x, y) {
           client
             .mouseButtonDown('left')
             .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
@@ -137,7 +137,7 @@ describe('Annotation', function () {
         toolNames: [
           'AnnotationCreateRedaction'
         ],
-        draw: function(x, y) {
+        draw: function (x, y) {
           client
             .mouseButtonDown('left')
             .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
@@ -150,7 +150,7 @@ describe('Annotation', function () {
             .waitForElementVisible('.WarningModal', 5000)
             .click('[data-element="WarningModalSignButton"]')
             .pause(1000)
-        } 
+        }
       }
     ];
 
@@ -186,25 +186,25 @@ describe('Annotation', function () {
         //   })
         // });
 
-        genericTools.forEach(function ({ toolNames, draw }, rowIndex) {
-          const initOffsetX = 5,
-                initOffsetY = 220,
-                gap = 20,
-                y = initOffsetY + rowIndex * (gAnnotHeight + gap);
+        // genericTools.forEach(function ({ toolNames, draw }, rowIndex) {
+        //   const initOffsetX = 5,
+        //         initOffsetY = 220,
+        //         gap = 20,
+        //         y = initOffsetY + rowIndex * (gAnnotHeight + gap);
 
-          toolNames.forEach(function (toolName, colIndex) {
-            const x = initOffsetX + colIndex * (gAnnotWidth + gap);
+        //   toolNames.forEach(function (toolName, colIndex) {
+        //     const x = initOffsetX + colIndex * (gAnnotWidth + gap);
 
-            client
-              .readerControl('setToolMode', toolName)
-              .moveToElement('.pageContainer', x, y, function () {
-                draw(x, y);
-              });
-          })
-        });
+        //     client
+        //       .readerControl('setToolMode', toolName)
+        //       .moveToElement('.pageContainer', x, y, function () {
+        //         draw(x, y);
+        //       });
+        //   })
+        // });
       })
       .assert.screenshot('.pageContainer', 'pageContainer.png')
-      // .saveAndReloadPDF()
-      // .waitForWVEvent('pageComplete')
+    // .saveAndReloadPDF()
+    // .waitForWVEvent('pageComplete')
   });
 });

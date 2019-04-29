@@ -166,7 +166,7 @@ describe('Annotation', function () {
       .pause(500, function () {
         textTools.forEach(function({ toolNames, draw }, index) {
           const initOffsetX = 70,
-                initOffsetY = 90,
+                initOffsetY = 85,
                 gap = 10,
                 x = initOffsetX;
 

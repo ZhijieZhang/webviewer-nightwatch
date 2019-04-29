@@ -1,5 +1,5 @@
 describe('Form', function() {
-  it.only('can change the values of each type of form field in the document and the values are the same after reloading the PDF', function(client) {
+  it('can change the values of each type of form field in the document and the values are the same after reloading the PDF', function(client) {
     const form = client.page.form();
 
     client

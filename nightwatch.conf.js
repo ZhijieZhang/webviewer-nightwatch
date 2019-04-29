@@ -1,4 +1,5 @@
 const chromedriver = require('chromedriver');
+const geckodriver = require('geckodriver');
 
 module.exports = (function(settings) {
   settings.test_workers = false;

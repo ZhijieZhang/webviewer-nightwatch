@@ -1,13 +1,31 @@
-exports.command = function(apiName, ...args) {
+exports.command = function(...args) {
   const callback = args[args.length - 1];
 
   this.execute(
-    function(apiName, args) {
+    function(args) {
       window = window[0] || window;
-      return window.readerControl[apiName](...args);
+      let obj,
+          apiName,
+          apiArgs;
+
+      if (
+        args[0] === 'docViewer' ||
+        args[0] === 'annotManager'
+      ) {
+        obj = args[0] === 'docViewer' 
+          ? window.docViewer
+          : window.docViewer.getAnnotationManager()
+        apiName = args[1];
+        apiArgs = args.slice(2);
+      } else {
+        obj = window.readerControl;
+        [apiName, ...apiArgs] = args;
+      }
+
+      return obj[apiName](...apiArgs);
     }, 
 
-    [apiName, args], 
+    [args], 
     
     result => { 
       if(typeof callback === 'function') {

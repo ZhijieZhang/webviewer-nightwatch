@@ -3,10 +3,10 @@ const getFileType = require('../../utils/getFileType');
 // image to upload when using the stamp tool
 const stampImage = path.resolve(__dirname, '../../../../samples/files/stamptest.png');
 
-module.exports = function(filePath) {
-  const fileType = getFileType(filePath);
+module.exports = function(fileName) {
+  const fileType = getFileType(fileName);
 
-  describe.only('Annotation', function () {
+  describe('Annotation', function () {
     it(`can add each type of annotation to the document and annotations looks the same after reloading the ${fileType}`, function (client) {
       // width for the annotation drawn by the generic tools, in pixels
       const gAnnotWidth = 40;
@@ -168,7 +168,7 @@ module.exports = function(filePath) {
   
       client
         .setUrlWithOptions({
-          initialDoc: `/samples/files/${filePath}`,
+          initialDoc: `/samples/files/${fileName}`,
           fullAPI: true,
           enableRedaction: true
         })
@@ -216,7 +216,7 @@ module.exports = function(filePath) {
           });
         })
         .assert.screenshot('.pageContainer', `annotation.${fileType}.png`)
-        .saveAndReload(`/samples/files/${filePath}`)
+        .saveAndReload(`/samples/files/${fileName}`)
         // TODO: lose custom appearances in pdf annotations
         .assert.screenshot('.pageContainer', `annotation.${fileType}.png`);
     });

@@ -1,6 +1,6 @@
 const getFileType = require('../utils/getFileType');
 
-exports.command = function(filePath) {
+exports.command = function(filePath, callback = () => {}) {
   const fileType = getFileType(filePath);
 
   this.executeAsync(
@@ -37,7 +37,9 @@ exports.command = function(filePath) {
 
     function({ value: xfdfString }) {
       if (fileType === 'PDF') {
-        this.waitForWVEvent('pageComplete');
+        this.waitForWVEvent('pageComplete', function() {
+          callback.call(this);
+        });
       } else if (fileType === 'XOD') {
         this
           .waitForWVEvent('pageComplete')
@@ -45,7 +47,9 @@ exports.command = function(filePath) {
           // we waited for 500ms here instead of using waitForWVEvent command because 
           // a) pageComplete doesn't trigger in the case
           // b) annotationChanged is triggered synchronously in the importAnnotations call so we can't capture it
-          .pause(500);
+          .pause(500, function() {
+            callback.call(this);
+          });
       }
     }
   );

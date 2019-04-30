@@ -1,13 +1,9 @@
-module.exports = function(doc1, doc2) {
-  const type = /\.xod(&|$|\?|#)/i.test(doc1) ? 'XOD' : 'PDF';
+const getFileType = require('../../utils/getFileType');
 
-  describe(`Load ${type} Document`, function() {
-    it(`load ${doc1} using constructor options`, function(client) {
-      client
-        .setUrlWithOptions({ initialDoc: `/samples/files/${doc1}` })
-        .waitForWVEvent('pageComplete');
-    });
-  
+module.exports = function(doc1, doc2) {
+  const fileType = getFileType(doc1);
+
+  describe(`Load ${fileType} Document`, function() {
     it(`load ${doc1} using loadDocument API`, function(client) {
       client
         .readerControl('loadDocument', `/samples/files/${doc1}`)

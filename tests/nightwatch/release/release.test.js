@@ -21,13 +21,13 @@ describe('WebViewer Release Test', function() {
       ['./common/annotation.test.js', 'sample.pdf'],
       ['./common/form.test.js', 'form.pdf'],
       ['./common/text-selection.test.js', 'webviewer-demo-annotated.pdf'],
+      ['./common/outline.test.js', 'outlines-nested.pdf'],
       './PDF/linearized.test.js',
       './PDF/non-linearized.test.js',
       './PDF/encrypted.test.js',
       './PDF/javascript.test.js',
       './PDF/substituted-font.test.js',
       './PDF/invalid-key.test.js',
-      './PDF/outline.test.js',
       './PDF/layout-mode.test.js'
     ]);
   });
@@ -52,6 +52,7 @@ describe('WebViewer Release Test', function() {
       ['./common/annotation.test.js', 'sample.xod'],
       ['./common/form.test.js', 'form.xod'],
       ['./common/text-selection.test.js', 'webviewer-demo-annotated.xod'],
+      ['./common/outline.test.js', 'outlines-nested.xod'],
     ]);
   });
 

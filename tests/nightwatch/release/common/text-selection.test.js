@@ -29,7 +29,7 @@ module.exports = function(fileName) {
         });
     });
   
-    it.only('select and copy the text in multiple pages', function(client) {
+    it('select and copy the text in multiple pages', function(client) {
       client
         .moveToElement('#pageContainer0', 100, 630)
         .mouseButtonDown('left')

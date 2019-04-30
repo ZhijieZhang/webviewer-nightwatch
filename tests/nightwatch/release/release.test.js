@@ -22,7 +22,8 @@ describe('WebViewer Release Test', function() {
       './PDF/annotation.test.js',
       './PDF/form.test.js',
       './PDF/text-selection.test.js',
-      './PDF/outline.test.js'
+      './PDF/outline.test.js',
+      './PDF/layout-mode.test.js'
     ]);
   });
 

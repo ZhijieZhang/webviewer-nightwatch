@@ -6,6 +6,7 @@ describe('Outline', function() {
       .readerControl('loadDocument', '/samples/files/outlines-nested.pdf')
       .waitForWVEvent('pageComplete')
       .readerControl('openElement', 'outlinesPanel')
+      // wait for the left panel to be fully opened
       .pause(500, done);
   });
 
@@ -17,7 +18,7 @@ describe('Outline', function() {
       });
   });
 
-  it.only('click a nested outline', function(client) {
+  it('click a nested outline', function(client) {
     // expand all the outlines by clicking on all the arrows
     // and then choose a nested outline to click
     client

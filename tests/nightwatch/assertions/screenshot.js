@@ -30,13 +30,8 @@ exports.assertion = function (element, filename, message) {
   };
 
   this.command = function (callback) {
-    let currentScreenshot;
-
     this.api
-      .captureElementScreenshot(element, function (screenshot) {
-        currentScreenshot = screenshot;
-      })
-      .perform(async function (done) {
+      .captureElementScreenshot(element, async function (currentScreenshot) {
         const baseFilePath = path.resolve(baseFolderPath, filename);
         const diffFilePath = path.resolve(diffFolderPath, filename);
         const currentFilePath = path.resolve(currentFolderPath, filename);
@@ -60,8 +55,6 @@ exports.assertion = function (element, filename, message) {
           console.log(`${filename} doesn't exist, saved the current screenshot as a baseline screenshot`);
           callback(true);
         }
-
-        done();
       });
 
     return this;

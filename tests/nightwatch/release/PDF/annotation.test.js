@@ -111,7 +111,8 @@ describe('Annotation', function () {
         toolNames: ['AnnotationCreateStamp'],
         draw: function (x, y) {
           client
-            // if we don't pause then there's a change that the file input can't be found
+            // if we don't pause then there's a chance that 
+            // the file input(created by the stamp tool at runtime) can't be found
             .pause(500)
             .mouseButtonClick()
             .setValue('input[type="file"]', stampImage);
@@ -149,6 +150,7 @@ describe('Annotation', function () {
             .click('[data-element="annotationRedactButton"]')
             .waitForElementVisible('.WarningModal', 5000)
             .click('[data-element="WarningModalSignButton"]')
+            // wait for redaction to be applied to the document
             .pause(1000);
         }
       }

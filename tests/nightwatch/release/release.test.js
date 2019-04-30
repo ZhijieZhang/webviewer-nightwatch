@@ -16,19 +16,19 @@ describe('WebViewer Release Test', function() {
       client.end(() => done());
     });
 
-    importTests([
-      ['./common/load-document.test.js', 'sample.pdf', 'sample-annotated.pdf'],
-      ['./common/annotation.test.js', 'sample.pdf'],
-      ['./common/form.test.js', 'form.pdf'],
-      ['./common/text-selection.test.js', 'webviewer-demo-annotated.pdf'],
-      ['./common/outline.test.js', 'outlines-nested.pdf'],
+    importTests([   
       './PDF/linearized.test.js',
       './PDF/non-linearized.test.js',
       './PDF/encrypted.test.js',
       './PDF/javascript.test.js',
       './PDF/substituted-font.test.js',
       './PDF/invalid-key.test.js',
-      './PDF/layout-mode.test.js'
+      './common/text-selection.test.js',
+      ['./common/load-document.test.js', 'sample.pdf', 'sample-annotated.pdf'],
+      ['./common/annotation.test.js', 'sample.pdf'],
+      ['./common/form.test.js', 'form.pdf'],
+      ['./common/outline.test.js', 'outlines-nested.pdf'],
+      ['./common/layout-mode.test.js', 'webviewer-demo-annotated.pdf']
     ]);
   });
 
@@ -37,7 +37,7 @@ describe('WebViewer Release Test', function() {
       client 
         .loadSample('viewing/viewing')
         .setUrlWithOptions({
-          initialDoc: '/samples/files/sample.xod', 
+          initialDoc: '/samples/files/webviewer-demo-annotated.xod', 
           pdftronServer: '' 
         })
         .waitForWVEvent('pageComplete', done);
@@ -48,11 +48,12 @@ describe('WebViewer Release Test', function() {
     });
 
     importTests([
+      './common/text-selection.test.js',
       ['./common/load-document.test.js', 'sample.xod', 'sample-annotated.xod'],
       ['./common/annotation.test.js', 'sample.xod'],
       ['./common/form.test.js', 'form.xod'],
-      ['./common/text-selection.test.js', 'webviewer-demo-annotated.xod'],
       ['./common/outline.test.js', 'outlines-nested.xod'],
+      ['./common/layout-mode.test.js', 'webviewer-demo-annotated.xod'],
     ]);
   });
 

@@ -3,7 +3,7 @@ const getFileType = require('../../utils/getFileType');
 module.exports = function(fileName) {
   const fileType = getFileType(fileName);
 
-  describe.only('Form', function() {
+  describe('Form', function() {
     it(`can change the values of each type of form field in the document and the values are the same after reloading the ${fileType}`, function(client) {
       const form = client.page.form();
   

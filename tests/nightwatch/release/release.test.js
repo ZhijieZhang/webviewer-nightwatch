@@ -57,8 +57,10 @@ describe('WebViewer Release Test', function() {
     ]);
   });
 
-  // describe('Samples', function() {
-
-  // })
+  describe('Samples', function() {
+    importTests([
+      './sample/legacy-viewing.test.js'
+    ]);
+  });
 });
 

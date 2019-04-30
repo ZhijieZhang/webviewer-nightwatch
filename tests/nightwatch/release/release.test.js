@@ -13,12 +13,13 @@ describe('WebViewer Release Test', function() {
     });
 
     importTests([
-      './PDF/normal.test.js',
+      ['./common/load-document.test.js', 'sample.pdf', 'sample-annotated.pdf'],
       './PDF/linearized.test.js',
       './PDF/non-linearized.test.js',
       './PDF/encrypted.test.js',
       './PDF/javascript.test.js',
       './PDF/substituted-font.test.js',
+      './PDF/invalid-key.test.js',
       './PDF/annotation.test.js',
       './PDF/form.test.js',
       './PDF/text-selection.test.js',
@@ -27,15 +28,19 @@ describe('WebViewer Release Test', function() {
     ]);
   });
 
-  // describe('XOD', function() {
-  //   beforeEach(function(client, done) {
-  //     loadViewingSampleClientOnly(client, done);
-  //   });
+  describe.only('XOD', function() {
+    beforeEach(function(client, done) {
+      loadViewingSampleClientOnly(client, done);
+    });
 
-  //   afterEach(function(client, done) {
-  //     client.end(() => done());
-  //   });
-  // })
+    afterEach(function(client, done) {
+      client.end(() => done());
+    });
+
+    importTests([
+      ['./common/load-document.test.js', 'sample.xod', 'sample-annotated.xod']
+    ]);
+  });
 
   // describe('Samples', function() {
 

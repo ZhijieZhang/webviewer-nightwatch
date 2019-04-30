@@ -6,6 +6,6 @@ const loadViewingSampleClientOnly = (client, done) => {
     .switchToUIFrame()
     .setUrlWithOptions({ pdftronServer: '' })
     .waitForWVEvent('pageComplete', done);
-}
+};
 
 module.exports = loadViewingSampleClientOnly;

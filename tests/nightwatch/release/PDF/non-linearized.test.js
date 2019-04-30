@@ -4,4 +4,4 @@ describe('Non-linearized PDF', function() {
       .readerControl('loadDocument', '/samples/files/non-linearized.pdf')
       .waitForWVEvent('pageComplete');
   });
-})
+});

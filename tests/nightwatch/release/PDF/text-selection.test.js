@@ -11,7 +11,7 @@ describe('Text Selection', function() {
         window.Tools.Tool.ENABLE_AUTO_SWITCH = false;
       })
       .readerControl('setToolMode', 'TextSelect', done);
-  })
+  });
 
   it('select and copy the text in the same page', function(client) {
     client
@@ -24,7 +24,7 @@ describe('Text Selection', function() {
       .readerControl('docViewer', 'getSelectedText', function(text) {
         assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, an');
       });
-  })
+  });
 
   it('select and copy the text in multiple pages', function(client) {
     client
@@ -39,5 +39,5 @@ describe('Text Selection', function() {
       .readerControl('docViewer', 'getSelectedText', function(text) {
         assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, and customer satisfaction.\nWebViewer');
       });
-  })
-})
+  });
+});

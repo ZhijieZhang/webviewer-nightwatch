@@ -3,7 +3,7 @@ exports.command = function(text, callback = () => {}) {
     function(text, done) {
       window = window || window[0];
       const docViewer = window.readerControl.docViewer;
-      const displayMode = docViewer.getDisplayModeManager().getDisplayMode()
+      const displayMode = docViewer.getDisplayModeManager().getDisplayMode();
       const doc = docViewer.getDocument();
       const pageIndex = 0;
 
@@ -34,9 +34,9 @@ exports.command = function(text, callback = () => {}) {
     [text],
 
     result => { 
-      callback.call(this, result && result.value)
+      callback.call(this, result && result.value);
     }
-  )
+  );
 
   return this;
-}
+};

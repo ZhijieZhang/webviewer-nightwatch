@@ -39,8 +39,8 @@ exports.command = function(element, callback = () => {}) {
         );
 
         callback.call(this, screenshot);
-      })
-    })
+      });
+    });
 
   return this;
-}
+};

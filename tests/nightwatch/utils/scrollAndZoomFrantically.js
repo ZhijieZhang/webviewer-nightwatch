@@ -21,6 +21,6 @@ const scrollAndZoomFrantically = function(client) {
       });
     });
   });
-}
+};
 
 module.exports = scrollAndZoomFrantically;

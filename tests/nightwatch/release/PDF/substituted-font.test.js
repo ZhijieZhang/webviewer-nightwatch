@@ -4,4 +4,4 @@ describe('PDF with substituted fonts', function() {
       .readerControl('loadDocument', '/samples/files/font-substituted.pdf')
       .waitForWVEvent('pageComplete');
   });
-})
+});

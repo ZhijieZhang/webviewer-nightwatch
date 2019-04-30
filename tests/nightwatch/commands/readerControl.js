@@ -14,7 +14,7 @@ exports.command = function(...args) {
       ) {
         obj = args[0] === 'docViewer' 
           ? window.docViewer
-          : window.docViewer.getAnnotationManager()
+          : window.docViewer.getAnnotationManager();
         apiName = args[1];
         apiArgs = args.slice(2);
       } else {
@@ -29,10 +29,10 @@ exports.command = function(...args) {
     
     result => { 
       if(typeof callback === 'function') {
-        callback.call(this, result && result.value)
+        callback.call(this, result && result.value);
       }
     }
   );
 
   return this;
-}
+};

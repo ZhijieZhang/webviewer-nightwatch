@@ -18,7 +18,7 @@ exports.command = function(options, callback = () => {}) {
         }
       
         return result;
-      }
+      };
       // each key of the map is a constructor option
       // the value of the key is an object in the shape of:
       // key: map the constructor option key to the query key that will be added to the iframe url
@@ -49,13 +49,13 @@ exports.command = function(options, callback = () => {}) {
       };
 
       window.location.href = Object
-        .keys(constructorOptionQueryKeyValueMap)
+        .keys(window.constructorOptionQueryKeyValueMap)
         .reduce(function(url, optionKey) {
           const optionValue = options[optionKey];
           
           if (optionValue !== undefined) {
-            const { key, getValue } = constructorOptionQueryKeyValueMap[optionKey]
-            return replaceQueryValue(url, key, getValue(optionValue));
+            const { key, getValue } = window.constructorOptionQueryKeyValueMap[optionKey];
+            return window.replaceQueryValue(url, key, getValue(optionValue));
           }
 
           return url;
@@ -70,4 +70,4 @@ exports.command = function(options, callback = () => {}) {
   );
 
   return this;
-}
+};

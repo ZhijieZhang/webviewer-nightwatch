@@ -32,7 +32,7 @@ describe('Annotation', function () {
           client
             .mouseButtonDown('left')
             .moveToElement('.pageContainer', x + gAnnotWidth, y + gAnnotHeight)
-            .mouseButtonUp('left')
+            .mouseButtonUp('left');
         }
       },
       {
@@ -63,7 +63,7 @@ describe('Annotation', function () {
             .moveToElement('.pageContainer', x + gAnnotWidth - 10, y + 20)
             .moveToElement('.pageContainer', x + gAnnotWidth / 2, y + gAnnotHeight)
             .moveToElement('.pageContainer', x, y)
-            .mouseButtonUp('left')
+            .mouseButtonUp('left');
         }
       },
       {
@@ -90,7 +90,7 @@ describe('Annotation', function () {
             .readerControl('setToolMode', 'AnnotationEdit')
             // click off the text area to blur it out
             .moveToElement('.pageContainer', 5, 5)
-            .mouseButtonClick()
+            .mouseButtonClick();
         }
       },
       {
@@ -104,7 +104,7 @@ describe('Annotation', function () {
             .pause(500)
             .readerControl('closeElements', ['leftPanel'])
             .moveToElement('.pageContainer', 5, 5)
-            .mouseButtonClick()
+            .mouseButtonClick();
         }
       },
       {
@@ -114,7 +114,7 @@ describe('Annotation', function () {
             // if we don't pause then there's a change that the file input can't be found
             .pause(500)
             .mouseButtonClick()
-            .setValue('input[type="file"]', stampImage)
+            .setValue('input[type="file"]', stampImage);
         }
       }
     ];
@@ -130,7 +130,7 @@ describe('Annotation', function () {
           client
             .mouseButtonDown('left')
             .moveToElement('.pageContainer', x + tAnnotWidth, y + tAnnotHeight)
-            .mouseButtonUp('left')
+            .mouseButtonUp('left');
         }
       },
       {
@@ -149,7 +149,7 @@ describe('Annotation', function () {
             .click('[data-element="annotationRedactButton"]')
             .waitForElementVisible('.WarningModal', 5000)
             .click('[data-element="WarningModalSignButton"]')
-            .pause(1000)
+            .pause(1000);
         }
       }
     ];
@@ -174,16 +174,16 @@ describe('Annotation', function () {
             const previousNumberOfRows = Array.from({ length: index }, function(_, index) {
                 return index;
               }).reduce(function(rows, index) {
-                return rows + textTools[index].toolNames.length
+                return rows + textTools[index].toolNames.length;
               }, 0);
-            const y = initOffsetY + (rowIndex + previousNumberOfRows) * (tAnnotHeight + gap)
+            const y = initOffsetY + (rowIndex + previousNumberOfRows) * (tAnnotHeight + gap);
 
             client
               .readerControl('setToolMode', toolName)
               .moveToElement('.pageContainer', x, y, function() {
                 draw(x, y);
-              })
-          })
+              });
+          });
         });
 
         genericTools.forEach(function ({ toolNames, draw }, rowIndex) {
@@ -200,12 +200,12 @@ describe('Annotation', function () {
               .moveToElement('.pageContainer', x, y, function () {
                 draw(x, y);
               });
-          })
+          });
         });
       })
       .assert.screenshot('.pageContainer', 'annotation.test.png')
       .saveAndReloadPDF()
       .waitForWVEvent('pageComplete')
-      .assert.screenshot('.pageContainer', 'annotation.test.png')
+      .assert.screenshot('.pageContainer', 'annotation.test.png');
   });
 });

@@ -4,7 +4,7 @@ describe('Form', function() {
 
     client
       .readerControl('loadDocument', '/samples/files/form.pdf')     
-      .waitForWVEvent('annotationsLoaded')
+      .waitForWVEvent('annotationsLoaded');
       
     form
       .clear('@textField')
@@ -23,7 +23,7 @@ describe('Form', function() {
       .click('@radioBox')
       .click('@checkbox')
       .click('@choiceFieldFirstOption')
-      .click('@listFieldFirstOption')
+      .click('@listFieldFirstOption');
 
     client
       // click('@listFieldFirstOption') will focus the first option
@@ -35,5 +35,5 @@ describe('Form', function() {
       .saveAndReloadPDF()
       .waitForWVEvent('annotationsLoaded')
       .assert.screenshot('.pageContainer', 'form.test.png');
-  })
-})
+  });
+});

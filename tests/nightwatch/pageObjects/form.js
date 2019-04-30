@@ -48,13 +48,13 @@ module.exports = {
       // https://github.com/nightwatchjs/nightwatch/issues/1132
       clear: function(element) {
         this.getValue(element, function({ value }) {
-          for (c in value) {
+          for (let c in value) {
             this.setValue(element, this.api.Keys.BACK_SPACE);
           }
-        }.bind(this))
+        }.bind(this));
 
         return this;
       }
     }
   ]
-}
+};

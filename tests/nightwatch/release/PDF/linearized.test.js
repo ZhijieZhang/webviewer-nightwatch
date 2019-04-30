@@ -5,8 +5,8 @@ describe('Linearized PDF', function() {
     client
       .readerControl('loadDocument', '/samples/files/linearized.pdf')
       .waitForWVEvent('pageComplete', function() {
-        scrollAndZoomFrantically(client)
-      })
+        scrollAndZoomFrantically(client);
+      });
   });
 
   it('load linearized.pdf with useDownloaderOption to false, and frantically scroll and zoom', function(client) {
@@ -14,7 +14,7 @@ describe('Linearized PDF', function() {
     .setUrlWithOptions({ useDownloader: false })
     .readerControl('loadDocument', '/samples/files/linearized.pdf')
     .waitForWVEvent('pageComplete', function() {
-      scrollAndZoomFrantically(client)
-    })
-  })
+      scrollAndZoomFrantically(client);
+    });
+  });
 });

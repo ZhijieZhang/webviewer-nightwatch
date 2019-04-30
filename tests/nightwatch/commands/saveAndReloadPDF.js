@@ -14,14 +14,14 @@ exports.command = function() {
           downloadType: 'pdf',
           xfdfString: annotManager.exportAnnotations()
         }).then(function(data) {
-          const blob = new Blob([new Uint8Array(data)], { type: 'application/pdf' })
+          const blob = new Blob([new Uint8Array(data)], { type: 'application/pdf' });
           window.readerControl.loadDocument(blob);
           
           done();
         });
-      })
+      });
     }
-  )
+  );
 
   return this;
-}
+};

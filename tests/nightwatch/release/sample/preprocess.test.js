@@ -1,0 +1,13 @@
+const assert = require('assert');
+
+describe('Preprocess', function() {
+  it('flattens all the annotations and log the number of annotations modified', function(client) {
+    client
+      .loadSample('full-apis/ViewerPreprocessTest')
+      .waitForWVEvent('pageComplete')
+      .readerControl('annotManager', 'getAnnotationsList', function(annotations) {
+        assert.equal(annotations.length, 0);
+      })
+      .assert.log('number of annotation modifications: 2');
+  });
+});

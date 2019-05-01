@@ -1,5 +1,5 @@
 describe('Edit', function() {
-  it.only('load sample.pdf, edit and then compare the screenshots', function(client) {
+  it('load sample.pdf, edit and then compare the screenshots', function(client) {
     client
       .loadSample('full-apis/ViewerEditTest')
       .waitForWVEvent('pageComplete')

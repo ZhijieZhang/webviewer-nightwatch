@@ -11,7 +11,10 @@
   "test_settings": {
     "default": {
       "desiredCapabilities": {
-        "browserName": "chrome"
+        "browserName": "chrome",
+        "loggingPrefs": { 
+          "browser": "ALL"
+        }
       },
       "globals": {
         "asyncHookTimeout": 1000000

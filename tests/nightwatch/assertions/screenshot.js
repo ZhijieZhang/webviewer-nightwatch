@@ -22,7 +22,7 @@ exports.assertion = function (element, filename, message) {
   this.expected = true;
 
   this.pass = function (value) {
-    return value === true;
+    return value;
   };
 
   this.value = function (result) {

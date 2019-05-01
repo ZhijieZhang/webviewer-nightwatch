@@ -78,7 +78,8 @@ describe('WebViewer Release Test', function() {
       './sample/flipbook.test.js',
       './sample/custom-save.test.js',
       './sample/display-points.test.js',
-      './sample/edit.test.js'
+      './sample/edit.test.js',
+      './sample/preprocess.test.js'
     ]);
   });
 });

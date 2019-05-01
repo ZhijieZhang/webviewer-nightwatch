@@ -58,8 +58,16 @@ describe('WebViewer Release Test', function() {
   });
 
   describe('Samples', function() {
+    afterEach(function(client, done) {
+      client.end(() => done());
+    });
+    
     importTests([
-      './sample/legacy-viewing.test.js'
+      './sample/legacy-viewing.test.js',
+      './sample/users-and-permissions.test.js',
+      './sample/custom-annotations.test.js',
+      './sample/ui-customization.test.js',
+      './sample/form-customization.test.js',
     ]);
   });
 });

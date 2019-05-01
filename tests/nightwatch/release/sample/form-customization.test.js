@@ -1,5 +1,5 @@
 describe('Form Customization', function() {
-  it.only('customize form fields', function(client) {
+  it('customize form fields', function(client) {
     client
       .loadSample('customization/form-fields')
       .waitForWVEvent('pageComplete')

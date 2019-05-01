@@ -71,7 +71,8 @@ describe('WebViewer Release Test', function() {
       './sample/i18n.test.js',
       './sample/page-operations.test.js',
       './sample/layer-separation.test.js',
-      './sample/color-separation.test.js'
+      './sample/color-separation.test.js',
+      './sample/XOD.test.js'
     ]);
   });
 });

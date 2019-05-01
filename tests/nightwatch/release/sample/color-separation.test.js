@@ -1,4 +1,4 @@
-describe.only('Color Separation', function() {
+describe('Color Separation', function() {
   const layers = [
     'PANTONE 1375 C',
     'PANTONE 288 C',

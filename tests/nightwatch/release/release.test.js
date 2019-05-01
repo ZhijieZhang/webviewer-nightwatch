@@ -73,7 +73,8 @@ describe('WebViewer Release Test', function() {
       './sample/layer-separation.test.js',
       './sample/color-separation.test.js',
       './sample/XOD.test.js',
-      './sample/text-position.test.js'
+      './sample/text-position.test.js',
+      './sample/flipbook.test.js'
     ]);
   });
 });

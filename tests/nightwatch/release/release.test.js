@@ -65,6 +65,7 @@ describe('WebViewer Release Test', function() {
     importTests([
       './sample/legacy-viewing.test.js',
       './sample/users-and-permissions.test.js',
+      './sample/realtime-collaboration.test.js',
       './sample/custom-annotations.test.js',
       './sample/ui-customization.test.js',
       './sample/form-customization.test.js',

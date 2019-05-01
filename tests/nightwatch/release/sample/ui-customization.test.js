@@ -19,6 +19,6 @@ describe('UI Customization', function() {
       // wait for the left panel to be fully open
       .pause(500)
       .click('[data-element="menuButton"]')
-      .assert.screenshot('.pageContainer', 'ui-customization.png');
+      .assert.screenshot('.App', 'ui-customization.png');
   });
 });

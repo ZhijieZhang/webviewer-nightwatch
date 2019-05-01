@@ -3,7 +3,7 @@
 // b) text in the menu overlay is translated correctly
 // it DOES NOT test all the text that should be translated in the UI are being translated
 // since it's a lot of work and it makes more sense for such a test to be part of the UI repo
-describe.only('Internationalization', function() {
+describe('Internationalization', function() {
   const languages = ['fr', 'zh_cn'];
 
   languages.forEach(function(language) {

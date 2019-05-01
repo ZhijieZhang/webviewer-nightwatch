@@ -69,6 +69,7 @@ describe('WebViewer Release Test', function() {
       './sample/ui-customization.test.js',
       './sample/form-customization.test.js',
       './sample/i18n.test.js',
+      './sample/page-operations.test.js',
     ]);
   });
 });

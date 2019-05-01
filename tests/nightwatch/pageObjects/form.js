@@ -44,15 +44,13 @@ module.exports = {
   },
   commands: [
     {
-      // this command is a workaround for the native clearValue API
-      // https://github.com/nightwatchjs/nightwatch/issues/1132
-      clear: function(element) {
-        this.getValue(element, function({ value }) {
-          for (let c in value) {
-            this.setValue(element, this.api.Keys.BACK_SPACE);
-          }
-        }.bind(this));
+      // this commands is created just for the purpose of chaining this page object
+      // nightwatch doesn't allow a page object command having the same name as a "global" custom command
+      // so we name it clearFormElement, which essentially does the same thing as the clear API
+      clearFormElement: function(element) {
+        const { selector } = this.elements[element.substring(1)];
 
+        this.api.clear(selector);
         return this;
       }
     }

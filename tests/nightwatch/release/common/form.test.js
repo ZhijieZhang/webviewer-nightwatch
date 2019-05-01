@@ -21,17 +21,17 @@ module.exports = function(fileName) {
         });
 
       form
-        .clear('@textField')
+        .clearFormElement('@textField')
         .setValue('@textField', 'This is a text field')
-        .clear('@passwordField')
+        .clearFormElement('@passwordField')
         .setValue('@passwordField', 'password')
-        .clear('@quantityTextField')
+        .clearFormElement('@quantityTextField')
         .setValue('@quantityTextField', '5')
-        .clear('@currencyTextField')
+        .clearFormElement('@currencyTextField')
         .setValue('@currencyTextField', '1221')
-        .clear('@dateTextField')
+        .clearFormElement('@dateTextField')
         .setValue('@dateTextField', '1.1.2019')
-        .clear('@percentTextField')
+        .clearFormElement('@percentTextField')
         .setValue('@percentTextField', '0.99')
         .setValue('@multilineTextField', 'This is a multiline text field')
         .click('@radioBox')

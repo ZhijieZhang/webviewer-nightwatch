@@ -1,4 +1,4 @@
-describe.only('XOD Sample', function() {
+describe('XOD Sample', function() {
   const urls = [
     'https://pdftron.s3.amazonaws.com/downloads/pl/sheet_music.xod',
     'https://pdftron.s3.amazonaws.com/downloads/pl/encrypted-foobar12.xod'

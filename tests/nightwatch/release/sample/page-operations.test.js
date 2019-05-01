@@ -1,7 +1,7 @@
 const assert = require('assert');
 const path = require('path');
 
-describe.only('Page Operations', function() {
+describe('Page Operations', function() {
   beforeEach(function(client, done) {
     client
       .loadSample('pdf-manipulation/page-operations')

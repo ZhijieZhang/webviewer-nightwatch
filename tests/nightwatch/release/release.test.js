@@ -70,7 +70,8 @@ describe('WebViewer Release Test', function() {
       './sample/form-customization.test.js',
       './sample/i18n.test.js',
       './sample/page-operations.test.js',
-      './sample/layer-separations.test.js'
+      './sample/layer-separation.test.js',
+      './sample/color-separation.test.js'
     ]);
   });
 });

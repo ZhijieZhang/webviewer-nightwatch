@@ -1,3 +1,11 @@
 module.exports = function(fileName) {
-  return /\.xod(&|$|\?|#)/i.test(fileName) ? 'XOD' : 'PDF';
+  if (/\.xod(&|$|\?|#)/i.test(fileName)) {
+    return 'XOD';
+  }
+
+  if (/\.pdf(&|$|\?|#)/i.test(fileName)) {
+    return 'PDF';
+  }
+
+  return 'other';
 };

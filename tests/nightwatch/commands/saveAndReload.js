@@ -1,6 +1,6 @@
 const getFileType = require('../utils/getFileType');
 
-exports.command = function(filePath, callback = () => {}) {
+exports.command = function(filePath = '', callback = () => {}) {
   const fileType = getFileType(filePath);
 
   this.executeAsync(
@@ -10,7 +10,13 @@ exports.command = function(filePath, callback = () => {}) {
       const annotManager = docViewer.getAnnotationManager();
       const xfdfString = annotManager.exportAnnotations();
 
-      if (fileType === 'PDF') {
+      if (fileType === 'XOD') {
+        window.readerControl.loadDocument(filePath);
+        docViewer.one('pageComplete', function() {
+          annotManager.importAnnotations(xfdfString);
+          done();
+        });
+      } else {
         const doc = docViewer.getDocument();
         const completingFreeHand = docViewer.getTool('AnnotationCreateFreeHand').complete();
         const loadingAnnotations = docViewer.getAnnotationsLoadedPromise();
@@ -26,30 +32,24 @@ exports.command = function(filePath, callback = () => {}) {
             done();
           });
         });
-      } else if (fileType === 'XOD') {
-        window.readerControl.loadDocument(filePath);
-
-        done(xfdfString);
       }
     },
 
     [filePath, fileType],
 
-    function({ value: xfdfString }) {
-      if (fileType === 'PDF') {
-        this.waitForWVEvent('pageComplete', function() {
-          callback.call(this);
-        });
-      } else if (fileType === 'XOD') {
+    function() {
+      if (fileType === 'XOD') {
         this
-          .waitForWVEvent('pageComplete')
-          .readerControl('annotManager', 'importAnnotations', xfdfString)
-          // we waited for 500ms here instead of using waitForWVEvent command because 
+          // we waited for 500ms here for the annotations to be drawn instead of using waitForWVEvent command because 
           // a) pageComplete doesn't trigger in the case
           // b) annotationChanged is triggered synchronously in the importAnnotations call so we can't capture it
           .pause(500, function() {
             callback.call(this);
           });
+      } else {
+        this.waitForWVEvent('pageComplete', function() {
+          callback.call(this);
+        });
       }
     }
   );

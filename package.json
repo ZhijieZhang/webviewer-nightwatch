@@ -29,6 +29,7 @@
   },
   "author": "PDFTron Systems Inc.",
   "dependencies": {
+    "lodash": "^4.17.11",
     "nightwatch": "^1.0.19"
   }
 }

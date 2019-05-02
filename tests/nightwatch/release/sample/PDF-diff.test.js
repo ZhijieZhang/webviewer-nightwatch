@@ -1,5 +1,5 @@
 describe('PDF Diff', function() {
-  it.only('diff two PDF files', function(client) {
+  it('diff two PDF files', function(client) {
     client
       .loadSample('full-apis/ViewerPDFDiffTest')
       .waitForWVEvent('pageComplete')

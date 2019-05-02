@@ -8,7 +8,15 @@ describe('Add Image', function() {
             buffer: buffers[0]
           })
           .waitForWVEvent('pageComplete')
-          .pause(300000);
+          .assert.screenshot('#pageContainer0', 'add-image-1.test.png')
+          .readerControl('setCurrentPageNumber', 2)
+          // can't wait for pageComplete event here since it's continuous mode
+          // and the second page is already rendered, same applies to page 3
+          .pause(500)
+          .assert.screenshot('#pageContainer1', 'add-image-2.test.png')
+          .readerControl('setCurrentPageNumber', 3)
+          .pause(500)
+          .assert.screenshot('#pageContainer2', 'add-image-3.test.png');
       });
   });
 });

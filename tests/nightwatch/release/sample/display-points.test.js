@@ -1,5 +1,5 @@
 describe('Display Points', function() {
-  it('display points if a bounding box is detected, compare the screenshot for the points', function(client) {
+  it('display points if a bounding box is detected', function(client) {
     client
       .loadSample('full-apis/ViewerDisplayPointsTest')
       .waitForWVEvent('pageComplete')

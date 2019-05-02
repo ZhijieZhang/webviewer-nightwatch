@@ -1,5 +1,5 @@
 describe('Flipbook', function() {
-  it('navigate to different pages and compare the screenshot', function(client) {
+  it('navigate to different pages', function(client) {
     client
       .resizeWindow(1280, 960)
       .url('http://localhost:3000/samples/advanced/flipbook')

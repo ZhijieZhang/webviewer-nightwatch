@@ -28,7 +28,7 @@ exports.command = function(...args) {
     [args], 
     
     result => { 
-      if(typeof callback === 'function') {
+      if (typeof callback === 'function') {
         callback.call(this, result && result.value);
       }
     }

@@ -1,8 +1,7 @@
 describe('Flipbook', function() {
   it('navigate to different pages', function(client) {
     client
-      .resizeWindow(1280, 960)
-      .url('http://localhost:3000/samples/advanced/flipbook')
+      .loadSample('advanced/flipbook')
       .waitForElementVisible('#flipbook')
       .waitForElementVisible('.page.p3.odd', 10000)
       .click('#next')

@@ -29,7 +29,7 @@ class WaitForWVEvent extends EventEmitter {
 
     const timeoutInMilliseconds = 10000;
     this.failTimeout = setTimeout(() => {
-      assert.ok(false, `${this.WVEvent} from ${this.nameSpace} didn't get triggered in ${timeoutInMilliseconds}`);
+      assert.ok(false, `${this.WVEvent} from ${this.nameSpace} didn't get triggered in ${timeoutInMilliseconds} ms`);
     }, timeoutInMilliseconds);
 
     this.api      

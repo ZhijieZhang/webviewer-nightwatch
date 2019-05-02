@@ -8,6 +8,6 @@ describe('Preprocess', function() {
       .readerControl('annotManager', 'getAnnotationsList', function(annotations) {
         assert.equal(annotations.length, 0);
       })
-      .assert.log('number of annotation modifications: 2');
+      .waitForConsoleLog('number of annotation modifications: 2');
   });
 });

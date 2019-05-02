@@ -81,7 +81,8 @@ describe('WebViewer Release Test', function() {
       './sample/edit.test.js',
       './sample/preprocess.test.js',
       './sample/PDF-diff.test.js',
-      './sample/deck.test.js'
+      './sample/deck.test.js',
+      './sample/add-image.test.js'
     ]);
   });
 });

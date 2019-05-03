@@ -7,8 +7,8 @@ exports.command = function (message, callback = () => {}) {
   this
     .execute(
       function () {
-        window.saveBufferAsPDFDoc = function (buffer) {
-          (window.buffers = window.buffers || []).push(buffer);
+        window.saveBuffer = function (buffer, filename, mimeType) {
+          (window.buffers = window.buffers || []).push({buffer, mimeType});
         };
       }
     )

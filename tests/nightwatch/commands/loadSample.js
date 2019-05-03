@@ -55,8 +55,8 @@ exports.command = function(samplePath, options, callback = () => {}) {
                 })
                 .waitForWVEvent('pageComplete')
                 .execute(
-                  function(buffer) {
-                    const blob = new Blob([new Uint8Array(buffer)], { type: 'application/pdf' });
+                  function({ buffer, mimeType }) {
+                    const blob = new Blob([new Uint8Array(buffer)], { type: mimeType });
       
                     window.readerControl.loadDocument(blob);
                   },

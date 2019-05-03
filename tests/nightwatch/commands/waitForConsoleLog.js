@@ -9,7 +9,10 @@ class WaitForConsoleLog extends EventEmitter {
     this.allLogMessages = [];
   }
 
-  command(message) {
+  command(message, timeoutInMilliseconds) {
+    if (timeoutInMilliseconds) {
+      this.timeoutInMilliseconds = timeoutInMilliseconds;
+    }
     this.startTime = new Date().getTime();    
 
     this.check(message, function(found) {

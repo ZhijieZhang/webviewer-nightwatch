@@ -45,7 +45,10 @@ exports.command = function(samplePath, options, callback = () => {}) {
         this
           .waitForElementVisible('iframe', 1000)
           .switchToUIFrame(function() {
-            if (options.buffer) {
+            if (
+              typeof options === 'object' && 
+              options.buffer
+            ) {
               this
                 .setUrlWithOptions({
                   pdftronServer: '' 

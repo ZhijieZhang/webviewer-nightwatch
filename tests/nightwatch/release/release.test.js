@@ -19,7 +19,7 @@ describe('WebViewer Release Test', function() {
     importTests([   
       './PDF/linearized.test.js',
       './PDF/non-linearized.test.js',
-      './PDF/encrypted.test.js',
+      './PDF/encryption.test.js',
       './PDF/javascript.test.js',
       './PDF/substituted-font.test.js',
       './PDF/invalid-key.test.js',
@@ -88,7 +88,8 @@ describe('WebViewer Release Test', function() {
       './sample/digital-signature.test.js',
       './sample/element-builder.test.js',
       './sample/element-reader.test.js',
-      './sample/encryption.test.js'
+      './sample/encryption.test.js',
+      './sample/XFDF-import.test.js'
     ]);
   });
 });

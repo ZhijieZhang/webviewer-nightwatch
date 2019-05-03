@@ -1,5 +1,5 @@
 describe('Encryption', function() {
-  it.only('encrypt and decrypt fils by adding or removing passwords', function(client) {
+  it('encrypt and decrypt fils by adding or removing passwords', function(client) {
     client
       .loadSample('full-apis/EncTest')
       .getPDFBufferAfter('done', function([

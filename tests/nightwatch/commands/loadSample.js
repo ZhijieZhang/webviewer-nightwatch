@@ -55,9 +55,17 @@ exports.command = function(samplePath, options, callback = () => {}) {
                 })
                 .waitForWVEvent('pageComplete')
                 .execute(
-                  function({ buffer, mimeType }) {
+                  function(arg) {
+                    let buffer, mimeType;
+                    if (Array.isArray(arg)) {
+                      buffer = arg;
+                      mimeType = 'application/pdf';
+                    } else if (typeof arg === 'object') {
+                      buffer = arg.buffer;
+                      mimeType = arg.mimeType;
+                    }
+
                     const blob = new Blob([new Uint8Array(buffer)], { type: mimeType });
-      
                     window.readerControl.loadDocument(blob);
                   },
 

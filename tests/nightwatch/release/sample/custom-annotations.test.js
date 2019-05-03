@@ -1,4 +1,4 @@
-describe('User and permissions', function() {
+describe('Custom annotations', function() {
   it('add custom ruler and stamp to the document', function(client) {
     client
       .loadSample('annotation/custom-annotations')

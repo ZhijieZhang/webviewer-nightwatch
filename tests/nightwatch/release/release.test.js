@@ -91,7 +91,8 @@ describe('WebViewer Release Test', function() {
       './sample/encryption.test.js',
       './sample/XFDF-import.test.js',
       './sample/interactive-forms.test.js',
-      './sample/logical-structure.test.js'
+      './sample/logical-structure.test.js',
+      './sample/office-to-pdf.test.js'
     ]);
   });
 });

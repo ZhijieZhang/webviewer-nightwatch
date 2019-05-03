@@ -1,8 +1,10 @@
 exports.command = function(callback = () => {}) {
   this.getAttribute('iframe', 'id', function(result) {
-    this.frame(result.value, function() {
-      callback.call(this);
-    });
+    this
+      .frame(result.value)
+      .waitForElementPresent('.App', 5000, function() {
+        callback.call(this);
+      });
   });
 
   return this;

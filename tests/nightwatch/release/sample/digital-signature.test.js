@@ -1,5 +1,5 @@
 describe('Digital Signature', function() {
-  it.only('digitally sign a PDF and also certify a PDF doc', function(client) {
+  it('digitally sign a PDF and also certify a PDF doc', function(client) {
     client
       .loadSample('full-apis/DigitalSignatureTest')
       .getPDFBufferAfter([

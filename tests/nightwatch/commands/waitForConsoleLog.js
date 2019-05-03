@@ -6,6 +6,7 @@ class WaitForConsoleLog extends EventEmitter {
     super();
     this.timeoutInMilliseconds = 15000;
     this.retryInMilliseconds = 100;
+    this.allLogMessages = [];
   }
 
   command(message) {
@@ -24,7 +25,11 @@ class WaitForConsoleLog extends EventEmitter {
 
     this.api
       .getLog('browser', function(logs) {
-        if (this.appearAll(logs.map(log => log.message), messages)) {
+        // it seems that this API doesn't return the all log history but only returns logs that were logged between
+        // two calls, since we need to get the entire logs we store it in a variable
+        this.allLogMessages.push(...logs.map(log => log.message));
+
+        if (this.appearAll(this.allLogMessages, messages)) {
           return callback.call(this, true);
         } else if (now - this.startTime < this.timeoutInMilliseconds) {
           return setTimeout(function() {
@@ -41,13 +46,14 @@ class WaitForConsoleLog extends EventEmitter {
   // For example: ['Done a'], ['Done'] => true
   //              ['Done a'], ['Done', 'Done a'] => false
   appearAll(arr1, arr2) {
+    let j = 0;
     for (let i = 0; i < arr2.length; i++) {
       let appear = false;
 
-      for (let j = 0; j < arr1.length; j++) {
+      for (; j < arr1.length; j++) {
         if (arr1[j].includes(arr2[i])) {
-          arr1.splice(j, 1);
           appear = true;
+          j++;
           break;
         }  
       }

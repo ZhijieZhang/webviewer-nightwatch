@@ -1,5 +1,5 @@
 describe('XFDF Import', function() {
-  it.only('merge XFDF using PDFNet', function(client) {
+  it('merge XFDF using PDFNet', function(client) {
     client
       .loadSample('full-apis/FDFTest')
       .getPDFBufferAfter('Done sample', function(buffers) {

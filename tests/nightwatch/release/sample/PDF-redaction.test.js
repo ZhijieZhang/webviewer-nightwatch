@@ -1,5 +1,5 @@
 describe('PDF Redaction', function() {
-  it.only('create Redaction objects and use PDFNetJS redact function to remove and overlay PDF document content', function(client) {
+  it('create Redaction objects and use PDFNetJS redact function to remove and overlay PDF document content', function(client) {
     client
       .loadSample('full-apis/PDFRedactTest')
       .getPDFBufferAfter('done', function(buffers) {

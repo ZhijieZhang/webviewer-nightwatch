@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 describe('PDF Page', function() {
-  it.only('copy pages from one document to another, delete pages, re-arrange pages, use ImportPages() for efficient copy and merge operations', function(client) {
+  it('copy pages from one document to another, delete pages, re-arrange pages, use ImportPages() for efficient copy and merge operations', function(client) {
     client
       .loadSample('full-apis/PDFPageTest')
       .getPDFBufferAfter('done saving newsletter_page_clone.pdf', function([

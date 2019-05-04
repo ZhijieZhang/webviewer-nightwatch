@@ -96,7 +96,8 @@ describe('WebViewer Release Test', function() {
       './sample/PDFA.test.js',
       './sample/PDF-draw.test.js',
       './sample/PDF-layer.test.js',
-      './sample/PDF-page.test.js'
+      './sample/PDF-page.test.js',
+      './sample/PDF-redaction.test.js'
     ]);
   });
 });

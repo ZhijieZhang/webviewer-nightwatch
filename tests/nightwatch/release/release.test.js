@@ -100,7 +100,9 @@ describe('WebViewer Release Test', function() {
       './sample/PDF-redaction.test.js',
       './sample/PDF-rect.test.js',
       './sample/SDF.test.js',
-      './sample/stamper.test.js'
+      './sample/stamper.test.js',
+      './sample/text-extract.test.js',
+      './sample/text-search.test.js'
     ]);
   });
 });

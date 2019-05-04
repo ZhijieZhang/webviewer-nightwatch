@@ -1,5 +1,5 @@
 describe('Stamper', function() {
-  it.only('stamp text and images onto various pages in a PDF document', function(client) {
+  it('stamp text and images onto various pages in a PDF document', function(client) {
     client
       .loadSample('full-apis/StamperTest')
       .getPDFBufferAfter('Done', function([

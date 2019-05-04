@@ -98,7 +98,8 @@ describe('WebViewer Release Test', function() {
       './sample/PDF-layer.test.js',
       './sample/PDF-page.test.js',
       './sample/PDF-redaction.test.js',
-      './sample/PDF-rect.test.js'
+      './sample/PDF-rect.test.js',
+      './sample/SDF.test.js'
     ]);
   });
 });

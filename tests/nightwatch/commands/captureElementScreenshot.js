@@ -34,26 +34,29 @@ exports.command = function(element, callback = () => {}) {
   }
 
   this
-    .getLocation(element, function({ value:{ x, y }}) {
-      elementX = iframeX + x;
-      elementY = iframeY + y;
-    })
-    .getElementSize(element, function({value: { width, height }}) {
-      elementWidth = width;
-      elementHeight = height;
-    })
-    .screenshot(false, function({ value: encodedScreenshot }) {
-      Jimp.read(new Buffer(encodedScreenshot, 'base64')).then(function(screenshot) {
-        screenshot.crop(
-          elementX,
-          elementY,
-          elementWidth,
-          elementHeight
-        );
-
-        callback.call(this, screenshot);
+    .execute(function() {
+      return window.devicePixelRatio;
+    }, [], function({ value: devicePixelRatio }) {
+      this
+        .getLocation(element, function({ value:{ x, y }}) {
+          elementX = (iframeX + x) * devicePixelRatio;
+          elementY = (iframeY + y) * devicePixelRatio;
+        })
+        .getElementSize(element, function({value: { width, height }}) {
+          elementWidth = width * devicePixelRatio;
+          elementHeight = height * devicePixelRatio;
+        })
+        .screenshot(false, function({ value: encodedScreenshot }) {
+          Jimp.read(new Buffer(encodedScreenshot, 'base64')).then(function(screenshot) {
+            screenshot
+              .crop(elementX, elementY, elementWidth, elementHeight)
+              .resize(elementWidth / devicePixelRatio, elementHeight / devicePixelRatio);
+    
+            callback.call(this, screenshot);
+          });
       });
     });
+
 
   return this;
 };

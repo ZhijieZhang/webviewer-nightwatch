@@ -11,8 +11,8 @@ module.exports = function(fileName) {
         .readerControl('loadDocument', `/samples/files/${fileName}`)     
         .waitForWVEvent('annotationsLoaded', function() {
           // form.xod is by default 100% and the document container's size
-          // is exceeding the viewport so we manually setFitMode to FitPage
-          // if we are using another XOD file we probably don't need this 
+          // is exceeding the viewport which will affect the screenshot test so we manually setFitMode to FitPage
+          // note that if we are using another XOD file we probably don't need this 
           if (fileType === 'XOD') {
             client
               .readerControl('setFitMode', 'FitPage')
@@ -46,13 +46,7 @@ module.exports = function(fileName) {
         .moveToElement('.pageContainer', 5, 5)
         .mouseButtonClick()
         .assert.screenshot('.pageContainer', `form.${fileType}.png`)
-        .saveAndReload(`/samples/files/${fileName}`, function() {
-          if (fileType === 'XOD') {
-            client
-              .readerControl('setFitMode', 'FitPage')
-              .waitForWVEvent('pageComplete');
-          }
-        })
+        .saveAndReload(`/samples/files/${fileName}`)
         .assert.screenshot('.pageContainer', `form.${fileType}.png`);
     });
   });

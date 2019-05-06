@@ -11,6 +11,8 @@ exports.command = function(filePath = '', callback = () => {}) {
       const xfdfString = annotManager.exportAnnotations();
 
       if (fileType === 'XOD') {
+        docViewer.setInternalAnnotationsTransform(() => {});
+        docViewer.setPagesUpdatedInternalAnnotationsTransform((originalData, pages, callback) => callback(''));
         window.readerControl.loadDocument(filePath);
         docViewer.one('pageComplete', function() {
           annotManager.importAnnotations(xfdfString);

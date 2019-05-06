@@ -1,6 +1,6 @@
 module.exports = function() {
   describe('Print', function() {
-    it.only('show the print modal and append canvases to the container which will show during the print process', function(client) {
+    it('show the print modal and append canvases to the container which will show during the print process', function(client) {
       client
         .readerControl('useEmbeddedPrint', false)
         .click('[data-element="menuButton"]')

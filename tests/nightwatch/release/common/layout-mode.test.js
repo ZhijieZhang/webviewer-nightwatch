@@ -3,7 +3,7 @@ const getFileType = require('../../utils/getFileType');
 module.exports = function(fileName) {
   const fileType = getFileType(fileName);
 
-  describe('Layout Mode', function() {
+  describe.only('Layout Mode', function() {
     beforeEach(function(client, done) {
       client
         .readerControl('disableElements', ['pageNavOverlay'])
@@ -30,19 +30,34 @@ module.exports = function(fileName) {
         .waitForWVEvent('pageComplete')
         .waitForElementPresent('#pageContainer2')
         .waitForElementPresent('#pageContainerb3')
-        .readerControl('setCurrentPageNumber', 1)
-        .waitForWVEvent('pageComplete')
-        .waitForWVEvent('pageComplete')
+        .readerControl('setCurrentPageNumber', 1, function() {
+          if (fileType === 'PDF') {
+            client
+              .waitForWVEvent('pageComplete')
+              .waitForWVEvent('pageComplete');
+          } else if (fileType === 'XOD') {
+            // it seems for XOD files pageComplete events will be triggered too early so we can't catch it using waitForWVEvent
+            // as a workaround we wait for 500ms here, assuming pages will be rendered in 500ms
+            // the same reason applies to all the layout modes below
+            client.pause(500);
+          }
+        })
         .assert.screenshot('.DocumentContainer', `facing-layout-mode.${fileType}.png`);
     });
   
     it('facing continuous', function(client) {
       client 
         .readerControl('setLayoutMode', 'FacingContinuous')
-        .waitForElementPresent('#pageContainerb3')
-        .waitForWVEvent('pageComplete')
-        .waitForWVEvent('pageComplete')
-        .waitForWVEvent('pageComplete')
+        .waitForElementPresent('#pageContainerb3', function() {
+          if (fileType === 'PDF') {
+            client
+              .waitForWVEvent('pageComplete')
+              .waitForWVEvent('pageComplete')
+              .waitForWVEvent('pageComplete');
+          } else if (fileType === 'XOD') {
+            client.pause(500);
+          }
+        })
         .assert.screenshot('.DocumentContainer', `facing-continuous-layout-mode.${fileType}.png`);
     });
   
@@ -52,18 +67,29 @@ module.exports = function(fileName) {
         .waitForElementPresent('#pageContainerb0')
         .readerControl('setCurrentPageNumber', 3)
         .waitForElementNotPresent('#pageContainerb0')
-        .readerControl('setCurrentPageNumber', 1)
-        .waitForWVEvent('pageComplete')
+        .readerControl('setCurrentPageNumber', 1, function() {
+          if (fileType === 'PDF') {
+            client.waitForWVEvent('pageComplete');
+          } else if (fileType === 'XOD') {
+            client.pause(500);
+          }
+        })
         .assert.screenshot('.DocumentContainer', `cover-facing-layout-mode.${fileType}.png`);
     });
   
     it('cover', function(client) {
       client 
         .readerControl('setLayoutMode', 'Cover')
-        .waitForElementPresent('#pageContainerb0')
-        .waitForWVEvent('pageComplete')
-        .waitForWVEvent('pageComplete')
-        .waitForWVEvent('pageComplete')
+        .waitForElementPresent('#pageContainerb0', function() {
+          if (fileType === 'PDF') {
+            client
+              .waitForWVEvent('pageComplete')
+              .waitForWVEvent('pageComplete')
+              .waitForWVEvent('pageComplete');
+          } else if (fileType === 'XOD') {
+            client.pause(500);
+          }
+        })
         .assert.screenshot('.DocumentContainer', `cover-layout-mode.${fileType}.png`);
     });
   });

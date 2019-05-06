@@ -11,7 +11,7 @@ describe('Encryption', function() {
           .loadSample('viewing/viewing', {
             buffer: encryptedPDFBuffer
           })
-          .waitForElementVisible('[data-element="passwordModal"]', 5000)
+          .waitForElementVisible('[data-element="passwordModal"]')
           .setValue('input[type=password]', 'test')
           .click('[data-element="passwordSubmitButton"]')
           .waitForWVEvent('pageComplete');

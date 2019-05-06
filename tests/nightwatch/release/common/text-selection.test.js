@@ -19,7 +19,7 @@ describe('Text Selection', function() {
       .mouseButtonDown('left')
       .moveToElement('#pageContainer0', 300, 680)
       .mouseButtonUp('left')
-      .waitForElementVisible('[data-element="textPopup"]', 5000)
+      .waitForElementVisible('[data-element="textPopup"]')
       .click('[data-element="copyTextButton"]')
       .readerControl('docViewer', 'getSelectedText', function(text) {
         assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, an');
@@ -37,7 +37,7 @@ describe('Text Selection', function() {
       .moveToElement('#pageContainer1', 300, 100)
       .pause(100)
       .mouseButtonUp('left')
-      .waitForElementVisible('[data-element="textPopup"]', 5000)
+      .waitForElementVisible('[data-element="textPopup"]')
       .click('[data-element="copyTextButton"]')
       .readerControl('docViewer', 'getSelectedText', function(text) {
         assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, and customer satisfaction.\nWebViewer');

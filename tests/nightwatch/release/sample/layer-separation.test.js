@@ -29,7 +29,7 @@ describe('Layer Separation', function() {
       client
         .switchToUIFrame()
         .waitForWVEvent('pageComplete')
-        .waitForElementNotVisible('.LoadingModal', 5000)  
+        .waitForElementNotVisible('.LoadingModal')  
         .assert.screenshot('.DocumentContainer', `layer-${layerOn.toLowerCase()}.png`);
     });
   });

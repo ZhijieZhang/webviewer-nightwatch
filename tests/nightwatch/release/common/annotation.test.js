@@ -155,9 +155,9 @@ module.exports = function(fileName) {
               // but can only be applied in PDF files because applying it requires the PDFDoc object and it's null for XOD files
               client
                 .mouseButtonClick()
-                .waitForElementVisible('[data-element="annotationPopup"]', 5000)
+                .waitForElementVisible('[data-element="annotationPopup"]')
                 .click('[data-element="annotationRedactButton"]')
-                .waitForElementVisible('.WarningModal', 5000)
+                .waitForElementVisible('.WarningModal')
                 .click('[data-element="WarningModalSignButton"]')
                 // wait for redaction to be applied to the document
                 .pause(1000);
@@ -216,8 +216,25 @@ module.exports = function(fileName) {
           });
         })
         .assert.screenshot('.pageContainer', `annotation.${fileType}.png`)
-        .saveAndReload(`/samples/files/${fileName}`)
-        // TODO: lose custom appearances in pdf annotations
+        .saveAndReload(`/samples/files/${fileName}`, function() {
+          if (fileType === 'PDF') {
+            client
+              .executeAsync(function(done) {
+                const annotationManager = window.readerControl.docViewer.getAnnotationManager();
+          
+                // annotations in PDF documents are loaded with custom appearances and since we are testing the draw function of
+                // annotations, we need to get rid of appearances.
+                // one way we can get rid of the appearances is by resetting the annotations rect height 
+                // and asking the annotManager to redraw them 
+                annotationManager.getAnnotationsList().forEach(annotation => {
+                  const initHeight = annotation.getHeight();
+                  annotation.setHeight(0);
+                  annotation.setHeight(initHeight);
+                });
+                annotationManager.drawAnnotationsFromList(annotationManager.getAnnotationsList()).then(done);
+              });
+            }
+        })
         .assert.screenshot('.pageContainer', `annotation.${fileType}.png`);
     });
   });

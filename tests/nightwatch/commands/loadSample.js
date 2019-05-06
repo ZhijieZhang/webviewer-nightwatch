@@ -39,7 +39,7 @@ exports.command = function(samplePath, options, callback = () => {}) {
   }
 
   this
-    .resizeWindow(1280, 850)
+    .resizeWindow(1280, 960)
     .url(`http://localhost:3000/samples/${samplePath}`, function() {
       if (isViewerSample) {
         this

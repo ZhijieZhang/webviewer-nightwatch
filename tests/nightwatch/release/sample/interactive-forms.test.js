@@ -25,24 +25,24 @@ describe('Interactive Forms', function() {
             buffer: formPDFBuffer
           })
           .waitForWVEvent('pageComplete')
-          .waitForElementPresent(firstNameId, 5000)
+          .waitForElementPresent(firstNameId)
           .assert.value(firstNameId, 'John')
-          .waitForElementPresent(lastNameId, 5000)
+          .waitForElementPresent(lastNameId)
           .assert.value(lastNameId, 'Doe')
-          .waitForElementPresent(`${checkboxId}:checked`, 5000)
-          .waitForElementPresent(submitId, 5000);
+          .waitForElementPresent(`${checkboxId}:checked`)
+          .waitForElementPresent(submitId);
 
         client
           .loadSample('viewing/viewing', {
             buffer: editedFormPDFBuffer
           })
           .waitForWVEvent('pageComplete')
-          .waitForElementPresent(firstNameId, 5000)
+          .waitForElementPresent(firstNameId)
           .assert.value(firstNameId, 'This is a new value. The old one was: John')
-          .waitForElementPresent(lastNameId, 5000)
+          .waitForElementPresent(lastNameId)
           .assert.value(lastNameId, 'This is a new value. The old one was: Doe')
-          .waitForElementPresent(`${checkboxId}:checked`, 5000)
-          .waitForElementPresent(submitId, 5000);
+          .waitForElementPresent(`${checkboxId}:checked`)
+          .waitForElementPresent(submitId);
 
         
         client
@@ -53,16 +53,16 @@ describe('Interactive Forms', function() {
           .readerControl('getPageCount', function(pageCount) {
             assert.equal(pageCount, 5);
           })
-          .waitForElementPresent(firstNameId.replace(/first/, 'first0'), 5000)
-          .waitForElementPresent(lastNameId.replace(/last/, 'last0'), 5000)
-          .waitForElementPresent(`${checkboxId.replace(/check1/, 'check10')}:checked`, 5000)
-          .waitForElementPresent(submitId.replace(/submit/, 'submit0'), 5000)
+          .waitForElementPresent(firstNameId.replace(/first/, 'first0'))
+          .waitForElementPresent(lastNameId.replace(/last/, 'last0'))
+          .waitForElementPresent(`${checkboxId.replace(/check1/, 'check10')}:checked`)
+          .waitForElementPresent(submitId.replace(/submit/, 'submit0'))
           .readerControl('setCurrentPageNumber', 5)
           .waitForWVEvent('pageComplete')
-          .waitForElementPresent(firstNameId.replace(/first/, 'first4'), 5000)
-          .waitForElementPresent(lastNameId.replace(/last/, 'last4'), 5000)
-          .waitForElementPresent(`${checkboxId.replace(/check1/, 'check14')}:checked`, 5000)
-          .waitForElementPresent(submitId.replace(/submit/, 'submit4'), 5000);
+          .waitForElementPresent(firstNameId.replace(/first/, 'first4'))
+          .waitForElementPresent(lastNameId.replace(/last/, 'last4'))
+          .waitForElementPresent(`${checkboxId.replace(/check1/, 'check14')}:checked`)
+          .waitForElementPresent(submitId.replace(/submit/, 'submit4'));
 
         client
           .loadSample('viewing/viewing', {
@@ -72,10 +72,10 @@ describe('Interactive Forms', function() {
           .readerControl('annotManager', 'getAnnotationsList', function(annotations) {
             assert.equal(annotations.length, 0);
           })
-          .waitForElementNotPresent(firstNameId, 5000)
-          .waitForElementNotPresent(lastNameId, 5000)
-          .waitForElementNotPresent(`${checkboxId}:checked`, 5000)
-          .waitForElementNotPresent(submitId, 5000);
+          .waitForElementNotPresent(firstNameId)
+          .waitForElementNotPresent(lastNameId)
+          .waitForElementNotPresent(`${checkboxId}:checked`)
+          .waitForElementNotPresent(submitId);
       });    
   });
 });

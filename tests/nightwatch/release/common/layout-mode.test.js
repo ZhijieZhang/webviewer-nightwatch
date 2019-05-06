@@ -15,7 +15,7 @@ module.exports = function(fileName) {
     it('single', function(client) {
       client
         .readerControl('setLayoutMode', 'Single')
-        .waitForElementNotPresent('#pageContainer1', 5000)
+        .waitForElementNotPresent('#pageContainer1')
         .assert.screenshot('.DocumentContainer', `single-layout-mode.${fileType}.png`);
     });
   
@@ -25,11 +25,11 @@ module.exports = function(fileName) {
     it('facing', function(client) {
       client
         .readerControl('setLayoutMode', 'Facing')
-        .waitForElementNotPresent('#pageContainer2', 5000)
+        .waitForElementNotPresent('#pageContainer2')
         .readerControl('setCurrentPageNumber', 3)
         .waitForWVEvent('pageComplete')
-        .waitForElementPresent('#pageContainer2', 5000)
-        .waitForElementPresent('#pageContainerb3', 5000)
+        .waitForElementPresent('#pageContainer2')
+        .waitForElementPresent('#pageContainerb3')
         .readerControl('setCurrentPageNumber', 1)
         .waitForWVEvent('pageComplete')
         .waitForWVEvent('pageComplete')
@@ -39,7 +39,7 @@ module.exports = function(fileName) {
     it('facing continuous', function(client) {
       client 
         .readerControl('setLayoutMode', 'FacingContinuous')
-        .waitForElementPresent('#pageContainerb3', 5000)
+        .waitForElementPresent('#pageContainerb3')
         .waitForWVEvent('pageComplete')
         .waitForWVEvent('pageComplete')
         .waitForWVEvent('pageComplete')
@@ -49,9 +49,9 @@ module.exports = function(fileName) {
     it('cover facing', function(client) {
       client 
         .readerControl('setLayoutMode', 'CoverFacing')
-        .waitForElementPresent('#pageContainerb0', 5000)
+        .waitForElementPresent('#pageContainerb0')
         .readerControl('setCurrentPageNumber', 3)
-        .waitForElementNotPresent('#pageContainerb0', 5000)
+        .waitForElementNotPresent('#pageContainerb0')
         .readerControl('setCurrentPageNumber', 1)
         .waitForWVEvent('pageComplete')
         .assert.screenshot('.DocumentContainer', `cover-facing-layout-mode.${fileType}.png`);
@@ -60,7 +60,7 @@ module.exports = function(fileName) {
     it('cover', function(client) {
       client 
         .readerControl('setLayoutMode', 'Cover')
-        .waitForElementPresent('#pageContainerb0', 5000)
+        .waitForElementPresent('#pageContainerb0')
         .waitForWVEvent('pageComplete')
         .waitForWVEvent('pageComplete')
         .waitForWVEvent('pageComplete')

@@ -15,7 +15,7 @@ describe('UI Customization', function() {
       .click('#page-nav')
       .click('#dark')
       .switchToUIFrame()
-      .click('[data-element="leftPanelButton"]')
+      .readerControl('openElements', ['outlinesPanel'])
       // wait for the left panel to be fully open
       .pause(500)
       .click('[data-element="menuButton"]')

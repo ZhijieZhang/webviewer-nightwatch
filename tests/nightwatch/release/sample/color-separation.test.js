@@ -34,7 +34,7 @@ describe('Color Separation', function() {
       client
         .switchToUIFrame()
         .waitForWVEvent('pageComplete')
-        .waitForElementNotVisible('.LoadingModal', 5000)  
+        .waitForElementNotVisible('.LoadingModal')  
         .assert.screenshot('.DocumentContainer', `color-${layerOn.toLowerCase().replace(/ /g, '-')}.png`);
     });
   });

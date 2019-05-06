@@ -5,7 +5,7 @@ describe('Encrypted PDF', function() {
     client.readerControl('loadDocument', '/samples/files/encrypted-foobar12.pdf');
     
     passwordModal = client.page.passwordModal();
-    passwordModal.waitForElementVisible('@modal', 5000, () => done());
+    passwordModal.waitForElementVisible('@modal', () => done());
   });
 
   it('show password modal', function() {});
@@ -23,7 +23,7 @@ describe('Encrypted PDF', function() {
       .setValue('@input', 'this cannot be the correct password ^_^')
       .click('@submitBtn')
       .assert.cssClassPresent('@input', 'wrong')
-      .waitForElementVisible('@wrongPasswordDiv', 5000);
+      .waitForElementVisible('@wrongPasswordDiv');
   });
 
   it('remain visible after cancel button is clicked', function() {

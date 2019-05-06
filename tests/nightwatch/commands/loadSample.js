@@ -43,7 +43,7 @@ exports.command = function(samplePath, options, callback = () => {}) {
     .url(`http://localhost:3000/samples/${samplePath}`, function() {
       if (isViewerSample) {
         this
-          .waitForElementVisible('iframe', 1000)
+          .waitForElementVisible('iframe')
           .switchToUIFrame(function() {
             if (
               typeof options === 'object' && 

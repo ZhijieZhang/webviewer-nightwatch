@@ -77,6 +77,7 @@ describe('WebViewer Release Test', function() {
       './sample/color-separation.test.js',
       './sample/XOD.test.js',
       './sample/text-position.test.js',
+      './sample/redaction.test.js',
       './sample/flipbook.test.js',
       './sample/custom-save.test.js',
       './sample/display-points.test.js',

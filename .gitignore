@@ -3,3 +3,5 @@ chromedriver.log
 geckodriver.log
 tests_output/
 .DS_Store
+current/
+diff/

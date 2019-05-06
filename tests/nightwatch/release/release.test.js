@@ -32,7 +32,7 @@ describe('WebViewer Release Test', function() {
     ]);
   });
 
-  describe.skip('XOD', function() {
+  describe('XOD', function() {
     beforeEach(function(client, done) {
       client 
         .loadSample('viewing/viewing')

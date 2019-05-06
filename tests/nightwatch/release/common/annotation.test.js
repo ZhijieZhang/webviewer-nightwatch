@@ -89,7 +89,7 @@ module.exports = function(fileName) {
           draw: function (x, y) {
             client
               .mouseButtonDown('left')
-              .moveToElement('.pageContainer', x + gAnnotWidth, y + gAnnotHeight)
+              .moveToElement('.pageContainer', x + gAnnotWidth + 15, y + gAnnotHeight)
               .mouseButtonUp('left')
               .readerControl('setToolMode', 'AnnotationEdit')
               // click off the text area to blur it out

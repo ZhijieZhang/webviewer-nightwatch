@@ -5,7 +5,7 @@ describe('Realtime Collaboration', function() {
   const user1 = `User${Math.floor(Math.random() * 1000)}`;
   const user2 = `User${Math.floor(Math.random() * 1000)}`;
 
-  it.only('add an annotation in another window and check if the annotation appears in the main window', function(client) {
+  it('add an annotation in another window and check if the annotation appears in the main window', function(client) {
     client
       .loadSample('annotation/realtime-collaboration')
       .pause(timeToWaitForPromptDialog)

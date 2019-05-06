@@ -23,7 +23,8 @@ describe('WebViewer Release Test', function() {
       './PDF/javascript.test.js',
       './PDF/substituted-font.test.js',
       './PDF/invalid-key.test.js',
-      './common/text-selection.test.js',
+      ['./common/text-selection.test.js'],
+      ['./common/print.test.js'],
       ['./common/load-document.test.js', 'sample.pdf', 'sample-annotated.pdf'],
       ['./common/annotation.test.js', 'sample.pdf'],
       ['./common/form.test.js', 'form.pdf'],
@@ -48,7 +49,8 @@ describe('WebViewer Release Test', function() {
     });
 
     importTests([
-      './common/text-selection.test.js',
+      ['./common/print.test.js'],
+      ['./common/text-selection.test.js'],
       ['./common/load-document.test.js', 'sample.xod', 'sample-annotated.xod'],
       ['./common/annotation.test.js', 'sample.xod'],
       ['./common/form.test.js', 'form.xod'],

@@ -1,0 +1,26 @@
+16:16:14.377 INFO - Selenium build info: version: '3.9.1', revision: '63f7b50'
+16:16:14.377 INFO - Launching a standalone Selenium Server on port 4444
+2019-05-07 16:16:14.515:INFO::main: Logging initialized @349ms to org.seleniumhq.jetty9.util.log.StdErrLog
+2019-05-07 16:16:14.628:INFO:osjs.Server:main: jetty-9.4.7.v20170914, build timestamp: 2017-11-21T13:27:37-08:00, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+2019-05-07 16:16:14.651:WARN:osjs.SecurityHandler:main: ServletContext@o.s.j.s.ServletContextHandler@7f1302d6{/,null,STARTING} has uncovered http methods for path: /
+2019-05-07 16:16:14.655:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@7f1302d6{/,null,AVAILABLE}
+2019-05-07 16:16:14.690:INFO:osjs.AbstractConnector:main: Started ServerConnector@cd3fee8{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
+2019-05-07 16:16:14.691:INFO:osjs.Server:main: Started @525ms
+16:16:14.691 INFO - Selenium Server is up and running on port 4444
+2019-05-07 16:16:15.150:INFO:osjshC.ROOT:qtp1816757085-15: org.openqa.selenium.remote.server.WebDriverServlet-279ad2e3: Initialising WebDriverServlet
+16:16:15.193 INFO - Found handler: org.openqa.selenium.remote.server.commandhandler.BeginSession@28f2b4f2
+16:16:15.197 INFO - /session: Executing POST on /session (handler: BeginSession)
+16:16:15.255 INFO - Capabilities are: Capabilities {acceptSslCerts: true, browserName: chrome, loggingPrefs: org.openqa.selenium.logging...}
+16:16:15.256 INFO - Capabilities {acceptSslCerts: true, browserName: chrome, loggingPrefs: org.openqa.selenium.logging...} matched class org.openqa.selenium.remote.server.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
+Starting ChromeDriver 2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e) on port 8886
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+16:16:16.467 INFO - Detected dialect: OSS
+16:16:16.779 INFO - Found handler: org.openqa.selenium.remote.server.commandhandler.BeginSession@3d6f2138
+16:16:16.780 INFO - /session: Executing POST on /session (handler: BeginSession)
+16:16:16.784 INFO - Capabilities are: Capabilities {acceptSslCerts: true, browserName: chrome, loggingPrefs: org.openqa.selenium.logging...}
+16:16:16.784 INFO - Capabilities {acceptSslCerts: true, browserName: chrome, loggingPrefs: org.openqa.selenium.logging...} matched class org.openqa.selenium.remote.server.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
+Starting ChromeDriver 2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e) on port 18154
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+16:16:17.775 INFO - Detected dialect: OSS

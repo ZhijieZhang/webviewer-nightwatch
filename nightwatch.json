@@ -4,10 +4,17 @@
   "custom_assertions_path": ["tests/nightwatch/assertions"],
   "page_objects_path": ["tests/nightwatch/pageObjects"],
   "globals_path": "tests/nightwatch/globals.js",
-  "webdriver": {
-    "start_process": true,
-    "server_path": "./node_modules/chromedriver/bin/chromedriver",
-    "port": 9515
+
+  "test_runner": "mocha",
+
+  "selenium" : {
+    "start_process" : true,
+    "server_path" : "./bin/selenium-server-standalone-4.0.0.jar",
+    "log_path" : "",
+    "port" : 4444,
+    "cli_args" : {
+      "webdriver.chrome.driver" : "./node_modules/chromedriver/bin/chromedriver"
+    }
   },
   "test_settings": {
     "default": {
@@ -18,6 +25,5 @@
         }
       }
     }
-  },
-  "test_runner": "mocha"
+  }
 }

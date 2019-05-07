@@ -1,16 +1,7 @@
 const Jimp = require('jimp');
 const Buffer = require('buffer').Buffer;
 
-// take a screenshot of the visible region of the element
-// this command makes a few assumptions based on the type of the element argument
-// if element is a string, then it assumes:
-//  1. current frame is the UI iframe
-//  2. the UI is loaded in a iframe
-//  3. the UI is 100% height and 100% width
-//  4. we are going to take a screenshot of an element in the UI iframe and it exists
-// if element is an object, then it assumes:
-//  1. the element has the shape of: { selector }
-//  2. we are going to take a screenshot of an element in the current frame
+// take a screenshot of the visible region of the element inside the current frame
 exports.command = function(element, callback = () => {}) {
   let iframeX,
       iframeY,
@@ -19,18 +10,22 @@ exports.command = function(element, callback = () => {}) {
       elementWidth,
       elementHeight;
 
-  if (typeof element === 'string') {
+  // this.iframe is set whenever we call switchToUIFrame()
+  // we use the information of this.iframe to determine if we are inside an iframe
+  // and the location of the iframe we are in
+  if (this.iframe) {
+    const { webElementId, id } = this.iframe;
+    
     this
       .frameParent()
-      .getLocation('iframe', function({value: { x, y }}) {
+      .elementIdLocation(webElementId, function({value: { x, y }}) {
         iframeX = x;
         iframeY = y;
       })
-      .switchToUIFrame();
-  } else if (typeof element === 'object') {
+      .frame(id);
+  } else {
     iframeX = 0;
     iframeY = 0;
-    element = element.selector;
   }
 
   this

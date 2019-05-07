@@ -7,8 +7,6 @@ describe('Flipbook', function() {
       .click('#next')
       // wait for 1.5secs for the flipping animation to complete
       .pause(1500)
-      .assert.screenshot({
-        selector: '#flipbook'
-      }, 'flipbook.png');
+      .assert.screenshot('#flipbook', 'flipbook.png');
   });
 });

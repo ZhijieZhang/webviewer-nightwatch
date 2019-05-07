@@ -1,5 +1,5 @@
 describe('Redaction', function() {
-  it.only('redact and permanently remove text, images or graphics from a document', function(client) {
+  it('redact and permanently remove text, images or graphics from a document', function(client) {
     client
       .loadSample('advanced/redaction')
       .waitForWVEvent('pageComplete')

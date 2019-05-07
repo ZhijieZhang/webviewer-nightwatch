@@ -1,4 +1,15 @@
-exports.command = function(samplePath, options, callback = () => {}) {
+exports.command = function(samplePath, ...args) {
+  let options = {}, 
+      callback = () => {};
+  if (args.length === 1) {
+    typeof args[0] === 'function' 
+      ? callback = args[0]
+      : options = args[0];
+  } else if (args.length === 2) {
+    options = args[0];
+    callback = args[1];
+  }
+
   // samples that doesn't use an iframe to load the viewer
   // currently this includes the flipbook sample and all console-based samples
   // if any of the path url for these samples changed, this array needs to be updated
@@ -44,11 +55,8 @@ exports.command = function(samplePath, options, callback = () => {}) {
       if (isViewerSample) {
         this
           .waitForElementVisible('iframe')
-          .switchToUIFrame(function() {
-            if (
-              typeof options === 'object' && 
-              options.buffer
-            ) {
+          .switchToUIFrame(options.iframe, function() {
+            if (options.buffer) {
               this
                 .setUrlWithOptions({
                   pdftronServer: '' 

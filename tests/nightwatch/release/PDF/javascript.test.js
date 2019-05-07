@@ -1,4 +1,4 @@
-describe('PDF with JavaScript', function() {
+describe.only('PDF with JavaScript', function() {
   let widgetElements, jsPDF;
 
   beforeEach(function(client, done) {

@@ -14,6 +14,8 @@ describe('WebViewer Release Test', function() {
         .setUrlWithOptions({ 
           pdftronServer: '' 
         })
+        // TODO remove
+        .pause(1000)
         .waitForWVEvent('pageComplete', done);
     });
 

@@ -27,16 +27,15 @@ class WaitForWVEvent extends EventEmitter {
       this.WVEvent = args[0];
     }
 
-    const timeoutInMilliseconds = 10000;
+    const timeoutInMilliseconds = 10000000;
     this.failTimeout = setTimeout(() => {
       assert.ok(false, `${this.WVEvent} from ${this.nameSpace} didn't get triggered in ${timeoutInMilliseconds} ms`);
     }, timeoutInMilliseconds);
 
     this.api      
-      .timeoutsAsyncScript(timeoutInMilliseconds)
+      // .timeoutsAsyncScript(timeoutInMilliseconds)
       .executeAsync(
         function(nameSpace, wvEvent, done) {
-          window = window[0] || window;
           const docViewer = window.readerControl.docViewer;
           const obj = nameSpace !== 'docViewer'
             ? docViewer.getAnnotationManager()

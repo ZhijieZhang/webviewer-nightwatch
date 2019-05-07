@@ -9,10 +9,12 @@ exports.command = function(arg = 0, callback = () => {}) {
   }
 
   this.elements('css selector', iframeSelector, function(result) {
-    const webElementId = result.value[iframeIndex].ELEMENT;
+    console.log(result.value);
+    const webElementId = Object.values(result.value[iframeIndex])[0];
     this.elementIdAttribute(webElementId, 'id', function({ value: id }) {
       this
-        .frame(id, function() {
+        // .frame(id, function() {
+        .frame(result.value[iframeIndex], function() {
           this.globals.iframe = {webElementId, id};
           callback.call(this);
         });

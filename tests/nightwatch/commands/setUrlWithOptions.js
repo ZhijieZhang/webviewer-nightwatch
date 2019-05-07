@@ -1,7 +1,6 @@
 exports.command = function(options, callback = () => {}) {
   this.execute(
     function(options) {
-      window = window[0] || window;
       // search the query key in the url and replace its value with the new value
       // if the key is not found and the new value is truthy, append the key value to the end of the url  
       window.replaceQueryValue = function(url, key, newValue) {

@@ -1,26 +1,108 @@
-16:16:14.377 INFO - Selenium build info: version: '3.9.1', revision: '63f7b50'
-16:16:14.377 INFO - Launching a standalone Selenium Server on port 4444
-2019-05-07 16:16:14.515:INFO::main: Logging initialized @349ms to org.seleniumhq.jetty9.util.log.StdErrLog
-2019-05-07 16:16:14.628:INFO:osjs.Server:main: jetty-9.4.7.v20170914, build timestamp: 2017-11-21T13:27:37-08:00, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
-2019-05-07 16:16:14.651:WARN:osjs.SecurityHandler:main: ServletContext@o.s.j.s.ServletContextHandler@7f1302d6{/,null,STARTING} has uncovered http methods for path: /
-2019-05-07 16:16:14.655:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@7f1302d6{/,null,AVAILABLE}
-2019-05-07 16:16:14.690:INFO:osjs.AbstractConnector:main: Started ServerConnector@cd3fee8{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
-2019-05-07 16:16:14.691:INFO:osjs.Server:main: Started @525ms
-16:16:14.691 INFO - Selenium Server is up and running on port 4444
-2019-05-07 16:16:15.150:INFO:osjshC.ROOT:qtp1816757085-15: org.openqa.selenium.remote.server.WebDriverServlet-279ad2e3: Initialising WebDriverServlet
-16:16:15.193 INFO - Found handler: org.openqa.selenium.remote.server.commandhandler.BeginSession@28f2b4f2
-16:16:15.197 INFO - /session: Executing POST on /session (handler: BeginSession)
-16:16:15.255 INFO - Capabilities are: Capabilities {acceptSslCerts: true, browserName: chrome, loggingPrefs: org.openqa.selenium.logging...}
-16:16:15.256 INFO - Capabilities {acceptSslCerts: true, browserName: chrome, loggingPrefs: org.openqa.selenium.logging...} matched class org.openqa.selenium.remote.server.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
-Starting ChromeDriver 2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e) on port 8886
-Only local connections are allowed.
-Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
-16:16:16.467 INFO - Detected dialect: OSS
-16:16:16.779 INFO - Found handler: org.openqa.selenium.remote.server.commandhandler.BeginSession@3d6f2138
-16:16:16.780 INFO - /session: Executing POST on /session (handler: BeginSession)
-16:16:16.784 INFO - Capabilities are: Capabilities {acceptSslCerts: true, browserName: chrome, loggingPrefs: org.openqa.selenium.logging...}
-16:16:16.784 INFO - Capabilities {acceptSslCerts: true, browserName: chrome, loggingPrefs: org.openqa.selenium.logging...} matched class org.openqa.selenium.remote.server.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
-Starting ChromeDriver 2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e) on port 18154
-Only local connections are allowed.
-Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
-16:16:17.775 INFO - Detected dialect: OSS
+16:49:12.564 INFO [GridLauncherV3.parse] - Selenium server version: 4.0.0-alpha-1, revision: d1d3728cae
+16:49:12.630 INFO [GridLauncherV3.lambda$buildLaunchers$3] - Launching a standalone Selenium Server on port 4444
+16:49:12.901 INFO [WebDriverServlet.<init>] - Initialising WebDriverServlet
+16:49:13.010 INFO [SeleniumServer.boot] - Selenium Server is up and running on port 4444
+16:49:13.406 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+  "acceptInsecureCerts": true,
+  "acceptSslCerts": true,
+  "browserName": "firefox",
+  "loggingPrefs": {
+    "browser": "ALL"
+  }
+}
+16:49:13.408 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.firefox.GeckoDriverService)
+1557272953784	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/5_/l65ldcv551sgc31g6z508gbc0000gn/T/rust_mozprofile.V7newD12Mj77"
+1557272954259	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1557272954259	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1557272954259	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1557272955578	Marionette	INFO	Listening on port 54983
+1557272955625	Marionette	WARN	TLS certificate errors will be ignored for this session
+16:49:15.684 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+16:49:15.713 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session bc117c24-d629-6f4e-bbb4-1d8c3d131de3 (org.openqa.selenium.firefox.GeckoDriverService)
+JavaScript warning: http://localhost:3000/lib/core/CoreControls.js, line 256: unreachable code after return statement
+JavaScript warning: http://localhost:3000/lib/core/CoreControls.js, line 256: unreachable code after return statement
+1557272963103	Marionette	INFO	Stopped listening on port 54983
+16:49:23.533 INFO [ActiveSessions$1.onStop] - Removing session bc117c24-d629-6f4e-bbb4-1d8c3d131de3 (org.openqa.selenium.firefox.GeckoDriverService)
+16:49:23.539 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+  "acceptInsecureCerts": true,
+  "acceptSslCerts": true,
+  "browserName": "firefox",
+  "loggingPrefs": {
+    "browser": "ALL"
+  }
+}
+16:49:23.539 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.firefox.GeckoDriverService)
+1557272963701	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/5_/l65ldcv551sgc31g6z508gbc0000gn/T/rust_mozprofile.CoKpCoAfdXmR"
+1557272964180	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1557272964181	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1557272964181	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1557272965494	Marionette	INFO	Listening on port 55317
+1557272965539	Marionette	WARN	TLS certificate errors will be ignored for this session
+16:49:25.591 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+16:49:25.594 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session dfec8584-b1aa-ee41-9b7f-d0868683a433 (org.openqa.selenium.firefox.GeckoDriverService)
+JavaScript warning: http://localhost:3000/lib/core/CoreControls.js, line 256: unreachable code after return statement
+JavaScript warning: http://localhost:3000/lib/core/CoreControls.js, line 256: unreachable code after return statement
+1557272971117	Marionette	INFO	Stopped listening on port 55317
+16:49:31.551 INFO [ActiveSessions$1.onStop] - Removing session dfec8584-b1aa-ee41-9b7f-d0868683a433 (org.openqa.selenium.firefox.GeckoDriverService)
+16:49:31.557 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+  "acceptInsecureCerts": true,
+  "acceptSslCerts": true,
+  "browserName": "firefox",
+  "loggingPrefs": {
+    "browser": "ALL"
+  }
+}
+16:49:31.557 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.firefox.GeckoDriverService)
+1557272971722	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/5_/l65ldcv551sgc31g6z508gbc0000gn/T/rust_mozprofile.dBIJGEXbXuxI"
+1557272972296	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1557272972297	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1557272972297	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1557272973603	Marionette	INFO	Listening on port 55642
+1557272973649	Marionette	WARN	TLS certificate errors will be ignored for this session
+16:49:33.690 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+16:49:33.693 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session 654b1313-bc57-a245-afb0-814a4d47052a (org.openqa.selenium.firefox.GeckoDriverService)
+JavaScript warning: http://localhost:3000/lib/core/CoreControls.js, line 256: unreachable code after return statement
+JavaScript warning: http://localhost:3000/lib/core/CoreControls.js, line 256: unreachable code after return statement
+1557272980773	Marionette	INFO	Stopped listening on port 55642
+16:49:41.203 INFO [ActiveSessions$1.onStop] - Removing session 654b1313-bc57-a245-afb0-814a4d47052a (org.openqa.selenium.firefox.GeckoDriverService)
+16:49:41.213 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+  "acceptInsecureCerts": true,
+  "acceptSslCerts": true,
+  "browserName": "firefox",
+  "loggingPrefs": {
+    "browser": "ALL"
+  }
+}
+16:49:41.214 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.firefox.GeckoDriverService)
+1557272981372	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/5_/l65ldcv551sgc31g6z508gbc0000gn/T/rust_mozprofile.exF8prLRS6xb"
+1557272981956	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1557272981956	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1557272981956	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1557272983254	Marionette	INFO	Listening on port 55959
+1557272983304	Marionette	WARN	TLS certificate errors will be ignored for this session
+16:49:43.353 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+16:49:43.354 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session 6024c299-bb01-1340-a778-c5d2d3c5b4fe (org.openqa.selenium.firefox.GeckoDriverService)
+1557272983363	Marionette	INFO	Stopped listening on port 55959
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 834: Error: Connection is not open.
+16:49:43.769 INFO [ActiveSessions$1.onStop] - Removing session 6024c299-bb01-1340-a778-c5d2d3c5b4fe (org.openqa.selenium.firefox.GeckoDriverService)
+16:49:43.776 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+  "acceptInsecureCerts": true,
+  "acceptSslCerts": true,
+  "browserName": "firefox",
+  "loggingPrefs": {
+    "browser": "ALL"
+  }
+}
+16:49:43.776 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.firefox.GeckoDriverService)
+1557272983939	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/5_/l65ldcv551sgc31g6z508gbc0000gn/T/rust_mozprofile.F8i8bXMZ4Ed3"
+1557272984521	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1557272984522	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1557272984522	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1557272985823	Marionette	INFO	Listening on port 56219
+1557272985868	Marionette	WARN	TLS certificate errors will be ignored for this session
+16:49:45.908 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+16:49:45.909 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session 329ddeea-e499-0545-b99d-d5528a2ae174 (org.openqa.selenium.firefox.GeckoDriverService)
+JavaScript warning: http://localhost:3000/lib/core/CoreControls.js, line 256: unreachable code after return statement
+JavaScript warning: http://localhost:3000/lib/core/CoreControls.js, line 256: unreachable code after return statement
+1557272990098	Marionette	INFO	Stopped listening on port 56219
+16:49:50.517 INFO [ActiveSessions$1.onStop] - Removing session 329ddeea-e499-0545-b99d-d5528a2ae174 (org.openqa.selenium.firefox.GeckoDriverService)

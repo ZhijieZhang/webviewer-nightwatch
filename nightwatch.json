@@ -3,6 +3,7 @@
   "custom_commands_path": ["tests/nightwatch/commands"],
   "custom_assertions_path": ["tests/nightwatch/assertions"],
   "page_objects_path": ["tests/nightwatch/pageObjects"],
+  "globals_path": "tests/nightwatch/globals.js",
   "webdriver": {
     "start_process": true,
     "server_path": "node_modules/.bin/chromedriver",
@@ -15,9 +16,6 @@
         "loggingPrefs": { 
           "browser": "ALL"
         }
-      },
-      "globals": {
-        "asyncHookTimeout": 1000000
       }
     }
   },

@@ -1,4 +1,4 @@
-describe.only('Flipbook', function() {
+describe('Flipbook', function() {
   it('navigate to different pages', function(client) {
     client
       .loadSample('advanced/flipbook')

@@ -2,6 +2,11 @@ const importTests = require('../utils/importTests');
 
 // https://docs.google.com/spreadsheets/d/1uKew8HEje2nI1Gt7IZ390qihWviYIBDD80D-cb88NqE/edit#gid=0
 describe('WebViewer Release Test', function() {
+  afterEach(function(client, done) {
+    client.globals.iframe = null;
+    client.end(() => done());
+  });
+
   describe('PDF', function() {
     beforeEach(function(client, done) {
       client 
@@ -10,10 +15,6 @@ describe('WebViewer Release Test', function() {
           pdftronServer: '' 
         })
         .waitForWVEvent('pageComplete', done);
-    });
-
-    afterEach(function(client, done) {
-      client.end(() => done());
     });
 
     importTests([   
@@ -44,10 +45,6 @@ describe('WebViewer Release Test', function() {
         .waitForWVEvent('pageComplete', done);
     });
 
-    afterEach(function(client, done) {
-      client.end(() => done());
-    });
-
     importTests([
       ['./common/print.test.js'],
       ['./common/text-selection.test.js'],
@@ -60,10 +57,6 @@ describe('WebViewer Release Test', function() {
   });
 
   describe('Samples', function() {
-    afterEach(function(client, done) {
-      client.end(() => done());
-    });
-    
     importTests([
       './sample/legacy-viewing.test.js',
       './sample/users-and-permissions.test.js',

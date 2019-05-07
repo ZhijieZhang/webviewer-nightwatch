@@ -1,4 +1,4 @@
-describe.only('Snap To Nearest', function() {
+describe('Snap To Nearest', function() {
   it('use the snap API for calculating the nearest snap point', function(client) {
     client
       .loadSample('full-apis/ViewerSnapToNearestTest')

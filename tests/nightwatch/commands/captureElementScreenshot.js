@@ -10,11 +10,8 @@ exports.command = function(element, callback = () => {}) {
       elementWidth,
       elementHeight;
 
-  // this.iframe is set after we successfully switched to another iframe by calling switchToUIFrame()
-  // we use the information of it to determine if we are inside an iframe
-  // and the location of the iframe we are in
-  if (this.iframe) {
-    const { webElementId, id } = this.iframe;
+  if (this.globals.iframe) {
+    const { webElementId, id } = this.globals.iframe;
     
     this
       .frameParent()

@@ -1,4 +1,4 @@
-exports.command = function(arg, callback = () => {}) {
+exports.command = function(arg = 0, callback = () => {}) {
   let iframeIndex, iframeSelector;
   if (typeof arg === 'number') {
     iframeIndex = arg;

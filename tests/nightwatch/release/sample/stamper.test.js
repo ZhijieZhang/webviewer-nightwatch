@@ -3,17 +3,17 @@ describe('Stamper', function() {
     client
       .loadSample('full-apis/StamperTest')
       .getPDFBufferAfter('Done', function([
-        stampedEven,
-        stampedVegetable,
-        stampedFishCorner,
-        stampedTwentyOdd,
-        stampedTwentyEven,
-        stampedCorner,
-        stampedHidden
+        stampedEvenPDFBuffer,
+        stampedVegetablePDFBuffer,
+        stampedFishCornerPDFBuffer,
+        stampedTwentyOddPDFBuffer,
+        stampedTwentyEvenPDFBuffer,
+        stampedCornerPDFBuffer,
+        stampedHiddenPDFBuffer
       ]) {
         client
           .loadSample('viewing/viewing', {
-            buffer: stampedEven
+            buffer: stampedEvenPDFBuffer
           })
           .waitForWVEvent('pageComplete')
           .readerControl('setCurrentPageNumber', 6)
@@ -22,28 +22,28 @@ describe('Stamper', function() {
 
         client
           .loadSample('viewing/viewing', {
-            buffer: stampedVegetable
+            buffer: stampedVegetablePDFBuffer
           })
           .waitForWVEvent('pageComplete')
           .assert.screenshot('.pageContainer', 'stamper-vegetable.test.png');
 
         client
           .loadSample('viewing/viewing', {
-            buffer: stampedFishCorner
+            buffer: stampedFishCornerPDFBuffer
           })
           .waitForWVEvent('pageComplete')
           .assert.screenshot('.pageContainer', 'stamper-fish-corner.test.png');
 
         client
           .loadSample('viewing/viewing', {
-            buffer: stampedTwentyOdd
+            buffer: stampedTwentyOddPDFBuffer
           })
           .waitForWVEvent('pageComplete')
           .assert.screenshot('.pageContainer', 'stamper-20-odd.test.png');
 
         client
           .loadSample('viewing/viewing', {
-            buffer: stampedTwentyEven
+            buffer: stampedTwentyEvenPDFBuffer
           })
           .waitForWVEvent('pageComplete')
           .readerControl('setCurrentPageNumber', 6)
@@ -52,14 +52,14 @@ describe('Stamper', function() {
 
         client
           .loadSample('viewing/viewing', {
-            buffer: stampedCorner
+            buffer: stampedCornerPDFBuffer
           })
           .waitForWVEvent('pageComplete')
           .assert.screenshot('.pageContainer', 'stamper-corner.test.png');
 
         client
           .loadSample('viewing/viewing', {
-            buffer: stampedHidden
+            buffer: stampedHiddenPDFBuffer
           })
           .waitForWVEvent('pageComplete')
           .assert.screenshot('.pageContainer', 'stamper-hidden.test.png');

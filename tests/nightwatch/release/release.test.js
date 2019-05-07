@@ -79,6 +79,7 @@ describe('WebViewer Release Test', function() {
       './sample/text-position.test.js',
       './sample/redaction.test.js',
       './sample/diff-documents.test.js',
+      './sample/measurement.test.js',
       './sample/flipbook.test.js',
       './sample/custom-save.test.js',
       './sample/display-points.test.js',

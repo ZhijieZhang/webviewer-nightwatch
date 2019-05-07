@@ -11,15 +11,15 @@ exports.command = function(arg, callback = () => {}) {
   this.elements('css selector', iframeSelector, function(result) {
     const webElementId = result.value[iframeIndex].ELEMENT;
     this.elementIdAttribute(webElementId, 'id', function({ value: id }) {
-      // this variable will be used in the captureElementScreenshot command
-      // to determine if we are currently inside an iframe and which iframe we are in
-      this.iframe = {
-        webElementId,
-        id
-      };
-
       this
-        .frame(id)
+        .frame(id, function() {
+          // this variable will be used in the captureElementScreenshot command
+          // to determine if we are currently inside an iframe and which iframe we are in
+          this.iframe = {
+            webElementId,
+            id
+          };
+        })
         .waitForElementPresent('.App', function() {
           callback.call(this);
         });

@@ -1,5 +1,5 @@
 describe('Measurement', function () {
-  it.only('create annotations that measurement distance, perimeter and area', function(client) {
+  it('create annotations that measurement distance, perimeter and area', function(client) {
     // width for the annotation drawn by the measurement tools, in pixels
     const annotWidth = 40;
     // height for the annotation drawn by the measurement tools, in pixels

@@ -94,6 +94,7 @@ describe('WebViewer Release Test', function() {
       './sample/content-replacer.test.js',
       './sample/digital-signature.test.js',
       './sample/element-builder.test.js',
+      './sample/element-edit.test.js',
       './sample/element-reader.test.js',
       './sample/encryption.test.js',
       './sample/XFDF-import.test.js',

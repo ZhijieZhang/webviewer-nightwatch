@@ -1,4 +1,4 @@
-describe.only('User and permissions', function() {
+describe('User and permissions', function() {
   let userPermission;
 
   beforeEach(function(client, done) {

@@ -1,4 +1,4 @@
-describe('PDF with JavaScript', function() {
+describe.only('PDF with JavaScript', function() {
   let widgetElements, jsPDF;
 
   beforeEach(function(client, done) {
@@ -12,7 +12,10 @@ describe('PDF with JavaScript', function() {
 
     client
       .readerControl('loadDocument', '/samples/files/javascript.pdf')
-      .waitForWVEvent('annotationsLoaded', done);
+      .waitForWVEvent('annotationsLoaded')
+      .waitForElementNotVisible('[data-element="progressModal"]', function() {
+        done();
+      });
   });
 
   it('triggers mouseenter/mouseleave events when mouse entering/leaving a widget element', function() {

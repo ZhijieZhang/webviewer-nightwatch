@@ -35,8 +35,7 @@ describe('Bookmark', function() {
                   assert.equal(pageNumber, idPageNumberMap[id]);
                 });
             });
-          })
-          .pause(10000000);
+          });
       });
   });
 });

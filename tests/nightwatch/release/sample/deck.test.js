@@ -1,4 +1,4 @@
-describe('deck.js', function() {
+describe.only('deck.js', function() {
   it('power deck.js slideshows', function(client) {
     client
       .loadSample('full-apis/DeckJSTest')

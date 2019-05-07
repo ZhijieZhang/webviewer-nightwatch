@@ -88,6 +88,7 @@ exports.command = function(samplePath, ...args) {
             }
           });
       } else {
+        this.iframe = null;
         callback.call(this);
       }
     });

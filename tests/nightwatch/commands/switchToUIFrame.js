@@ -19,8 +19,7 @@ exports.command = function(arg = 0, callback = () => {}) {
             webElementId,
             id
           };
-        })
-        .waitForElementPresent('.App', function() {
+
           callback.call(this);
         });
     });

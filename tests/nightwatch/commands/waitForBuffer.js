@@ -11,15 +11,26 @@ class WaitForBuffer extends EventEmitter {
   // execute the callback function with a PDF buffer array after the length of the array matches the given length
   // this command is specifically targeted to be used for testing console-based samples
   command(length, ...args) {
-    let callback = () => {};
-        
     if (args.length === 1) {
-      typeof args[0] === 'function'
-        ? callback = args[0]
-        : this.timeoutInMilliseconds = args[0];
-      } else if (args.length === 2) {
+      if (typeof args[0] === 'function') {
+        this.callbacks = [args[0]];
+      } else if (Array.isArray(args[0])) {
+        this.runSequential = true;
+        this.callbacks = args[0];
+        this.executedCbCounter = 0;
+      } else if (typeof args[0] === 'number') {
+        this.timeoutInMilliseconds = args[0];
+      }
+    } else if (args.length === 2) {
       this.timeoutInMilliseconds = args[0];
-      callback = args[1];
+
+      if (Array.isArray(args[1])) {
+        this.runSequential = true;
+        this.callbacks = args[1];
+        this.executedCbCounter = 0;
+      } else if (typeof args[1] === 'function') {
+        this.callbacks = [args[1]];
+      }
     }
 
     // so far all the console-based samples use a function saveBufferAsPDFDoc to save the PDF to disk after the sample is finished
@@ -33,11 +44,21 @@ class WaitForBuffer extends EventEmitter {
       }
     );
     this.startTime = new Date().getTime();    
-    this.check(length, function(found, buffers) {
+    this.check(length, function(found) {
       assert.ok(found, `window.buffers doesn't have length of ${length} in ${this.timeoutInMilliseconds}ms`);
-      callback.call(this.api, buffers);
+      if (!found) {
+        return this.emit('complete');
+      }
 
-      return this.emit('complete');
+      if (this.runSequential) {
+        this.next();
+      } else {
+        this.api.execute(function() {
+          return window.buffers;
+        }, [], function({ value: buffers }) {
+          this.callbacks[0].call(this, buffers);
+        }.bind(this));
+      }
     });
   }
 
@@ -46,14 +67,10 @@ class WaitForBuffer extends EventEmitter {
 
     this.api
       .execute(function(length) {
-        if (window.buffers && window.buffers.length === length) {
-          return window.buffers;
-        }
-
-        return false;
-      }, [length], function({ value }) {
-        if (Array.isArray(value)) {
-          return callback.call(this, true, value);
+        return window.buffers && window.buffers.length === length;
+      }, [length], function({ value: lengthMatched }) {
+        if (lengthMatched) {
+          return callback.call(this, true);
         } else if (now - this.startTime < this.timeoutInMilliseconds) {
           return setTimeout(function() {
             this.check(length, callback);
@@ -62,6 +79,15 @@ class WaitForBuffer extends EventEmitter {
           return callback.call(this, false);
         }
       }.bind(this));
+  }
+
+  next() {
+    this.api.execute(function(index) {
+      return window.buffers[index];
+    }, [this.executedCbCounter], function({ value: buffer }) {
+      this.callbacks[this.executedCbCounter].call(this, buffer, this.next.bind(this));
+      this.executedCbCounter++;
+    }.bind(this));
   }
 }
 

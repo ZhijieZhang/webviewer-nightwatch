@@ -18,10 +18,10 @@ describe('WebViewer Release Test', function() {
     });
 
     importTests([   
-      // './PDF/linearized.test.js',
-      // './PDF/non-linearized.test.js',
-      // './PDF/encryption.test.js',
-      // './PDF/javascript.test.js',
+      './PDF/linearized.test.js',
+      './PDF/non-linearized.test.js',
+      './PDF/encryption.test.js',
+      './PDF/javascript.test.js',
       './PDF/substituted-font.test.js',
       './PDF/invalid-key.test.js',
       ['./common/text-selection.test.js'],

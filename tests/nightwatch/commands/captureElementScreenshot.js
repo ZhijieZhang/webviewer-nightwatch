@@ -38,6 +38,9 @@ exports.command = function(element, callback = () => {}) {
           elementWidth = width * devicePixelRatio;
           elementHeight = height * devicePixelRatio;
         })
+        // switching to parent frame isn't technically necessary, this is a workaround for
+        // geckodriver: https://github.com/mozilla/geckodriver/issues/936
+        .frameParent()
         .screenshot(false, function({ value: encodedScreenshot }) {
           Jimp.read(new Buffer(encodedScreenshot, 'base64')).then(function(screenshot) {
             screenshot

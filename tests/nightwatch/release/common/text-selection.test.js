@@ -8,7 +8,6 @@ module.exports = function() {
     beforeEach(function(client, done) {
       client
         .execute(function() {
-          window = window || window[0];
           window.Tools.Tool.ENABLE_AUTO_SWITCH = false;
         })
         .readerControl('setToolMode', 'TextSelect', done);
@@ -16,6 +15,7 @@ module.exports = function() {
   
     it('select and copy the text in the same page', function(client) {
       client
+        .readerControl('setToolMode', 'AnnotationCreateLine')
         .moveToElement('#pageContainer0', 100, 630)
         .mouseButtonDown('left')
         .moveToElement('#pageContainer0', 300, 680)

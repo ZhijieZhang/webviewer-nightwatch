@@ -32,9 +32,13 @@ class WaitForWVEvent extends EventEmitter {
       assert.ok(false, `${this.WVEvent} from ${this.nameSpace} didn't get triggered in ${timeoutInMilliseconds} ms`);
     }, timeoutInMilliseconds);
 
+    const { browserName } = this.api.options.desiredCapabilities; 
+    if (browserName !== 'firefox') {
+      this.api.timeoutsAsyncScript(timeoutInMilliseconds);
+    }
+    
     this.api      
       .waitForReaderControl()
-      // .timeoutsAsyncScript(timeoutInMilliseconds)
       .executeAsync(
         function(nameSpace, wvEvent, done) {
           const docViewer = window.readerControl.docViewer;

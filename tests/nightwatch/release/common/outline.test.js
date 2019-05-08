@@ -26,14 +26,15 @@ module.exports = function(fileName) {
       // expand all the outlines by clicking on all the arrows
       // and then choose a nested outline to click
       client
-        .elements('css selector', '.Outline .arrow', function({ value: arrowIds }) {
-          arrowIds.forEach(function({ ELEMENT: id }) {
+        .elements('css selector', '.Outline .arrow', function({ value: arrows }) {
+          arrows.forEach(function(arrow) {
+            const id = Object.values(arrow)[0];
             client.elementIdClick(id);
           });
         })
-        .elements('css selector', '.Outline', function ({ value: outlineIds }) {
+        .elements('css selector', '.Outline', function ({ value: outlines }) {
           client
-            .elementIdClick(outlineIds[5].ELEMENT)
+            .elementIdClick(Object.values(outlines[5])[0])
             .readerControl('getCurrentPageNumber', function (currentPage) {
               assert.equal(currentPage, 6);
             });

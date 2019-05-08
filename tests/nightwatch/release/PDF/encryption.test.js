@@ -8,7 +8,7 @@ describe('Encrypted PDF', function() {
     passwordModal.waitForElementVisible('@modal', () => done());
   });
 
-  it('show password modal', function() {});
+  it.skip('show password modal', function() {});
 
   it('load successfully after the correct password is submitted', function(client) {
     passwordModal

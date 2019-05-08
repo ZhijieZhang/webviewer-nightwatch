@@ -8,6 +8,7 @@ describe('Add Image', function() {
             buffer: buffers[0]
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('#pageContainer0', 'add-image-1.test.png')
           .readerControl('setCurrentPageNumber', 2)
           // can't wait for pageComplete event here since it's continuous mode

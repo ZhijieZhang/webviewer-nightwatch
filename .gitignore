@@ -5,3 +5,4 @@ tests_output/
 .DS_Store
 current/
 diff/
+selenium-server.log

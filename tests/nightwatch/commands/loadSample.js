@@ -57,32 +57,7 @@ exports.command = function(samplePath, ...args) {
           .waitForElementVisible('iframe')
           .switchToUIFrame(options.iframe, function() {
             if (options.buffer) {
-              this
-                .setUrlWithOptions({
-                  pdftronServer: '' 
-                })
-                .waitForWVEvent('pageComplete')
-                .execute(
-                  function(arg) {
-                    let buffer, mimeType;
-                    if (Array.isArray(arg)) {
-                      buffer = arg;
-                      mimeType = 'application/pdf';
-                    } else if (typeof arg === 'object') {
-                      buffer = arg.buffer;
-                      mimeType = arg.mimeType;
-                    }
-
-                    const blob = new Blob([new Uint8Array(buffer)], { type: mimeType });
-                    window.readerControl.loadDocument(blob);
-                  },
-
-                  [options.buffer],
-
-                  function() {
-                    callback.call(this);
-                  }
-                );
+              loadDocumentWithBuffer.call(this, options.buffer, callback);
             } else {
               callback.call(this);
             }
@@ -92,3 +67,40 @@ exports.command = function(samplePath, ...args) {
       }
     });
 };
+
+function loadDocumentWithBuffer(buffer, callback) {
+  this
+    .setUrlWithOptions({
+      pdftronServer: ''
+    })
+    .waitForWVEvent('pageComplete')
+    .execute(
+      function (buffer) {
+        let mimeType;
+
+        if (Array.isArray(buffer)) {
+          mimeType = 'application/pdf';
+        } else if (typeof buffer === 'object') {
+          mimeType = buffer.mimeType;
+          buffer = buffer.buffer;
+
+          if (!Array.isArray(buffer) && typeof buffer === 'object') {
+            // geckodriver will serialize the uint8Array to an object when we return it from the execute command so we convert it back to an array here
+            buffer = Object.keys(buffer).reduce((bufferArray, key) => {
+              bufferArray.push(buffer[key]);
+              return bufferArray;
+            }, []);
+          }
+        }
+
+        const blob = new Blob([new Uint8Array(buffer)], { type: mimeType });
+        window.readerControl.loadDocument(blob);
+      },
+
+      [buffer],
+
+      function () {
+        callback.call(this);
+      }
+    );
+}

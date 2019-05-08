@@ -8,6 +8,7 @@ describe('SDF Test', function() {
             buffer: buffers[0]
           })
           .waitForWVEvent('pageComplete')
+          .waitForElemengNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'SDF.test.png');
       });
   });

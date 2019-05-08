@@ -8,6 +8,7 @@ describe('XFDF Import', function() {
             buffer: buffers[0]
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'XFDF-import.test.png');
       });    
   });

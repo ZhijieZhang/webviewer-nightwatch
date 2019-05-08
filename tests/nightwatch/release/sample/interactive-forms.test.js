@@ -53,7 +53,8 @@ describe('Interactive Forms', function() {
           .waitForElementPresent(`${checkboxId.replace(/check1/, 'check10')}:checked`)
           .waitForElementPresent(submitId.replace(/submit/, 'submit0'))
           .readerControl('setCurrentPageNumber', 5)
-          .waitForWVEvent('pageComplete')
+          // wait for the widgets to be rendered
+          .pause(500)
           .waitForElementPresent(firstNameId.replace(/first/, 'first4'))
           .waitForElementPresent(lastNameId.replace(/last/, 'last4'))
           .waitForElementPresent(`${checkboxId.replace(/check1/, 'check14')}:checked`)

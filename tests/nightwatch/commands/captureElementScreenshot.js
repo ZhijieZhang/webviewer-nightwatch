@@ -41,7 +41,8 @@ exports.command = function(element, callback = () => {}) {
           elementHeight = height * devicePixelRatio;
         })
         // switching to parent frame isn't technically necessary, this is a workaround for
-        // geckodriver: https://github.com/mozilla/geckodriver/issues/936
+        // geckodriver as it takes screenshot in the current frame, not the top one: https://github.com/mozilla/geckodriver/issues/936
+        // we will switch back to the frame we are currently in after screenshot has been captured
         .frameParent()
         .screenshot(false, function({ value: encodedScreenshot }) {
           Jimp.read(new Buffer(encodedScreenshot, 'base64')).then(function(screenshot) {
@@ -49,8 +50,14 @@ exports.command = function(element, callback = () => {}) {
               .crop(elementX, elementY, elementWidth, elementHeight)
               .resize(elementWidth / devicePixelRatio, elementHeight / devicePixelRatio);
     
-            callback.call(this, screenshot);
-          });
+            if (this.globals.iframe) {
+              this.frame(this.globals.iframe.frame, function() {
+                callback.call(this, screenshot);
+              });
+            } else {
+              callback.call(this, screenshot);
+            }
+          }.bind(this));
       });
     });
 

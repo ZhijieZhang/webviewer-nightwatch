@@ -3,18 +3,11 @@ const path = require('path');
 const readline = require('readline');
 const fs = require('fs');
 const { promisify } = require('util');
+const getBrowserName = require('../utils/getBrowserName');
+
 const stat = promisify(fs.stat);
 const copyFile = promisify(fs.copyFile);
 const unlink = promisify(fs.unlink);
-
-const RESET = '\x1b[0m';
-const RED = '\x1b[31m';
-const GREEN = '\x1b[32m';
-const YELLOW = '\x1b[33m';
-const CYAN = '\x1b[36m';
-const baseFolderPath = path.resolve(__dirname, '../screenshot/baseline');
-const diffFolderPath = path.resolve(__dirname, '../screenshot/diff');
-const currentFolderPath = path.resolve(__dirname, '../screenshot/current');
 
 exports.assertion = function (element, filename, message) {
   this.message = message || `Screenshot test for ${element} failed.`;
@@ -32,9 +25,10 @@ exports.assertion = function (element, filename, message) {
   this.command = function (callback) {
     this.api
       .captureElementScreenshot(element, async function (currentScreenshot) {
-        const baseFilePath = path.resolve(baseFolderPath, filename);
-        const diffFilePath = path.resolve(diffFolderPath, filename);
-        const currentFilePath = path.resolve(currentFolderPath, filename);
+        const browserName = getBrowserName(this);
+        const baseFilePath = path.resolve(__dirname, '../screenshot/', browserName, 'baseline', filename);
+        const diffFilePath = path.resolve(__dirname, '../screenshot/', browserName, 'diff', filename);
+        const currentFilePath = path.resolve(__dirname, '../screenshot/', browserName, 'current', filename);
 
         try {
           await stat(baseFilePath);
@@ -62,6 +56,12 @@ exports.assertion = function (element, filename, message) {
 };
 
 function promptOverwrite(baseFilePath, diffFilePath, currentFilePath) {
+  const RESET = '\x1b[0m';
+  const RED = '\x1b[31m';
+  const GREEN = '\x1b[32m';
+  const YELLOW = '\x1b[33m';
+  const CYAN = '\x1b[36m';
+
   return new Promise(function (resolve) {
     const rl = readline.createInterface({
       input: process.stdin,

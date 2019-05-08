@@ -3,7 +3,7 @@ describe('Content Replacer', function() {
     client
       .loadSample('full-apis/ContentReplacerTest')
       .waitForBuffer(2, function(buffers) {
-        client
+        client 
           .loadSample('viewing/viewing', {
             buffer: buffers[0]
           })

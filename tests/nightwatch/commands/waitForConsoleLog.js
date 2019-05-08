@@ -1,5 +1,6 @@
 const assert = require('assert');
 const EventEmitter = require('events');
+const getBrowserName = require('../utils/getBrowserName');
 
 class WaitForConsoleLog extends EventEmitter {
   constructor() {
@@ -10,11 +11,20 @@ class WaitForConsoleLog extends EventEmitter {
   }
 
   command(message, timeoutInMilliseconds) {
+    const browserName = getBrowserName(this.api);
+    // currently the log interface has not been decided in W3C WebViewer Spec so there's no way to get the logs when using 
+    // geckodriver: https://github.com/mozilla/geckodriver/issues/330
+    // edgedriver: https://docs.microsoft.com/en-us/microsoft-edge/webdriver
+    if (browserName !== 'chrome') {
+      console.log('waitForConsoleLog skipped for drivers other than the chrome driver');
+      return this.emit('complete');
+    }
+
     if (timeoutInMilliseconds) {
       this.timeoutInMilliseconds = timeoutInMilliseconds;
     }
-    this.startTime = new Date().getTime();    
 
+    this.startTime = new Date().getTime();    
     this.check(message, function(found) {
       assert.ok(found, `${message} didn't logged in console in ${this.timeoutInMilliseconds} ms`);
 

@@ -40,6 +40,8 @@ describe('User and permissions', function() {
       .click('@showOtherUsersAnnotations');
     client
       .switchToUIFrame()
+      // wait for annotations to be redrawn
+      .pause(500)
       .assert.screenshot('.App', 'user-permissions-other-annotations.test.png');
   });
 });

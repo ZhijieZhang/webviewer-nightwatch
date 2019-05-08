@@ -3,7 +3,7 @@ const getFileType = require('../../utils/getFileType');
 module.exports = function(fileName) {
   const fileType = getFileType(fileName);
 
-  describe.only('Layout Mode', function() {
+  describe('Layout Mode', function() {
     beforeEach(function(client, done) {
       client
         .readerControl('disableElements', ['pageNavOverlay'])

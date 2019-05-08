@@ -5,7 +5,6 @@ describe('UI Customization', function() {
       .waitForWVEvent('pageComplete')
       .frameParent()
       .click('#reverse')
-      .click('#annotation')
       .click('#notes-panel')
       .click('#file-picker')
       .click('#print')
@@ -16,9 +15,9 @@ describe('UI Customization', function() {
       .click('#dark')
       .switchToUIFrame()
       .readerControl('openElements', ['outlinesPanel'])
-      // wait for the left panel to be fully open
-      .pause(500)
       .click('[data-element="menuButton"]')
+      // wait for the left panel to be fully open
+      .pause(1000)
       .assert.screenshot('.App', 'ui-customization.png');
   });
 });

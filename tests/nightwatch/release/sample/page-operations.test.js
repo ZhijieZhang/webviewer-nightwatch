@@ -34,8 +34,10 @@ describe('Page Operations', function() {
   it('delete a page', function(client) {
     client
       .click('#delete')
+      // sometimes layoutChanged event is triggered before we switch to the UI frame
+      // so we pause 500 ms here for the first page to be deleted. Same situation applies to merge a document
+      .pause(500)
       .switchToUIFrame()
-      .waitForWVEvent('layoutChanged')
       .readerControl('getPageCount', function(pageCount) {
         assert.equal(pageCount, 2);
       })
@@ -65,10 +67,9 @@ describe('Page Operations', function() {
     const samplePDF = path.resolve(__dirname, '../../../../samples/files/sample.pdf');
 
     client 
-      .click('#file-picker')
       .setValue('#file-picker', samplePDF)
+      .pause(1000)
       .switchToUIFrame()
-      .waitForWVEvent('pageComplete')
       .readerControl('getPageCount', function(pageCount) {
         assert.equal(pageCount, 5);
       })

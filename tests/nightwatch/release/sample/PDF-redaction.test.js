@@ -2,7 +2,7 @@ describe('PDF Redaction', function() {
   it('create Redaction objects and use PDFNetJS redact function to remove and overlay PDF document content', function(client) {
     client
       .loadSample('full-apis/PDFRedactTest')
-      .getPDFBufferAfter('done', function(buffers) {
+      .waitForBuffer(1, function(buffers) {
         client
           .loadSample('viewing/viewing', {
             buffer: buffers[0]

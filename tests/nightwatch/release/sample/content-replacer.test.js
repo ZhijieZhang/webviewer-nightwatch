@@ -2,10 +2,7 @@ describe('Content Replacer', function() {
   it('replace of objects such as images, text and strings within a document', function(client) {
     client
       .loadSample('full-apis/ContentReplacerTest')
-      .getPDFBufferAfter([
-        'Done. Result saved as BusinessCard.pdf',
-        'Done. Result saved as newsletterReplaced.pdf'
-      ], function(buffers) {
+      .waitForBuffer(2, function(buffers) {
         client
           .loadSample('viewing/viewing', {
             buffer: buffers[0]

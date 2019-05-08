@@ -3,7 +3,7 @@ describe('PDF Draw', function() {
   it.skip('use the built-in rasterizer to render PDF images on the fly and save resulting images in PNG and JPEG format', function(client) {
     client
       .loadSample('full-apis/PDFDrawTest')
-      .getPDFBufferAfter('Done', function(buffers) {
+      .waitForBuffer(1, function(buffers) {
         client
           .loadSample('viewing/viewing', {
             buffer: buffers[0]

@@ -2,7 +2,7 @@ describe('Add Image', function() {
   it('embed various raster image formats in a PDF document', function(client) {
     client
       .loadSample('full-apis/AddImageTest')
-      .getPDFBufferAfter('Done. Result saved as addimage.pdf', function(buffers) {
+      .waitForBuffer(1, function(buffers) {
         client
           .loadSample('viewing/viewing', {
             buffer: buffers[0]

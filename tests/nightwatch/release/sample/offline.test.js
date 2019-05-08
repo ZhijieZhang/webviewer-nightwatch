@@ -5,8 +5,8 @@ describe('Offline', function() {
     client
       .loadSample('advanced/offline')
       .frameParent()
-      .click('#documents button')
-      .click('#documents button')
+      .click('#documents li:nth-of-type(3) button')
+      .click('#documents li:nth-of-type(3) button')
       .switchToUIFrame()
       .waitForWVEvent('pageComplete');
   });

@@ -10,7 +10,8 @@ describe('Text Position', function() {
       .setValue('#text', text)
       .click('#page-0')
       .switchToUIFrame()
-      .waitForWVEvent('annotManager', 'annotationSelected')
+      // wait for annotations to be drawn and selected
+      .pause(500)
       .assert.screenshot('.pageContainer', 'text-position.test.png');
   });
 });

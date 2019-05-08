@@ -26,8 +26,6 @@ exports.command = function(element, callback = () => {}) {
   }
 
   this
-    // TODO: automatically get all modals' data-element
-    .waitForElementNotVisible('[data-element="progressModal"]')
     .execute(function() {
       return window.devicePixelRatio;
     }, [], function({ value: devicePixelRatio }) {

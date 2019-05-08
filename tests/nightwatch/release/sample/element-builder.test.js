@@ -2,7 +2,7 @@ describe('Element Builder', function() {
   it('use PDFNet page writing API, embed fonts and images and copy graphical elements from one page to another', function(client) {
     client
       .loadSample('full-apis/ElementBuilderTest')
-      .getPDFBufferAfter('Done. Result saved in element_builder.pdf', function(buffers) {
+      .waitForBuffer(1, function(buffers) {
         client
           .loadSample('viewing/viewing', {
             buffer: buffers[0]

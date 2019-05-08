@@ -4,7 +4,7 @@ describe('Bookmark', function() {
   it('embed various raster image formats in a PDF document', function(client) {
     client
       .loadSample('full-apis/BookmarkTest')
-      .getPDFBufferAfter(['Done.', 'Done.'], function(buffers) {
+      .waitForBuffer(2, function(buffers) {
         const remoteBookmarkPDFBuffer = buffers[1];
 
         client

@@ -2,7 +2,7 @@ describe('XFDF Import', function() {
   it('merge XFDF using PDFNet', function(client) {
     client
       .loadSample('full-apis/FDFTest')
-      .getPDFBufferAfter('Done sample', function(buffers) {
+      .waitForBuffer(1, function(buffers) {
         client
           .loadSample('viewing/viewing', {
             buffer: buffers[0]

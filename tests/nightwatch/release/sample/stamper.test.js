@@ -2,7 +2,7 @@ describe('Stamper', function() {
   it('stamp text and images onto various pages in a PDF document', function(client) {
     client
       .loadSample('full-apis/StamperTest')
-      .getPDFBufferAfter('Done', function([
+      .waitForBuffer(7, function([
         stampedEvenPDFBuffer,
         stampedVegetablePDFBuffer,
         stampedFishCornerPDFBuffer,

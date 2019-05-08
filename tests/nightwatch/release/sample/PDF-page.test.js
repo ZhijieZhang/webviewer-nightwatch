@@ -4,7 +4,7 @@ describe('PDF Page', function() {
   it('copy pages from one document to another, delete pages, re-arrange pages, use ImportPages() for efficient copy and merge operations', function(client) {
     client
       .loadSample('full-apis/PDFPageTest')
-      .getPDFBufferAfter('done saving newsletter_page_clone.pdf', function([
+      .waitForBuffer(8, function([
         page1PDFBuffer,
         page2PDFBuffer,
         page3PDFBuffer,

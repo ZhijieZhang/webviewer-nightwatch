@@ -3,10 +3,7 @@ describe('PDF Layer', function() {
   it.skip('create PDF layers and extract PDF layers', function(client) {
     client
       .loadSample('full-apis/PDFLayersTest')
-      .getPDFBufferAfter([
-        'done example 1',
-        'done'
-      ], function(buffers) {
+      .waitForBuffer(2, function(buffers) {
         client
           .loadSample('viewing/viewing', {
             buffer: buffers[0]

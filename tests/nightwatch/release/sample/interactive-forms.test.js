@@ -9,12 +9,7 @@ describe('Interactive Forms', function() {
 
     client
       .loadSample('full-apis/InteractiveFormsTest')
-      .getPDFBufferAfter([
-        'Example 1 complete and everything deallocated.',
-        'Example 2 complete and everything deallocated.',
-        'Example 3 complete and everything deallocated.',
-        'Example 4 complete and everything deallocated.'
-      ], function([
+      .waitForBuffer(4, function([
         formPDFBuffer,
         editedFormPDFBuffer,
         clonedFormPDFBuffer,

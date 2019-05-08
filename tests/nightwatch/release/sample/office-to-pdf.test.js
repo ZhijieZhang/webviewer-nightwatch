@@ -3,7 +3,7 @@ describe('Office To PDF', function() {
   it.skip('convert office files to PDF using PDFNetJS', function(client) {
     client
       .loadSample('full-apis/OfficeToPDFTest')
-      .getPDFBufferAfter('Test Complete!', function(buffers) {
+      .waitForBuffer(3, function(buffers) {
         const screenshotNames = [
           'office-to-pdf-docx.test.png',
           'office-to-pdf-pptx.test.png',

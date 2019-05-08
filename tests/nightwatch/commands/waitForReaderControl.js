@@ -1,7 +1,7 @@
 const assert = require('assert');
 const EventEmitter = require('events');
 
-class WaitForConsoleLog extends EventEmitter {
+class WaitForReaderControl extends EventEmitter {
   constructor() {
     super();
     this.timeoutInMilliseconds = 10000;
@@ -41,4 +41,4 @@ class WaitForConsoleLog extends EventEmitter {
   }
 }
 
-module.exports = WaitForConsoleLog;
+module.exports = WaitForReaderControl;

@@ -14,16 +14,14 @@ describe('WebViewer Release Test', function() {
         .setUrlWithOptions({ 
           pdftronServer: '' 
         })
-        // TODO remove
-        .pause(1000)
         .waitForWVEvent('pageComplete', done);
     });
 
     importTests([   
-      './PDF/linearized.test.js',
-      './PDF/non-linearized.test.js',
-      './PDF/encryption.test.js',
-      './PDF/javascript.test.js',
+      // './PDF/linearized.test.js',
+      // './PDF/non-linearized.test.js',
+      // './PDF/encryption.test.js',
+      // './PDF/javascript.test.js',
       './PDF/substituted-font.test.js',
       './PDF/invalid-key.test.js',
       ['./common/text-selection.test.js'],

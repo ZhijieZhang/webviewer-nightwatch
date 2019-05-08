@@ -28,7 +28,6 @@ module.exports = {
       selector: '[data-element="documentContainer"]'
     }
   },
-  // TODO: remove duplicate code, it also appears in form.js.
   commands: [
     {
       mouseDown: function(button, element) {

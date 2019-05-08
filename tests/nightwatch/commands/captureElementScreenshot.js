@@ -11,7 +11,7 @@ exports.command = function(element, callback = () => {}) {
       elementHeight;
 
   if (this.globals.iframe) {
-    const { webElementId, id } = this.globals.iframe;
+    const { webElementId, frame } = this.globals.iframe;
     
     this
       .frameParent()
@@ -19,7 +19,7 @@ exports.command = function(element, callback = () => {}) {
         iframeX = x;
         iframeY = y;
       })
-      .frame(id);
+      .frame(frame);
   } else {
     iframeX = 0;
     iframeY = 0;

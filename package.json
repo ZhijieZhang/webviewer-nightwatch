@@ -9,7 +9,8 @@
     "samples": "npm run server samples",
     "doc": "npm run server doc",
     "optimize": "node scripts/optimize-for-prod.js",
-    "test": "nightwatch"
+    "test": "nightwatch",
+    "test:ff": "nightwatch -e firefox"
   },
   "devDependencies": {
     "archiver": "^3.0.0",

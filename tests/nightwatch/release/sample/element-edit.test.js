@@ -8,6 +8,7 @@ describe('Element Edit', function() {
             buffer: buffers[0]
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'element-edit.test.png');
       });    
   });

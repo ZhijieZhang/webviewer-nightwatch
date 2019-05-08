@@ -77,7 +77,6 @@ function loadDocumentWithBuffer(buffer, callback) {
     .execute(
       function (buffer) {
         let mimeType;
-
         if (Array.isArray(buffer)) {
           mimeType = 'application/pdf';
         } else if (typeof buffer === 'object') {

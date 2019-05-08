@@ -8,11 +8,13 @@ describe('Content Replacer', function() {
             buffer: buffers[0]
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'content-replacer-business-card.test.png')
           .loadSample('viewing/viewing', {
             buffer: buffers[1]
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'content-replacer-news-letter.test.png');
       });    
   });

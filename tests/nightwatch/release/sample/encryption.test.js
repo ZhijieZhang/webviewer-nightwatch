@@ -13,7 +13,7 @@ describe('Encryption', function() {
           .waitForElementVisible('[data-element="passwordModal"]')
           .setValue('input[type=password]', 'test')
           .click('[data-element="passwordSubmitButton"]')
-          .waitForWVEvent('pageComplete');
+          .waitForElementNotVisible('[data-element="passwordModal"]');
         
         client
           .loadSample('viewing/viewing', {

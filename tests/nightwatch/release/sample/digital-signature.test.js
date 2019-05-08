@@ -8,6 +8,7 @@ describe('Digital Signature', function() {
             buffer: buffers[0]
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'digital-signature-sign.test.png');
       });    
   });

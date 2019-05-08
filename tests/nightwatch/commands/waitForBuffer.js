@@ -12,25 +12,12 @@ class WaitForBuffer extends EventEmitter {
   // this command is specifically targeted to be used for testing console-based samples
   command(length, ...args) {
     if (args.length === 1) {
-      if (typeof args[0] === 'function') {
-        this.callbacks = [args[0]];
-      } else if (Array.isArray(args[0])) {
-        this.runSequential = true;
-        this.callbacks = args[0];
-        this.executedCbCounter = 0;
-      } else if (typeof args[0] === 'number') {
-        this.timeoutInMilliseconds = args[0];
-      }
-    } else if (args.length === 2) {
+      typeof args[0] === 'function'
+        ? this.callback = args[0]
+        : this.timeoutInMilliseconds = args[0];
+      } else if (args.length === 2) {
       this.timeoutInMilliseconds = args[0];
-
-      if (Array.isArray(args[1])) {
-        this.runSequential = true;
-        this.callbacks = args[1];
-        this.executedCbCounter = 0;
-      } else if (typeof args[1] === 'function') {
-        this.callbacks = [args[1]];
-      }
+      this.callback = args[1];
     }
 
     // so far all the console-based samples use a function saveBufferAsPDFDoc to save the PDF to disk after the sample is finished
@@ -50,14 +37,34 @@ class WaitForBuffer extends EventEmitter {
         return this.emit('complete');
       }
 
-      if (this.runSequential) {
-        this.next();
-      } else {
+      if (length < 3) {
         this.api.execute(function() {
           return window.buffers;
         }, [], function({ value: buffers }) {
-          this.callbacks[0].call(this, buffers);
+          this.callback.call(this, buffers);
+          return this.emit('complete');
         }.bind(this));
+      } else {
+        this.buffers = [];
+
+        Array
+          .from({ length }, (_, index) => index)
+          .forEach(function(index) {
+            console.log('starting:', index);
+
+            this.api.execute(function(index) {
+              return window.buffers[index];
+            }, [index], function({ value: buffer }) {
+              this.buffers[index] = buffer;
+
+              console.log('ending:', index);
+
+              if (this.buffers.length === length) {
+                this.callback.call(this, this.buffers);
+                return this.emit('complete');
+              }
+            }.bind(this));
+          }.bind(this));
       }
     });
   }
@@ -79,15 +86,6 @@ class WaitForBuffer extends EventEmitter {
           return callback.call(this, false);
         }
       }.bind(this));
-  }
-
-  next() {
-    this.api.execute(function(index) {
-      return window.buffers[index];
-    }, [this.executedCbCounter], function({ value: buffer }) {
-      this.callbacks[this.executedCbCounter].call(this, buffer, this.next.bind(this));
-      this.executedCbCounter++;
-    }.bind(this));
   }
 }
 

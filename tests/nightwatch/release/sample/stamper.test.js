@@ -1,5 +1,5 @@
 describe('Stamper', function() {
-  it('stamp text and images onto various pages in a PDF document', function(client) {
+  it.only('stamp text and images onto various pages in a PDF document', function(client) {
     client
       .loadSample('full-apis/StamperTest')
       .waitForBuffer(7, function([
@@ -25,6 +25,7 @@ describe('Stamper', function() {
             buffer: stampedVegetablePDFBuffer
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'stamper-vegetable.test.png');
 
         client
@@ -32,6 +33,7 @@ describe('Stamper', function() {
             buffer: stampedFishCornerPDFBuffer
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'stamper-fish-corner.test.png');
 
         client
@@ -39,6 +41,7 @@ describe('Stamper', function() {
             buffer: stampedTwentyOddPDFBuffer
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'stamper-20-odd.test.png');
 
         client
@@ -55,6 +58,7 @@ describe('Stamper', function() {
             buffer: stampedCornerPDFBuffer
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'stamper-corner.test.png');
 
         client
@@ -62,6 +66,7 @@ describe('Stamper', function() {
             buffer: stampedHiddenPDFBuffer
           })
           .waitForWVEvent('pageComplete')
+          .waitForElementNotVisible('[data-element="progressModal"]')
           .assert.screenshot('.pageContainer', 'stamper-hidden.test.png');
       });
   });

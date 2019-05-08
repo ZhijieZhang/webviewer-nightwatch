@@ -33,6 +33,7 @@ class WaitForWVEvent extends EventEmitter {
     }, timeoutInMilliseconds);
 
     this.api      
+      .waitForReaderControl()
       // .timeoutsAsyncScript(timeoutInMilliseconds)
       .executeAsync(
         function(nameSpace, wvEvent, done) {

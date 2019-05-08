@@ -3,7 +3,6 @@ exports.command = function(...args) {
 
   this.execute(
     function(args) {
-      window = window[0] || window;
       let obj,
           apiName,
           apiArgs;

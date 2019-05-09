@@ -30,7 +30,7 @@
       "desiredCapabilities": {
         "browserName": "chrome",
         "chromeOptions": {
-          "args": ["user-data-dir=/Users/zhijiezhang/Library/Application Support/Google/Chrome/Default"],
+          "args": ["user-data-dir=/Users/zhijiezhang/Library/Application Support/Google/Chrome"],
           "excludeSwitches": ["disable-component-update"]
         },
         "loggingPrefs": { 

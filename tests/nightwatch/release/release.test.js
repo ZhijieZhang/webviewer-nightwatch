@@ -7,7 +7,7 @@ describe('WebViewer Release Test', function() {
     client.end(() => done());
   });
 
-  describe.skip('PDF', function() {
+  describe('PDF', function() {
     beforeEach(function(client, done) {
       client 
         .loadSample('viewing/viewing')
@@ -46,10 +46,10 @@ describe('WebViewer Release Test', function() {
     });
 
     importTests([
-      // ['./common/print.test.js'],
-      // ['./common/text-selection.test.js'],
-      // ['./common/load-document.test.js', 'sample.xod', 'sample-annotated.xod'],
-      // ['./common/annotation.test.js', 'sample.xod'],
+      ['./common/print.test.js'],
+      ['./common/text-selection.test.js'],
+      ['./common/load-document.test.js', 'sample.xod', 'sample-annotated.xod'],
+      ['./common/annotation.test.js', 'sample.xod'],
       ['./common/form.test.js', 'form.xod'],
       ['./common/outline.test.js', 'outlines-nested.xod'],
       ['./common/layout-mode.test.js', 'webviewer-demo-annotated.xod'],

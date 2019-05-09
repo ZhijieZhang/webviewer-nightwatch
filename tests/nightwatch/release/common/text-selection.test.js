@@ -15,7 +15,6 @@ module.exports = function() {
   
     it('select and copy the text in the same page', function(client) {
       client
-        .readerControl('setToolMode', 'AnnotationCreateLine')
         .moveToElement('#pageContainer0', 100, 630)
         .mouseButtonDown('left')
         .moveToElement('#pageContainer0', 300, 680)

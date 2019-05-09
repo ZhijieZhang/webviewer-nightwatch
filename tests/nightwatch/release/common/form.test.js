@@ -16,7 +16,8 @@ module.exports = function(fileName) {
           if (fileType === 'XOD') {
             client
               .readerControl('setFitMode', 'FitPage')
-              .waitForWVEvent('pageComplete');
+              // can't use waitForWVEvent('pageComplete') here since XOD rendering is very fast and it will be triggered before we wait for it
+              .pause(500);
           }
         });
 

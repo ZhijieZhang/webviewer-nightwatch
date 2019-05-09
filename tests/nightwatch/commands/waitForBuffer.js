@@ -50,14 +50,10 @@ class WaitForBuffer extends EventEmitter {
         Array
           .from({ length }, (_, index) => index)
           .forEach(function(index) {
-            console.log('starting:', index);
-
             this.api.execute(function(index) {
               return window.buffers[index];
             }, [index], function({ value: buffer }) {
               this.buffers[index] = buffer;
-
-              console.log('ending:', index);
 
               if (this.buffers.length === length) {
                 this.callback.call(this, this.buffers);

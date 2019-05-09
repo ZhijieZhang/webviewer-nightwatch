@@ -1,5 +1,5 @@
 describe('Diff Documents', function() {
-  it('render three synced panels where the middle on shows pixel differences between the two documents', function(client) {
+  it('render three synced panels where the middle one shows pixel differences between the two documents', function(client) {
     client
       .loadSample('advanced/diff', {
         iframe: 1

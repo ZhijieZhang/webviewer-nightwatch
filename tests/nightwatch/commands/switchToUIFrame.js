@@ -1,3 +1,5 @@
+const getBrowserName = require('../utils/getBrowserName');
+
 exports.command = function(arg = 0, callback = () => {}) {
   let iframeIndex, iframeSelector;
   if (typeof arg === 'number') {
@@ -11,12 +13,24 @@ exports.command = function(arg = 0, callback = () => {}) {
   this.elements('css selector', iframeSelector, function(result) {
     const frame = result.value[iframeIndex];
     const webElementId = Object.values(frame)[0];
-    this
-      .frame(result.value[iframeIndex], function() {
-        this.globals.iframe = {frame, webElementId};
+    const browserName = getBrowserName(this);
+    
+    this.globals.iframe = {
+      webElementId,
+      frame: arg
+    };
+
+    if (browserName === 'firefox') {
+      this.frame(frame, function() {
         callback.call(this);
       });
-
+    } else {
+      this.elementIdAttribute(webElementId, 'id', function(result) {
+        this.frame(result.value, function() {
+          callback.call(this);
+        });
+      });
+    }
   });
   
   return this;

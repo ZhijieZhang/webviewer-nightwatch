@@ -26,6 +26,18 @@
         }
       }
     },
+    "chrome-pnacl": {
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "chromeOptions": {
+          "args": ["user-data-dir=/Users/zhijiezhang/Library/Application Support/Google/Chrome/Default"],
+          "excludeSwitches": ["disable-component-update"]
+        },
+        "loggingPrefs": { 
+          "browser": "ALL"
+        }
+      }
+    },
     "firefox": {
       "desiredCapabilities": {
         "browserName": "firefox",

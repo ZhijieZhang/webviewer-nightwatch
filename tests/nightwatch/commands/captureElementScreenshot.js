@@ -19,7 +19,7 @@ exports.command = function(element, callback = () => {}) {
         iframeX = x;
         iframeY = y;
       })
-      .frame(frame);
+      .switchToUIFrame(frame);
   } else {
     iframeX = 0;
     iframeY = 0;
@@ -49,7 +49,7 @@ exports.command = function(element, callback = () => {}) {
               .resize(elementWidth / devicePixelRatio, elementHeight / devicePixelRatio);
     
             if (this.globals.iframe) {
-              this.frame(this.globals.iframe.frame, function() {
+              this.switchToUIFrame(this.globals.iframe.frame, function() {
                 callback.call(this, screenshot);
               });
             } else {

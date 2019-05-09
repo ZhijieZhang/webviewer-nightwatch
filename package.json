@@ -10,6 +10,7 @@
     "doc": "npm run server doc",
     "optimize": "node scripts/optimize-for-prod.js",
     "test": "nightwatch",
+    "test:pnacl": "nightwatch -e chrome-pnacl",
     "test:ff": "nightwatch -e firefox"
   },
   "devDependencies": {

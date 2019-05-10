@@ -65,16 +65,16 @@ app.get(/\/samples(.*)(\/|\.html)$/, (req, res, next) => {
 		next();
 	} else {
 		if (req.originalUrl.slice(-10) === 'index.html') {
-			res.redirect(`${req.originalUrl}?key=${options.key}`)
+			res.redirect(`${req.originalUrl}?key=${options.key}`);
 		} else {
-			res.redirect(`./index.html?key=${options.key}`)
+			res.redirect(`./index.html?key=${options.key}`);
 		}
 	}
 });
 
 app.use(express.static(path.resolve(__dirname), {
 	setHeaders: (res) => {
-    res.set('Service-Worker-Allowed', '/')
+    res.set('Service-Worker-Allowed', '/');
   }
 }));
 
@@ -83,10 +83,5 @@ app.listen(3000, '0.0.0.0', (err) => {
 		console.error(err);
 	} else {
 		console.info(`Listening at localhost:3000 (http://${ip.address()}:3000)`);
-		if (process.argv[2] === 'samples') {
-			opn(`http://localhost:3000/samples`);
-		} else if (process.argv[2] === 'doc') {
-			opn('http://localhost:3000/doc/PDFTron.WebViewer.html');
-		}
 	}
 });

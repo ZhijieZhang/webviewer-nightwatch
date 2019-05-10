@@ -31,6 +31,4 @@ Object.keys(browserSettings).forEach(browser => {
 });
 browserStackConfig['test_settings'].default = browserStackConfig['test_settings'].chrome;
 
-console.log(browserStackConfig);
-
 module.exports = browserStackConfig;

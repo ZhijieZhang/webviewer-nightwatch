@@ -8,5 +8,5 @@ module.exports = {
   // and reset to null after each test finishes
   // the information in this object is used by the captureElementScreenshot command to determine if we are inside an iframe 
   // to get the correct position of the element we want to take screenshot about
-  iframe: null,
+  iframe: null
 };

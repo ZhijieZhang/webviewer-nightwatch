@@ -5,10 +5,12 @@
   "main": "lib/webviewer.min.js",
   "scripts": {
     "start": "npm run samples",
-    "test": "nightwatch -c ./tests/nightwatch/config/local.config.js",
-    "test:bs": "node tests/nightwatch/local.runner.js -c ./tests/nightwatch/config/browserStack.config.js",
-    "test:local:pnacl": "nightwatch -c ./tests/nightwatch/config/local.config.js -e pnacl",
-    "test:local:ff": "nightwatch -c ./tests/nightwatch/config/local.config.js -e firefox"
+    "server": "node server.js $*",
+    "samples": "npm run server samples",
+    "test": "nightwatch -c tests/nightwatch/config/local.config.js",
+    "test:bs": "node tests/nightwatch/runner/browserStack.runner.js -c tests/nightwatch/config/browserStack.config.js",
+    "test:local:pnacl": "nightwatch -c tests/nightwatch/config/local.config.js -e pnacl",
+    "test:local:ff": "nightwatch -c tests/nightwatch/config/local.config.js -e firefox"
   },
   "devDependencies": {
     "archiver": "^3.0.0",

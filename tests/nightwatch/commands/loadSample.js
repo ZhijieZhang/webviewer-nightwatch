@@ -51,6 +51,7 @@ exports.command = function(samplePath, ...args) {
 
   this
     .resizeWindow(1280, 960)
+    // .url(`http://bs-local.com:3000/samples/${samplePath}`, function() {
     .url(`http://localhost:3000/samples/${samplePath}`, function() {
       if (isViewerSample) {
         this

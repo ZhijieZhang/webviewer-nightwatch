@@ -22,7 +22,7 @@ module.exports = function(fileName) {
         });
     });
   
-    it(`click a nested outline in a ${fileType} file`, function(client) {
+    it.only(`click a nested outline in a ${fileType} file`, function(client) {
       // expand all the outlines by clicking on all the arrows
       // and then choose a nested outline to click
       client

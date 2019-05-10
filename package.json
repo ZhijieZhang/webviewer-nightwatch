@@ -10,6 +10,7 @@
     "doc": "npm run server doc",
     "optimize": "node scripts/optimize-for-prod.js",
     "test": "nightwatch",
+    "test:bs": "node tests/nightwatch/local.runner.js -c ./nightwatch.bs.conf.js",
     "test:pnacl": "nightwatch -e pnacl",
     "test:ff": "nightwatch -e firefox"
   },
@@ -31,6 +32,7 @@
   },
   "author": "PDFTron Systems Inc.",
   "dependencies": {
+    "browserstack-local": "^1.4.0",
     "lodash": "^4.17.11",
     "nightwatch": "^1.0.19"
   }

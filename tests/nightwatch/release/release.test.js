@@ -1,5 +1,5 @@
 const importTests = require('../utils/importTests');
-
+const assert = require('assert');
 // https://docs.google.com/spreadsheets/d/1uKew8HEje2nI1Gt7IZ390qihWviYIBDD80D-cb88NqE/edit#gid=0
 describe('WebViewer Release Test', function() {
   afterEach(function(client, done) {
@@ -17,24 +17,48 @@ describe('WebViewer Release Test', function() {
         .waitForWVEvent('pageComplete', done);
     });
 
-    importTests([   
-      './PDF/linearized.test.js',
-      './PDF/non-linearized.test.js',
-      './PDF/encryption.test.js',
-      './PDF/javascript.test.js',
-      './PDF/substituted-font.test.js',
-      './PDF/invalid-key.test.js',
-      ['./common/text-selection.test.js'],
-      ['./common/print.test.js'],
-      ['./common/load-document.test.js', 'sample.pdf', 'sample-annotated.pdf'],
-      ['./common/annotation.test.js', 'sample.pdf'],
-      ['./common/form.test.js', 'form.pdf'],
-      ['./common/outline.test.js', 'outlines-nested.pdf'],
-      ['./common/layout-mode.test.js', 'webviewer-demo-annotated.pdf']
-    ]);
+    it.only('click a nested outline in a file', function(client) {
+      // expand all the outlines by clicking on all the arrows
+      // and then choose a nested outline to click
+      client
+        .readerControl('loadDocument', '/samples/files/outlines-nested.pdf')
+        .waitForWVEvent('pageComplete')
+        .readerControl('openElement', 'outlinesPanel')
+        // wait for the left panel to be fully opened
+        .pause(500)
+        .elements('css selector', '.Outline .arrow', function({ value: arrows }) {
+          arrows.forEach(function(arrow) {
+            const id = Object.values(arrow)[0];
+            client.elementIdClick(id);
+          });
+        })
+        .elements('css selector', '.Outline', function ({ value: outlines }) {
+          client
+            .elementIdClick(Object.values(outlines[5])[0])
+            .readerControl('getCurrentPageNumber', function (currentPage) {
+              assert.equal(currentPage, 6);
+            });
+        });
+    });
+
+    // importTests([   
+    //   './PDF/linearized.test.js',
+    //   './PDF/non-linearized.test.js',
+    //   './PDF/encryption.test.js',
+    //   './PDF/javascript.test.js',
+    //   './PDF/substituted-font.test.js',
+    //   './PDF/invalid-key.test.js',
+    //   ['./common/text-selection.test.js'],
+    //   ['./common/print.test.js'],
+    //   ['./common/load-document.test.js', 'sample.pdf', 'sample-annotated.pdf'],
+    //   ['./common/annotation.test.js', 'sample.pdf'],
+    //   ['./common/form.test.js', 'form.pdf'],
+    //   ['./common/outline.test.js', 'outlines-nested.pdf'],
+    //   ['./common/layout-mode.test.js', 'webviewer-demo-annotated.pdf']
+    // ]);
   });
 
-  describe('XOD', function() {
+  describe.skip('XOD', function() {
     beforeEach(function(client, done) {
       client 
         .loadSample('viewing/viewing')
@@ -56,7 +80,7 @@ describe('WebViewer Release Test', function() {
     ]);
   });
 
-  describe('Samples', function() {
+  describe.skip('Samples', function() {
     importTests([
       './sample/legacy-viewing.test.js',
       './sample/users-and-permissions.test.js',

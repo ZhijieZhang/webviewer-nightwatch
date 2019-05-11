@@ -5,12 +5,17 @@ var browserstack = require('browserstack-local');
 var bs_local;
 
 try {
+  // process.mainModule.filename = '../../../node_modules/.bin/nightwatch';
   process.mainModule.filename = './node_modules/.bin/nightwatch';
 
   // Code to start browserstack local before start of test
   console.log('Connecting local');
   Nightwatch.bs_local = bs_local = new browserstack.Local();
   bs_local.start({'key': 'QKPysHGgp6Ykq92rT9Hf' }, function(error) {
+    if (error) {
+      throw error;
+    }
+
     console.log('Connected. Now testing...');
     Nightwatch.cli(function(argv) {
       Nightwatch.CliRunner(argv)

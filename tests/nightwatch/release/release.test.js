@@ -56,7 +56,7 @@ describe('WebViewer Release Test', function() {
   //   ]);
   // });
 
-  describe.skip('Samples', function() {
+  describe('Samples', function() {
     importTests([
       // './sample/legacy-viewing.test.js',
       // './sample/users-and-permissions.test.js',

@@ -18,6 +18,6 @@ jobs:
           name: start-server
           command: npm start
           background: true
-      - run:
-          name: test
-          command: npm run test:bs
+      # - run:
+      #     name: test
+      #     command: npm run test:bs

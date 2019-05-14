@@ -3,9 +3,10 @@ const getFileType = require('../../utils/getFileType');
 module.exports = function(fileName) {
   const fileType = getFileType(fileName);
 
-  describe('Layout Mode', function() {
+  describe.only('Layout Mode', function() {
     beforeEach(function(client, done) {
       client
+        .waitForWVEvent('pageComplete')
         .readerControl('disableElements', ['pageNavOverlay'])
         // for some reasons if we don't pause for a short time here
         // the annotations will be invisible
@@ -22,7 +23,7 @@ module.exports = function(fileName) {
     // other tests are all done in continuous mode so not sure what we should test here
     it.skip('continuous', function() {});
   
-    it('facing', function(client) {
+    it.only('facing', function(client) {
       client
         .readerControl('setLayoutMode', 'Facing')
         .waitForElementNotPresent('#pageContainer2')

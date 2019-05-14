@@ -1,20 +1,22 @@
 const scrollAndZoomFrantically = require('../../utils/scrollAndZoomFrantically');
 
 describe('Linearized PDF', function() {
-  it('load linearized.pdf and frantically scroll and zoom', function(client) {
+  it.only('load linearized.pdf and frantically scroll and zoom', function(client) {
     client
-      .readerControl('loadDocument', '/samples/files/linearized.pdf')
-      .waitForWVEvent('pageComplete', function() {
-        scrollAndZoomFrantically(client);
+      .readerControl('loadDocument', '/samples/files/linearized.pdf', {
+        waitForWVEvent: 'pageComplete',
+        callback: function() {
+          scrollAndZoomFrantically(client);  
+        } 
       });
   });
 
   it('load linearized.pdf with useDownloaderOption to false, and frantically scroll and zoom', function(client) {
     client
-    .setUrlWithOptions({ useDownloader: false })
-    .readerControl('loadDocument', '/samples/files/linearized.pdf')
-    .waitForWVEvent('pageComplete', function() {
-      scrollAndZoomFrantically(client);
-    });
+      .setUrlWithOptions({ useDownloader: false })
+      .readerControl('loadDocument', '/samples/files/linearized.pdf')
+      .waitForWVEvent('pageComplete', function() {
+        scrollAndZoomFrantically(client);
+      });
   });
 });

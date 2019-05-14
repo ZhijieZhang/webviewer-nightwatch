@@ -21,7 +21,7 @@ module.exports = function() {
         .mouseButtonUp('left')
         .waitForElementVisible('[data-element="textPopup"]')
         .click('[data-element="copyTextButton"]')
-        .readerControl('docViewer', 'getSelectedText', function(text) {
+        .readerControl('getSelectedText', function(text) {
           assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, an');
         });
     });
@@ -39,7 +39,7 @@ module.exports = function() {
         .mouseButtonUp('left')
         .waitForElementVisible('[data-element="textPopup"]')
         .click('[data-element="copyTextButton"]')
-        .readerControl('docViewer', 'getSelectedText', function(text) {
+        .readerControl('getSelectedText', function(text) {
           assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, and customer satisfaction.\nWebViewer');
         });
     });

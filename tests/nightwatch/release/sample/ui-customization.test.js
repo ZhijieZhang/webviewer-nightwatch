@@ -17,7 +17,7 @@ describe('UI Customization', function() {
       .readerControl('openElements', ['outlinesPanel'])
       .click('[data-element="menuButton"]')
       // wait for the left panel to be fully open
-      .pause(1000)
+      .pause(500)
       .assert.screenshot('.App', 'ui-customization.png');
   });
 });

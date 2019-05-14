@@ -38,18 +38,30 @@ exports.command = function(...args) {
 
         let result;    
         if (eventToWait) {
-          if (eventToWait === 'annotationsLoaded') {
-            docViewer.one('documentLoaded', function() {
-              docViewer.one('annotationsLoaded', function() {
-                done(result);
+          let eventCounter = 0;
+          eventToWait = typeof eventToWait === 'string' ? [eventToWait] : eventToWait;
+
+          eventToWait.forEach(function(event) {
+            if (event === 'annotationsLoaded') {
+              docViewer.one('documentLoaded', function() {
+                docViewer.one('annotationsLoaded', function() {
+                  eventCounter++;
+                  if (eventCounter === eventToWait.length) {
+                    done(result);
+                  }
+                });
               });
-            });
-          } else {
-            eventToNameSpaceMap[eventToWait].one(eventToWait, function() {
-              done(result);
-            });
-          }
-          result = nameSpace[apiName](...apiArgs);
+            } else {
+              eventToNameSpaceMap[event].one(event, function() {
+                eventCounter++;
+                if (eventCounter === eventToWait.length) {
+                  done(result);
+                }
+              });
+            }
+
+            result = nameSpace[apiName](...apiArgs);
+          });
         } else {
           result = nameSpace[apiName](...apiArgs);
           done(result);

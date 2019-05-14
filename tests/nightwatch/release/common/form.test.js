@@ -8,18 +8,19 @@ module.exports = function(fileName) {
       const form = client.page.form();
   
       client
-        .readerControl('loadDocument', `/samples/files/${fileName}`)     
-        .waitForWVEvent('annotationsLoaded', function() {
-          // form.xod is by default 100% and the document container's size
-          // is exceeding the viewport which will affect the screenshot test so we manually setFitMode to FitPage
-          // note that if we are using another XOD file we probably don't need this 
-          if (fileType === 'XOD') {
-            client
-              .readerControl('setFitMode', 'FitPage')
-              // can't use waitForWVEvent('pageComplete') here since XOD rendering is very fast and it will be triggered before we wait for it
-              .pause(500);
+        .readerControl('loadDocument', `/samples/files/${fileName}`, {
+          waitForWVEvent: 'annotationsLoaded',
+          callback: function() {
+            if (fileType === 'XOD') {
+              // form.xod is by default 100% and the document container's size
+              // is exceeding the viewport which will affect the screenshot test so we manually setFitMode to FitPage
+              // note that if we are using another XOD file we probably don't need this 
+              client.readerControl('setFitMode', 'FitPage', {
+                waitForWVEvent: 'pageComplete'
+              });
+            }
           }
-        });
+        });     
 
       form
         .clearFormElement('@textField')

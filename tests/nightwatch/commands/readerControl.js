@@ -1,5 +1,4 @@
 exports.command = function(...args) {
-  const timeoutInMilliSeconds = 200000;
   const apiName = args[0];
   const lastArg = args[args.length - 1];
 
@@ -21,13 +20,13 @@ exports.command = function(...args) {
   }
 
   this
-    .timeoutsAsyncScript(timeoutInMilliSeconds)
     .executeAsync(
       function(apiName, apiArgs, eventToWait, done) {
         const docViewer = window.readerControl.docViewer;
         const annotManager = docViewer.getAnnotationManager();
         const eventToNameSpaceMap = {
           pageComplete: docViewer,
+          annotationsLoaded: docViewer,
           annotationChanged: annotManager 
         };
         const nameSpace = 
@@ -39,9 +38,17 @@ exports.command = function(...args) {
 
         let result;    
         if (eventToWait) {
-          eventToNameSpaceMap[eventToWait].one(eventToWait, function() {
-            done(result);
-          });
+          if (eventToWait === 'annotationsLoaded') {
+            docViewer.one('documentLoaded', function() {
+              docViewer.one('annotationsLoaded', function() {
+                done(result);
+              });
+            });
+          } else {
+            eventToNameSpaceMap[eventToWait].one(eventToWait, function() {
+              done(result);
+            });
+          }
           result = nameSpace[apiName](...apiArgs);
         } else {
           result = nameSpace[apiName](...apiArgs);

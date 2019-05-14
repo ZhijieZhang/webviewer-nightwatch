@@ -1,7 +1,7 @@
 const scrollAndZoomFrantically = require('../../utils/scrollAndZoomFrantically');
 
 describe('Linearized PDF', function() {
-  it.only('load linearized.pdf and frantically scroll and zoom', function(client) {
+  it('load linearized.pdf and frantically scroll and zoom', function(client) {
     client
       .readerControl('loadDocument', '/samples/files/linearized.pdf', {
         waitForWVEvent: 'pageComplete',

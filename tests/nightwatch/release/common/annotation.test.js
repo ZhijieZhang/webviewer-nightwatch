@@ -175,7 +175,7 @@ module.exports = function(fileName) {
         .waitForWVEvent('pageComplete')
         // if we don't wait 500ms then mouse actions will be performed on the progressModal(in the UI we close it asynchronously)
         // and we won't be able to see the annotation drawn in the canvas
-        .pause(500, function () {
+        .waitForElementNotVisible('[data-element="progressModal"]', function() {
           textTools.forEach(function({ toolNames, draw }, index) {
             const initOffsetX = 70,
                   initOffsetY = 85,

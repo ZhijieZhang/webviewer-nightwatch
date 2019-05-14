@@ -1,6 +1,5 @@
 const assert = require('assert');
 const EventEmitter = require('events');
-const getBrowserName = require('../utils/getBrowserName');
 class WaitForWVEvent extends EventEmitter {
   constructor() {
     super();
@@ -31,14 +30,8 @@ class WaitForWVEvent extends EventEmitter {
     this.failTimeout = setTimeout(() => {
       assert.ok(false, `${this.WVEvent} from ${this.nameSpace} didn't get triggered in ${timeoutInMilliseconds} ms`);
     }, timeoutInMilliseconds);
-
-    const browserName = getBrowserName(this.api); 
-    if (browserName !== 'firefox') {
-      this.api.timeoutsAsyncScript(timeoutInMilliseconds);
-    }
     
     this.api      
-      .waitForReaderControl()
       .executeAsync(
         function(nameSpace, wvEvent, done) {
           const docViewer = window.readerControl.docViewer;

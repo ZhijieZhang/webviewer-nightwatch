@@ -11,8 +11,9 @@ describe('PDF with JavaScript', function() {
     ];
 
     client
-      .readerControl('loadDocument', '/samples/files/javascript.pdf')
-      .waitForWVEvent('annotationsLoaded')
+      .readerControl('loadDocument', '/samples/files/javascript.pdf', {
+        waitForWVEvent: 'annotationsLoaded'
+      })
       .waitForElementNotVisible('[data-element="progressModal"]', function() {
         done();
       });

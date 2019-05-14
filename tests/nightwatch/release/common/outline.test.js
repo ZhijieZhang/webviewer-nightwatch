@@ -7,8 +7,9 @@ module.exports = function(fileName) {
   describe('Outline', function() {
     beforeEach(function(client, done) {
       client
-        .readerControl('loadDocument', `/samples/files/${fileName}`)
-        .waitForWVEvent('pageComplete')
+        .readerControl('loadDocument', `/samples/files/${fileName}`, {
+          waitForWVEvent: 'pageComplete'
+        })
         .readerControl('openElement', 'outlinesPanel')
         // wait for the left panel to be fully opened
         .pause(500, done);

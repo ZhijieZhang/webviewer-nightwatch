@@ -15,8 +15,10 @@ exports.command = function(filePath = '', callback = () => {}) {
           docViewer.setPagesUpdatedInternalAnnotationsTransform((originalData, pages, callback) => callback(''));
           window.readerControl.loadDocument(filePath);
           docViewer.one('pageComplete', function() {
+            annotManager.one('annotationChanged', function() {
+              done();
+            });
             annotManager.importAnnotations(xfdfString);
-            done();
           });
         } else {
           const doc = docViewer.getDocument();
@@ -30,8 +32,9 @@ exports.command = function(filePath = '', callback = () => {}) {
             }).then(function(data) {
               const blob = new Blob([new Uint8Array(data)], { type: 'application/pdf' });
               window.readerControl.loadDocument(blob);
-              
-              done();
+              docViewer.one('pageComplete', function() {
+                done();
+              });
             });
           });
         }
@@ -40,19 +43,7 @@ exports.command = function(filePath = '', callback = () => {}) {
       [filePath, fileType],
 
       function() {
-        if (fileType === 'XOD') {
-          this
-            // we waited for 500ms here for the annotations to be drawn instead of using waitForWVEvent command because 
-            // a) pageComplete doesn't trigger in the case
-            // b) annotationChanged is triggered synchronously in the importAnnotations call so we can't capture it
-            .pause(500, function() {
-              callback.call(this);
-            });
-        } else {
-          this.waitForWVEvent('pageComplete', function() {
-            callback.call(this);
-          });
-        }
+        callback.call(this);
       }
     );
 

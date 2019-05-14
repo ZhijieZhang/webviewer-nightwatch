@@ -1,5 +1,6 @@
 const assert = require('assert');
 const EventEmitter = require('events');
+
 class WaitForWVEvent extends EventEmitter {
   constructor() {
     super();
@@ -35,13 +36,21 @@ class WaitForWVEvent extends EventEmitter {
       .executeAsync(
         function(nameSpace, wvEvent, done) {
           const docViewer = window.readerControl.docViewer;
-          const obj = nameSpace !== 'docViewer'
-            ? docViewer.getAnnotationManager()
-            : docViewer;
 
-          obj.one(wvEvent, () => {
-            done();
-          });
+          if (wvEvent === 'annotationsLoaded') {
+            docViewer.one('documentLoaded', function() {
+              docViewer.one('annotationsLoaded', function() {
+                done();
+              });
+            });
+          } else {
+            const obj = nameSpace !== 'docViewer'
+              ? docViewer.getAnnotationManager()
+              : docViewer;
+            obj.one(wvEvent, () => {
+              done();
+            });
+          }
         }, 
       
         [this.nameSpace, this.WVEvent], 

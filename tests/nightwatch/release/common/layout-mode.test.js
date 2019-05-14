@@ -26,12 +26,14 @@ module.exports = function(fileName) {
       client
         .readerControl('setLayoutMode', 'Facing')
         .waitForElementNotPresent('#pageContainer2')
-        .readerControl('setCurrentPageNumber', 3, {
+        .executeOnce({
+          readerControl: ['setCurrentPageNumber', 3],
           waitForWVEvent: 'pageComplete'
         })
         .waitForElementPresent('#pageContainer2')
         .waitForElementPresent('#pageContainerb3')
-        .readerControl('setCurrentPageNumber', 1, {
+        .executeOnce({
+          readerControl: ['setCurrentPageNumber', 1],
           waitForWVEvent: ['pageComplete', 'pageComplete']
         })
         .assert.screenshot('.DocumentContainer', `facing-layout-mode.${fileType}.png`);
@@ -39,7 +41,8 @@ module.exports = function(fileName) {
   
     it('facing continuous', function(client) {
       client 
-        .readerControl('setLayoutMode', 'FacingContinuous', {
+        .executeOnce({
+          readerControl: ['setLayoutMode', 'FacingContinuous'],
           waitForWVEvent: ['pageComplete', 'pageComplete', 'pageComplete']
         })
         .assert.screenshot('.DocumentContainer', `facing-continuous-layout-mode.${fileType}.png`);
@@ -51,7 +54,8 @@ module.exports = function(fileName) {
         .waitForElementPresent('#pageContainerb0')
         .readerControl('setCurrentPageNumber', 3)
         .waitForElementNotPresent('#pageContainerb0')
-        .readerControl('setCurrentPageNumber', 1, {
+        .executeOnce({
+          readerControl: ['setCurrentPageNumber', 1],
           waitForWVEvent: 'pageComplete'
         })
         .assert.screenshot('.DocumentContainer', `cover-facing-layout-mode.${fileType}.png`);
@@ -59,7 +63,8 @@ module.exports = function(fileName) {
   
     it('cover', function(client) {
       client 
-        .readerControl('setLayoutMode', 'Cover', {
+        .executeOnce({
+          readerControl: ['setLayoutMode', 'Cover'],
           waitForWVEvent: ['pageComplete', 'pageComplete', 'pageComplete']
         })
         .assert.screenshot('.DocumentContainer', `cover-layout-mode.${fileType}.png`);

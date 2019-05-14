@@ -11,7 +11,8 @@ const scrollAndZoomFrantically = function(client) {
         .readerControl('setCurrentPageNumber', pageNumber)
         // WebViewer will pre-render the next page so changing the page number doesn't necessarily trigger pageComplete event 
         // change the zoom level to make sure that pageComplete event will be triggered
-        .readerControl('setZoomLevel', 30, {
+        .executeOnce({
+          readerControl: ['setZoomLevel', 30],
           waitForWVEvent: 'pageComplete'
         });
 

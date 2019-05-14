@@ -1,4 +1,4 @@
-describe('PDF with JavaScript', function() {
+describe.only('PDF with JavaScript', function() {
   let widgetElements, jsPDF;
 
   beforeEach(function(client, done) {
@@ -11,7 +11,8 @@ describe('PDF with JavaScript', function() {
     ];
 
     client
-      .readerControl('loadDocument', '/samples/files/javascript.pdf', {
+      .executeOnce({
+        readerControl: ['loadDocument', '/samples/files/javascript.pdf'],
         waitForWVEvent: 'annotationsLoaded'
       })
       .waitForElementNotVisible('[data-element="progressModal"]', function() {

@@ -7,20 +7,20 @@ module.exports = function(fileName) {
     it(`can change the values of each type of form field in the document and the values are the same after reloading the ${fileType}`, function(client) {
       const form = client.page.form();
   
-      client
-        .readerControl('loadDocument', `/samples/files/${fileName}`, {
-          waitForWVEvent: 'annotationsLoaded',
-          callback: function() {
-            if (fileType === 'XOD') {
-              // form.xod is by default 100% and the document container's size
-              // is exceeding the viewport which will affect the screenshot test so we manually setFitMode to FitPage
-              // note that if we are using another XOD file we probably don't need this 
-              client.readerControl('setFitMode', 'FitPage', {
-                waitForWVEvent: 'pageComplete'
-              });
-            }
-          }
-        });     
+      client.executeOnce({
+        readerControl: ['loadDocument', `/samples/files/${fileName}`],
+        waitForWVEvent: 'annotationsLoaded'
+      }, function() {
+        if (fileType === 'XOD') {
+          // form.xod is by default 100% and the document container's size
+          // is exceeding the viewport which will affect the screenshot test so we manually setFitMode to FitPage
+          // note that if we are using another XOD file we probably don't need this 
+          client.executeOnce({
+            readerControl: ['setFitMode', 'FitPage'],
+            waitForWVEvent: 'pageComplete'
+          });
+        }
+      });  
 
       form
         .clearFormElement('@textField')

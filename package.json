@@ -9,6 +9,7 @@
     "samples": "npm run server samples",
     "test": "nightwatch -c tests/nightwatch/config/local.config.js",
     "test:bs": "node tests/nightwatch/runner/browserStack.runner.js -c tests/nightwatch/config/browserStack.config.js",
+    "test:lt": "nightwatch -c tests/nightwatch/config/lambdaTest.config.js",
     "test:local:pnacl": "nightwatch -c tests/nightwatch/config/local.config.js -e pnacl",
     "test:local:ff": "nightwatch -c tests/nightwatch/config/local.config.js -e firefox"
   },

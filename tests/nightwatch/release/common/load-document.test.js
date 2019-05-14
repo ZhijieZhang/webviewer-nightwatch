@@ -10,7 +10,7 @@ module.exports = function(doc1, doc2) {
         .waitForWVEvent('pageComplete');
     });
   
-    it.only(`load ${doc1}, ${doc2} back and forth using loadDocument API`, function(client) {
+    it(`load ${doc1}, ${doc2} back and forth using loadDocument API`, function(client) {
       client
         .readerControl('loadDocument', `/samples/files/${doc1}`)
         .waitForWVEvent('pageComplete')

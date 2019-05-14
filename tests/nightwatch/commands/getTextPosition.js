@@ -1,6 +1,5 @@
 exports.command = function(text, callback = () => {}) {
   this
-    .waitForReaderControl()
     .executeAsync(
       function(text, done) {
         const docViewer = window.readerControl.docViewer;

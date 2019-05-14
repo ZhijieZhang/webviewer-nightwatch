@@ -8,14 +8,12 @@ class WaitForReaderControl extends EventEmitter {
     this.retryInMilliseconds = 100;
   }
 
-  command(timeoutInMilliseconds) {
-    if (timeoutInMilliseconds) {
-      this.timeoutInMilliseconds = timeoutInMilliseconds;
-    }
+  command(callback) {
     this.startTime = new Date().getTime();    
 
     this.check(function(found) {
       assert.ok(found, `window.readerControl isn't available in ${this.timeoutInMilliseconds}ms`);
+      callback.call(this);
 
       return this.emit('complete');
     });

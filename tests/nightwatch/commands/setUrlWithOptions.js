@@ -61,12 +61,9 @@ exports.command = function(options, callback = () => {}) {
         }, window.location.href);
     },
 
-    [options],
-
-    () => {
-      callback.call(this);
-    }
-  );
+    [options]
+  )
+  .waitForReaderControl(callback);
 
   return this;
 };

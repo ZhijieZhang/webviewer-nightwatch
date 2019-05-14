@@ -13,8 +13,7 @@ describe('WebViewer Release Test', function() {
         .loadSample('viewing/viewing')
         .setUrlWithOptions({ 
           pdftronServer: '' 
-        })
-        .waitForWVEvent('pageComplete', done);
+        }, done);
     });
 
     importTests([   
@@ -41,8 +40,7 @@ describe('WebViewer Release Test', function() {
         .setUrlWithOptions({
           initialDoc: '/samples/files/webviewer-demo-annotated.xod', 
           pdftronServer: '' 
-        })
-        .waitForWVEvent('pageComplete', done);
+        }, done);
     });
 
     importTests([

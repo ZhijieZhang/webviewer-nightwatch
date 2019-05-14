@@ -4,6 +4,7 @@ const readline = require('readline');
 const fs = require('fs');
 const { promisify } = require('util');
 const getBrowserName = require('../utils/getBrowserName');
+const isRunningLocally = require('../utils/isRunningLocally');
 
 const stat = promisify(fs.stat);
 const copyFile = promisify(fs.copyFile);
@@ -33,14 +34,31 @@ exports.assertion = function (element, filename, message) {
         try {
           await stat(baseFilePath);
           const baseScreenshot = await Jimp.read(baseFilePath);
-          const diff = Jimp.diff(currentScreenshot, baseScreenshot);
+          let diff;
 
+          if (
+            baseScreenshot.bitmap.height === currentScreenshot.bitmap.height &&
+            baseScreenshot.bitmap.width === currentScreenshot.bitmap.width
+          ) {
+            diff = Jimp.diff(currentScreenshot, baseScreenshot);
+          } else {
+            const height = Math.min(baseScreenshot.bitmap.height, currentScreenshot.bitmap.height);
+            const width = Math.min(baseScreenshot.bitmap.width, currentScreenshot.bitmap.width);
+            diff = Jimp.diff(
+              currentScreenshot.clone().resize(height, width),
+              baseScreenshot.clone().resize(height, width)
+            );
+          }
+          
           if (diff.percent === 0) {
             callback(true);
           } else {
+            console.log(diff.percent);
             await currentScreenshot.writeAsync(currentFilePath);
             await diff.image.writeAsync(diffFilePath);
-            const hasOverwritten = await promptOverwrite(baseFilePath, diffFilePath, currentFilePath);
+            const hasOverwritten = isRunningLocally(this) 
+                                  ? await promptOverwrite(baseFilePath, diffFilePath, currentFilePath)
+                                  : false;
             // if we overwrite the baseline screenshot then this assertion should pass because we wanted to update it
             callback(hasOverwritten);
           }

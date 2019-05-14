@@ -111,17 +111,17 @@ module.exports = function(fileName) {
               .mouseButtonClick();
           }
         },
-        {
-          toolNames: ['AnnotationCreateStamp'],
-          draw: function (x, y) {
-            client
-              // if we don't pause then there's a chance that 
-              // the file input(created by the stamp tool at runtime) can't be found
-              .pause(500)
-              .mouseButtonClick()
-              .setValue('input[type="file"]', stampImage);
-          }
-        }
+        // {
+        //   toolNames: ['AnnotationCreateStamp'],
+        //   draw: function (x, y) {
+        //     client
+        //       // if we don't pause then there's a chance that 
+        //       // the file input(created by the stamp tool at runtime) can't be found
+        //       .pause(500)
+        //       .mouseButtonClick()
+        //       .setValue('input[type="file"]', stampImage);
+        //   }
+        // }
       ];
       const textTools = [
         {

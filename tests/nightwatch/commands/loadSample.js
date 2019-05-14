@@ -73,7 +73,6 @@ function loadDocumentWithBuffer(buffer, callback) {
     .setUrlWithOptions({
       pdftronServer: ''
     })
-    .waitForWVEvent('pageComplete')
     .execute(
       function (buffer) {
         let mimeType;

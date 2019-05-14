@@ -4,7 +4,7 @@ const EventEmitter = require('events');
 class WaitForBuffer extends EventEmitter {
   constructor() {
     super();
-    this.timeoutInMilliseconds = 10000;
+    this.timeoutInMilliseconds = 20000;
     this.retryInMilliseconds = 100;
   }
 

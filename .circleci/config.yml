@@ -21,3 +21,7 @@ jobs:
       - run:
           name: test
           command: npm run test:bs
+      - store_artifacts:
+          path: /tests/nightwatch/screenshot/chrome/current
+      - store_artifacts:
+          path: /tests/nightwatch/screenshot/chrome/diff

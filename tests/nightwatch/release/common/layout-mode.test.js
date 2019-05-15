@@ -3,7 +3,7 @@ const getFileType = require('../../utils/getFileType');
 module.exports = function(fileName) {
   const fileType = getFileType(fileName);
 
-  describe.only('Layout Mode', function() {
+  describe('Layout Mode', function() {
     beforeEach(function(client, done) {
       client
         .waitForWVEvent('pageComplete')
@@ -23,7 +23,7 @@ module.exports = function(fileName) {
     // other tests are all done in continuous mode so not sure what we should test here
     it.skip('continuous', function() {});
   
-    it.only('facing', function(client) {
+    it('facing', function(client) {
       client
         .readerControl('setLayoutMode', 'Facing')
         .waitForElementNotPresent('#pageContainer2')

@@ -14,6 +14,7 @@ const commonCapabilities = {
   'browserstack.selenium_version': '3.14.0',
   'browserstack.user': 'zhijiezhang1',
   'browserstack.key': 'QKPysHGgp6Ykq92rT9Hf',
+  'skip_testcases_on_fail': false
 };
 const specificCapabilities = {
   chrome: {

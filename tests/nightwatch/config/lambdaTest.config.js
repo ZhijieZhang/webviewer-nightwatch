@@ -17,15 +17,17 @@ const lambdaTestConfig = Object.assign(baseConfig, {
 const commonCapabilities = {
   'build': 'WebViewer-Release',
   'video': true,
-  'console': true,
-  'network': true,
   'resolution': '1920x1080',
   'tunnel': true
 };
 const specificCapabilities = {
   chrome: {
-		'platform' : 'Windows 8',
-		'version' : '71.0',
+    // 'platform': 'Windows 8',
+    // 'version': '71.0'
+		'platform' : 'Windows 10',
+    'version' : '73.0',
+    "chrome.driver" : 73.0,
+    "selenium_version" : "3.13.0",
   }
 };
 const browserSettings = lambdaTestConfig['test_settings'];
@@ -38,12 +40,13 @@ Object.keys(browserSettings).forEach(browser => {
   );
 });
 browserSettings.default = {
-  'screenshots' : {
-    'enabled' : true,
-    'path' : ''
+  'screenshots': {
+    'enabled': true,
+    'path': ''
   },
-  'username' : process.env.LT_USERNAME,
-  'access_key' : process.env.LT_ACCESS_KEY
+  'username': process.env.LT_USERNAME,
+  'access_key': process.env.LT_ACCESS_KEY,
+  'skip_testcases_on_fail': false
 };
 
 module.exports = lambdaTestConfig;

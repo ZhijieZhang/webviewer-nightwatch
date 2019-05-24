@@ -1,3 +1,4 @@
+require('dotenv').config();
 const baseConfig = require('./base.config.js');
 const lambdaTestConfig = Object.assign(baseConfig, {
   'selenium': {
@@ -12,7 +13,7 @@ const lambdaTestConfig = Object.assign(baseConfig, {
     }
   },
 
-  'test_workers' : {'enabled' : true, 'workers' : 'auto'},
+  // 'test_workers' : {'enabled' : true, 'workers' : 'auto'},
 });
 const commonCapabilities = {
   'build': 'WebViewer-Release',
@@ -22,12 +23,10 @@ const commonCapabilities = {
 };
 const specificCapabilities = {
   chrome: {
-    // 'platform': 'Windows 8',
-    // 'version': '71.0'
 		'platform' : 'Windows 10',
-    'version' : '73.0',
-    "chrome.driver" : 73.0,
-    "selenium_version" : "3.13.0",
+    'version' : '72.0',
+    'chrome.driver' : 72.0,
+    'selenium_version' : '3.13.0',
   }
 };
 const browserSettings = lambdaTestConfig['test_settings'];

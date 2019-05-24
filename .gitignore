@@ -6,3 +6,4 @@ tests_output/
 current/
 diff/
 selenium-server.log
+.env

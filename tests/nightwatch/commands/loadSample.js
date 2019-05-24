@@ -51,7 +51,7 @@ exports.command = function(samplePath, ...args) {
 
   this
     .resizeWindow(1280, 960)
-    // .url(`http://localhost.lambdatest.com:3000/samples/${samplePath}`, function() {
+    // .url(`http://localhost:3000/samples/${samplePath}`, function() {
     .url(`http://localhost.lambdatest.com:3000/samples/${samplePath}`, function() {
       if (isViewerSample) {
         this

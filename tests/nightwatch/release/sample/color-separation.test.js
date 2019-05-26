@@ -1,5 +1,5 @@
 describe('Color Separation', function() {
-  const layers = [
+  const colors = [
     'PANTONE 1375 C',
     'PANTONE 288 C',
     'PANTONE 299 C',
@@ -21,21 +21,20 @@ describe('Color Separation', function() {
       });
   });
 
-  layers.forEach(function(layerOn) {
-    it(`${layerOn} layer`, function(client) {
-      const otherLayers = layers.filter(function(layer) {
-        return layer !== layerOn;
+  colors.forEach(function(colorOn) {
+    it(`${colorOn} color`, function(client) {
+      const otherColors = colors.filter(function(layer) {
+        return layer !== colorOn;
       });
   
-      otherLayers.forEach(function(layer) {
-        client.click(`input[id="${layer}"]`);
+      otherColors.forEach(function(color) {
+        client.click(`input[id="${color}"]`);
       });
 
       client
         .switchToUIFrame()
-        .waitForWVEvent('pageComplete')
         .waitForElementNotVisible('.LoadingModal')  
-        .assert.screenshot('.DocumentContainer', `color-${layerOn.toLowerCase().replace(/ /g, '-')}.png`);
+        .assert.screenshot('.DocumentContainer', `color-${colorOn.toLowerCase().replace(/ /g, '-')}.png`);
     });
   });
 });

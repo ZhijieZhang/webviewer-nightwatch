@@ -15,10 +15,10 @@ describe('Page Operations', function() {
     client
       .click('#rotate')
       .switchToUIFrame()
-      .waitForWVEvent('pageComplete')
       // not sure why in this case the document canvas isn't there after pageComplete event is triggered
-      // so we wait explicitly for 1s here. Same situation applies to crop a page
-      .pause(1500)
+      // so instead we wait explicitly for 3s here. Same situation applies to crop a page
+      .waitForElementPresent('#pageContainer0 .auxiliary')
+      .pause(3000)
       .assert.screenshot('.DocumentContainer', 'page-rotate.png');
   });
 
@@ -26,8 +26,8 @@ describe('Page Operations', function() {
     client
       .click('#crop')
       .switchToUIFrame()
-      .waitForWVEvent('pageComplete')
-      .pause(1500)
+      .waitForElementPresent('#pageContainer0 .auxiliary')
+      .pause(3000)
       .assert.screenshot('.DocumentContainer', 'page-crop.png');
   });
 
@@ -35,8 +35,8 @@ describe('Page Operations', function() {
     client
       .click('#delete')
       // sometimes layoutChanged event is triggered before we switch to the UI frame
-      // so we pause 500 ms here for the first page to be deleted. Same situation applies to merge a document
-      .pause(500)
+      // so we pause 1.5s here for the first page to be deleted. Same situation applies to merge a document
+      .pause(1500)
       .switchToUIFrame()
       .readerControl('getPageCount', function(pageCount) {
         assert.equal(pageCount, 2);
@@ -49,9 +49,10 @@ describe('Page Operations', function() {
       .click('#move-to option:nth-of-type(2)')
       .click('#move')
       .switchToUIFrame()
-      .readerControl('setZoomLevel', 0.75)
-      .waitForWVEvent('pageComplete')
-      .waitForWVEvent('pageComplete')
+      .executeOnce({
+        readerControl: ['setZoomLevel', 0.75],
+        waitForWVEvent: ['pageComplete', 'pageComplete']
+      })
       .assert.screenshot('.DocumentContainer', 'page-move.png');  
   });
 
@@ -59,11 +60,12 @@ describe('Page Operations', function() {
     client
       .click('#insert')
       .switchToUIFrame()
-      .waitForWVEvent('pageComplete')
+      // pageComplete is triggered before switching into the UI frame so we wait for 2 seconds here instead of waiting for pageComplete
+      .pause(2000)
       .assert.screenshot('.DocumentContainer', 'page-insert.png');  
   });
 
-  it('merge another document', function(client) {
+  it.skip('merge another document', function(client) {
     const samplePDF = path.resolve(__dirname, '../../../../samples/files/sample.pdf');
 
     client 

@@ -7,6 +7,7 @@ module.exports = function() {
   describe('Text Selection', function() {
     beforeEach(function(client, done) {
       client
+        .waitForWVEvent('pageComplete')
         .execute(function() {
           window.Tools.Tool.ENABLE_AUTO_SWITCH = false;
         })
@@ -22,7 +23,7 @@ module.exports = function() {
         .waitForElementVisible('[data-element="textPopup"]')
         .click('[data-element="copyTextButton"]')
         .readerControl('getSelectedText', function(text) {
-          assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, an');
+          assert.strictEqual(text, 'Embed & customize PDFTron WebViewer in a web app to rapidly grow\nmarket appeal, revenue streams, and');
         });
     });
   

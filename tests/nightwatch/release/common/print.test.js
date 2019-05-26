@@ -2,6 +2,7 @@ module.exports = function() {
   describe('Print', function() {
     it('show the print modal and append canvases to the container which will show during the print process', function(client) {
       client
+        .waitForWVEvent('pageComplete')
         .readerControl('useEmbeddedPrint', false)
         .click('[data-element="menuButton"]')
         .waitForElementVisible('[data-element="menuOverlay"]')

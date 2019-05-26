@@ -27,9 +27,10 @@ exports.assertion = function (element, filename, message) {
     this.api
       .captureElementScreenshot(element, async function (currentScreenshot) {
         const browserName = getBrowserName(this);
-        const baseFilePath = path.resolve(__dirname, '../screenshot/', browserName, 'baseline', filename);
-        const diffFilePath = path.resolve(__dirname, '../screenshot/', browserName, 'diff', filename);
-        const currentFilePath = path.resolve(__dirname, '../screenshot/', browserName, 'current', filename);
+        const folderName = isRunningLocally(this) ? browserName : `${browserName}-remote`;
+        const baseFilePath = path.resolve(__dirname, '../screenshot/', folderName, 'baseline', filename);
+        const diffFilePath = path.resolve(__dirname, '../screenshot/', folderName, 'diff', filename);
+        const currentFilePath = path.resolve(__dirname, '../screenshot/', folderName, 'current', filename);
 
         try {
           await stat(baseFilePath);
@@ -53,7 +54,6 @@ exports.assertion = function (element, filename, message) {
           if (diff.percent === 0) {
             callback(true);
           } else {
-            console.log(diff.percent);
             await currentScreenshot.writeAsync(currentFilePath);
             await diff.image.writeAsync(diffFilePath);
             const hasOverwritten = isRunningLocally(this) 

@@ -13,11 +13,8 @@ describe('Linearized PDF', function() {
     client
       .setUrlWithOptions({ useDownloader: false })
       .readerControl('loadDocument', '/samples/files/linearized.pdf')
-      .waitForWVEvent('pageComplete', {
-        waitForWVEvent: 'pageComplete',
-        callback: function() {
-          scrollAndZoomFrantically(client);  
-        } 
+      .waitForWVEvent('pageComplete', function() {
+        scrollAndZoomFrantically(client);
       });
   });
 });

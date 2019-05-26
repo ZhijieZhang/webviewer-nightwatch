@@ -9,7 +9,7 @@ module.exports = function(fileName) {
         .readerControl('disableElements', ['pageNavOverlay'])
         // for some reasons if we don't pause for a short time here
         // the annotations will be invisible
-        .pause(500, done);
+        .pause(2000, done);
     });
   
     it('single', function(client) {
@@ -24,16 +24,8 @@ module.exports = function(fileName) {
   
     it('facing', function(client) {
       client
-        .readerControl('setLayoutMode', 'Facing')
-        .waitForElementNotPresent('#pageContainer2')
         .executeOnce({
-          readerControl: ['setCurrentPageNumber', 3],
-          waitForWVEvent: 'pageComplete'
-        })
-        .waitForElementPresent('#pageContainer2')
-        .waitForElementPresent('#pageContainerb3')
-        .executeOnce({
-          readerControl: ['setCurrentPageNumber', 1],
+          readerControl: ['setLayoutMode', 'Facing'],
           waitForWVEvent: ['pageComplete', 'pageComplete']
         })
         .assert.screenshot('.DocumentContainer', `facing-layout-mode.${fileType}.png`);
@@ -50,12 +42,8 @@ module.exports = function(fileName) {
   
     it('cover facing', function(client) {
       client 
-        .readerControl('setLayoutMode', 'CoverFacing')
-        .waitForElementPresent('#pageContainerb0')
-        .readerControl('setCurrentPageNumber', 3)
-        .waitForElementNotPresent('#pageContainerb0')
         .executeOnce({
-          readerControl: ['setCurrentPageNumber', 1],
+          readerControl: ['setLayoutMode', 'CoverFacing'],
           waitForWVEvent: 'pageComplete'
         })
         .assert.screenshot('.DocumentContainer', `cover-facing-layout-mode.${fileType}.png`);

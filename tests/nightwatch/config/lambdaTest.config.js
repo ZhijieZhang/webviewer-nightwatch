@@ -11,9 +11,7 @@ const lambdaTestConfig = Object.assign(baseConfig, {
       'webdriver.chrome.driver': '',
       'webdriver.firefox.profile': ''
     }
-  },
-
-  // 'test_workers' : {'enabled' : true, 'workers' : 'auto'},
+  }
 });
 const commonCapabilities = {
   'build': 'WebViewer-Release',

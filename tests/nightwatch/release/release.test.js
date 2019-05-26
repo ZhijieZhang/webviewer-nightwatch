@@ -7,7 +7,7 @@ describe('WebViewer Release Test', function() {
     client.end(() => done());
   });
 
-  describe('PDF', function() {
+  describe.skip('PDF', function() {
     beforeEach(function(client, done) {
       client 
         .loadSample('viewing/viewing')
@@ -33,7 +33,7 @@ describe('WebViewer Release Test', function() {
     ]);
   });
 
-  describe.skip('XOD', function() {
+  describe('XOD', function() {
     beforeEach(function(client, done) {
       client 
         .loadSample('viewing/viewing')
@@ -54,7 +54,7 @@ describe('WebViewer Release Test', function() {
     ]);
   });
 
-  describe('Samples', function() {
+  describe.skip('Samples', function() {
     importTests([
       './sample/legacy-viewing.test.js',
       './sample/users-and-permissions.test.js',

@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-describe('Realtime Collaboration', function() {
+describe.skip('Realtime Collaboration', function() {
   const timeToWaitForPromptDialog = 4000;
   const user1 = `User${Math.floor(Math.random() * 1000)}`;
   const user2 = `User${Math.floor(Math.random() * 1000)}`;

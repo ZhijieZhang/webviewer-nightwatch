@@ -7,7 +7,7 @@ describe('WebViewer Release Test', function() {
     client.end(() => done());
   });
 
-  describe.skip('PDF', function() {
+  describe('PDF', function() {
     beforeEach(function(client, done) {
       client 
         .loadSample('viewing/viewing')
@@ -33,7 +33,7 @@ describe('WebViewer Release Test', function() {
     ]);
   });
 
-  describe.skip('XOD', function() {
+  describe('XOD', function() {
     beforeEach(function(client, done) {
       client 
         .loadSample('viewing/viewing')

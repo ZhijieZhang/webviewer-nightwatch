@@ -1,10 +1,6 @@
 node_modules/
-chromedriver.log
-geckodriver.log
 tests_output/
 .DS_Store
 current/
 diff/
-selenium-server.log
 .env
-local.log

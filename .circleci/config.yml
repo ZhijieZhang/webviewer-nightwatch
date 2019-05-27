@@ -18,7 +18,7 @@ jobs:
           name: valid-LT-credentials
           command: |
             echo ${LT_USERNAME}
-            echo ${LT_ACCESS}
+            echo ${LT_ACCESS_KEY}
             echo ${LT_EMAIL}
       - run:
           name: download-lambdatest-tunnel

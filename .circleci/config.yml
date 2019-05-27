@@ -31,11 +31,12 @@ jobs:
           background: true
           command: |
             ./LT -user ${LT_EMAIL} -key ${LT_ACCESS_KEY}
-            sleep 40
       - run:
           name: start-server
           command: npm start
           background: true
       - run:
           name: test
-          command: npm run test:lt
+          command: |
+            sleep 10
+            npm run test:lt

@@ -11,7 +11,7 @@ describe('Invalid License Key', function() {
       .setUrlWithOptions({ 
         initialDoc: '/samples/files/sample.pdf'
       })
-      .waitForElementVisible('[data-element="errorModal"]', 10000)
+      .waitForElementVisible('[data-element="errorModal"]', 15000)
       .expect.element('[data-element="errorModal"] .container').text.to.contain('Bad License Key');
   });
 });

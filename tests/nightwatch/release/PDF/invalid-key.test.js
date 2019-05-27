@@ -1,5 +1,5 @@
 describe('Invalid License Key', function() {
-  it('fail to load with invalid license key', function(client) {
+  it.only('fail to load with invalid license key', function(client) {
     client
       .frameParent()
       .execute(

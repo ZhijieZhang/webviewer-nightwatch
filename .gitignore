@@ -4,3 +4,8 @@ tests_output/
 current/
 diff/
 .env
+local.log
+chromedriver.log
+geckodriver.log
+selenium-server.log
+tunnel.log

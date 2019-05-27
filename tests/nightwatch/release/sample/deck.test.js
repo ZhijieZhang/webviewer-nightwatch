@@ -2,8 +2,8 @@ describe('deck.js', function() {
   it('power deck.js slideshows', function(client) {
     client
       .loadSample('full-apis/DeckJSTest')
-      .waitForElementPresent('#page0')
-      .waitForElementPresent('#page1')
+      .waitForElementPresent('#page0', 10000)
+      .waitForElementPresent('#page1', 10000)
       .moveToElement('#page0', 50, 50)
       .waitForElementVisible('.deck-next-link')
       .click('.deck-next-link')

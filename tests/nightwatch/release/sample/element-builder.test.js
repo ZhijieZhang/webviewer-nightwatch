@@ -1,4 +1,5 @@
 describe('Element Builder', function() {
+  // TODO: fix this in LT
   it('use PDFNet page writing API, embed fonts and images and copy graphical elements from one page to another', function(client) {
     client
       .loadSample('full-apis/ElementBuilderTest')

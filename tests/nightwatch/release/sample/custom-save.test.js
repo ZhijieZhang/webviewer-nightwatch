@@ -11,7 +11,7 @@ describe('Viewer Custom Save', function() {
       .moveToElement('.pageContainer', 300, 100)
       .mouseButtonUp('left')
       .saveAndReload()
-      .readerControl('annotManager', 'getAnnotationsList', function(annotations) {
+      .readerControl('getAnnotationsList', function(annotations) {
         assert.equal(annotations.length, 0);
       });
   });

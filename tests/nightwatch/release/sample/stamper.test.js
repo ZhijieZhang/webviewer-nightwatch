@@ -16,8 +16,10 @@ describe('Stamper', function() {
             buffer: stampedEvenPDFBuffer
           })
           .waitForWVEvent('pageComplete')
-          .readerControl('setCurrentPageNumber', 6)
-          .waitForWVEvent('pageComplete')
+          .executeOnce({
+            readerControl: ['setCurrentPageNumber', 6],
+            waitForWVEvent: 'pageComplete'
+          })
           .assert.screenshot('#pageContainer5', 'stamper-even.test.png');
 
         client
@@ -49,8 +51,10 @@ describe('Stamper', function() {
             buffer: stampedTwentyEvenPDFBuffer
           })
           .waitForWVEvent('pageComplete')
-          .readerControl('setCurrentPageNumber', 6)
-          .waitForWVEvent('pageComplete')
+          .executeOnce({
+            readerControl: ['setCurrentPageNumber', 6],
+            waitForWVEvent: 'pageComplete'
+          })
           .assert.screenshot('#pageContainer5', 'stamper-20-even.test.png');
 
         client

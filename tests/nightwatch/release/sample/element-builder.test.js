@@ -1,5 +1,4 @@
 describe('Element Builder', function() {
-  // TODO: fix this in LT
   it('use PDFNet page writing API, embed fonts and images and copy graphical elements from one page to another', function(client) {
     client
       .loadSample('full-apis/ElementBuilderTest')
@@ -14,16 +13,17 @@ describe('Element Builder', function() {
           // before taking screenshots
           .readerControl('setLayoutMode', 'Single')
           .readerControl('setCurrentPageNumber', 4)
-          .readerControl('setFitMode', 'FitPage')
-          .waitForWVEvent('pageComplete');
+          .readerControl('setFitMode', 'FitPage');
           
         const pageCount = 8; 
         Array
           .from({ length: pageCount }, (_, index) => index + 1)  
           .forEach(function(pageNumber) {
             client
-              .readerControl('setCurrentPageNumber', pageNumber)
-              .waitForWVEvent('pageComplete')
+              .executeOnce({
+                readerControl: ['setCurrentPageNumber', pageNumber],
+                waitForWVEvent: 'pageComplete'
+              })
               .assert.screenshot('.pageContainer', `element-builder-${pageNumber}.test.png`);
           });
       });    

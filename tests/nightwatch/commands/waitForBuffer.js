@@ -15,7 +15,7 @@ class WaitForBuffer extends EventEmitter {
       typeof args[0] === 'function'
         ? this.callback = args[0]
         : this.timeoutInMilliseconds = args[0];
-      } else if (args.length === 2) {
+    } else if (args.length === 2) {
       this.timeoutInMilliseconds = args[0];
       this.callback = args[1];
     }

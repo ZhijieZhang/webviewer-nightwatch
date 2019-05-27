@@ -7,11 +7,15 @@ describe('PDF Redaction', function() {
           .loadSample('viewing/viewing', {
             buffer: buffers[0]
           })
-          .readerControl('setLayoutMode', 'Single')
-          .waitForWVEvent('pageComplete')
+          .executeOnce({
+            readerControl: ['setLayoutMode', 'Single'],
+            waitForWVEvent: 'pageComplete'
+          })
           .assert.screenshot('.pageContainer', 'PDF-redaction-1.test.png')
-          .readerControl('setCurrentPageNumber', 2)
-          .waitForWVEvent('pageComplete')
+          .executeOnce({
+            readerControl: ['setCurrentPageNumber', 2],
+            waitForWVEvent: 'pageComplete'
+          })
           .assert.screenshot('.pageContainer', 'PDF-redaction-2.test.png');
       });
   });

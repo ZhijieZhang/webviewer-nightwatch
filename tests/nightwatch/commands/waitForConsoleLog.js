@@ -38,6 +38,8 @@ class WaitForConsoleLog extends EventEmitter {
 
     this.api
       .getLog('browser', function(logs) {
+        console.log(logs);
+
         // it seems that this API doesn't return the all log history but only returns logs that were logged between
         // two calls, since we need to get the entire logs we store it in a variable
         this.allLogMessages.push(...logs.map(log => log.message));

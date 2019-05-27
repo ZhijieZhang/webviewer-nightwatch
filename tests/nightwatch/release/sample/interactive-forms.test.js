@@ -65,7 +65,7 @@ describe('Interactive Forms', function() {
             buffer: flattenedFormPDFBuffer
           })
           .waitForWVEvent('pageComplete')
-          .readerControl('annotManager', 'getAnnotationsList', function(annotations) {
+          .readerControl('getAnnotationsList', function(annotations) {
             assert.equal(annotations.length, 0);
           })
           .waitForElementNotPresent(firstNameId)

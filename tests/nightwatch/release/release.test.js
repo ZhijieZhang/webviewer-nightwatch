@@ -86,12 +86,12 @@ describe('WebViewer Release Test', function() {
       // './sample/digital-signature.test.js',
       // './sample/element-builder.test.js',
       // './sample/element-edit.test.js',
-      './sample/element-reader.test.js',
-      './sample/encryption.test.js',
-      './sample/XFDF-import.test.js',
-      './sample/interactive-forms.test.js',
-      './sample/logical-structure.test.js',
-      './sample/office-to-PDF.test.js',
+      // './sample/element-reader.test.js',
+      // './sample/encryption.test.js',
+      // './sample/XFDF-import.test.js',
+      // './sample/interactive-forms.test.js',
+      // './sample/logical-structure.test.js',
+      // './sample/office-to-PDF.test.js',
       // './sample/PDFA.test.js',
       // './sample/PDF-draw.test.js',
       // './sample/PDF-layer.test.js',
@@ -99,9 +99,9 @@ describe('WebViewer Release Test', function() {
       // './sample/PDF-redaction.test.js',
       // './sample/PDF-rect.test.js',
       // './sample/SDF.test.js',
-      // './sample/stamper.test.js',
+      './sample/stamper.test.js',
       // './sample/text-extract.test.js',
-      // './sample/text-search.test.js'
+      './sample/text-search.test.js'
     ]);
   });
 });

@@ -10,7 +10,7 @@ describe('Encryption', function() {
           .loadSample('viewing/viewing', {
             buffer: encryptedPDFBuffer
           })
-          .waitForElementVisible('[data-element="passwordModal"]')
+          .waitForElementVisible('[data-element="passwordModal"]', 10000)
           .setValue('input[type=password]', 'test')
           .click('[data-element="passwordSubmitButton"]')
           .waitForElementNotVisible('[data-element="passwordModal"]');

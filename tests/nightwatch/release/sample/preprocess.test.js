@@ -5,7 +5,7 @@ describe('Preprocess', function() {
     client
       .loadSample('full-apis/ViewerPreprocessTest')
       .waitForWVEvent('pageComplete')
-      .readerControl('annotManager', 'getAnnotationsList', function(annotations) {
+      .readerControl('getAnnotationsList', function(annotations) {
         assert.equal(annotations.length, 0);
       })
       .waitForConsoleLog('number of annotation modifications: 2');

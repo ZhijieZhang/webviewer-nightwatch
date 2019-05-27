@@ -14,20 +14,20 @@ describe('PDF Page', function() {
         insertedPDFBuffer,
         clonedPDFBuffer
       ]) {
-        [
-          page1PDFBuffer,
-          page2PDFBuffer,
-          page3PDFBuffer,
-          page4PDFBuffer
-        ].forEach(function(buffer, index) {
-          client
-            .loadSample('viewing/viewing', {
-              buffer
-            })
-            .waitForWVEvent('pageComplete')
-            .waitForElementNotVisible('[data-element="progressModal"]')
-            .assert.screenshot('.pageContainer', `PDF-page-${index + 1}.test.png`);
-        });
+        // [
+        //   page1PDFBuffer,
+        //   page2PDFBuffer,
+        //   page3PDFBuffer,
+        //   page4PDFBuffer
+        // ].forEach(function(buffer, index) {
+        //   client
+        //     .loadSample('viewing/viewing', {
+        //       buffer
+        //     })
+        //     .waitForWVEvent('pageComplete')
+        //     .waitForElementNotVisible('[data-element="progressModal"]')
+        //     .assert.screenshot('.pageContainer', `PDF-page-${index + 1}.test.png`);
+        // });
 
 
         client
@@ -39,8 +39,10 @@ describe('PDF Page', function() {
           .from({ length: 4 }, (_, index) => index + 1)
           .forEach(function(pageNumber) {
             client
-              .readerControl('setCurrentPageNumber', pageNumber)
-              .waitForWVEvent('pageComplete')
+              .executeOnce({
+                readerControl: ['setCurrentPageNumber', pageNumber],
+                waitForWVEvent: 'pageComplete'
+              })
               .assert.screenshot('.pageContainer', `PDF-page-${pageNumber}.test.png`);
           });
 
@@ -59,8 +61,10 @@ describe('PDF Page', function() {
           })
           .waitForWVEvent('pageComplete')
           .readerControl('setCurrentPageNumber', 9)
-          .readerControl('setFitMode', 'FitPage')
-          .waitForWVEvent('pageComplete')
+          .executeOnce({
+            readerControl: ['setFitMode', 'FitPage'],
+            waitForWVEvent: 'pageComplete'
+          })
           .assert.screenshot('#pageContainer8', 'PDF-page-insert.test.png');
 
         client
@@ -68,8 +72,10 @@ describe('PDF Page', function() {
             buffer: clonedPDFBuffer
           })
           .waitForWVEvent('pageComplete')
-          .readerControl('setCurrentPageNumber', 8)
-          .waitForWVEvent('pageComplete')
+          .executeOnce({
+            readerControl: ['setCurrentPageNumber', 8],
+            waitForWVEvent: 'pageComplete'
+          })
           .assert.screenshot('#pageContainer7', 'PDF-page-clone.test.png');
       });    
   });

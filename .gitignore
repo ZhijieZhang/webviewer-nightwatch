@@ -7,3 +7,4 @@ current/
 diff/
 selenium-server.log
 .env
+local.log

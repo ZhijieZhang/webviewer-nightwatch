@@ -32,6 +32,6 @@
   "dependencies": {
     "browserstack-local": "^1.4.0",
     "lodash": "^4.17.11",
-    "nightwatch": "^1.0.19"
+    "nightwatch": "^1.7.13"
   }
 }
